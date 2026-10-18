@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+/* Quiet ledger look: off-white paper, ink text, one deep-teal accent.
+   Green/red only for gains and losses. */
+:root {
+  color-scheme: light;
+  --paper: #f5f4f0;
+  --card: #ffffff;
+  --ink: #1b1f24;
+  --ink-soft: #626b76;
+  --line: #e2e0d9;
+  --accent: #0f5e5a;
+  --on-accent: #ffffff;
+  --up: #15803d;
+  --down: #c2410c;
+  --warn-bg: #fdf2d8;
+  --focus: #2563eb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --paper: #121416;
+    --card: #1b1e21;
+    --ink: #eef0f2;
+    --ink-soft: #9aa3ad;
+    --line: #2c3035;
+    --accent: #3fb3a8;
+    --on-accent: #0b1514;
+    --up: #4ade80;
+    --down: #fb923c;
+    --warn-bg: #3a2f14;
+    --focus: #5b9bff;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-up: var(--up);
+  --color-down: var(--down);
+  --color-warn-bg: var(--warn-bg);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  font-family: var(--font-sans);
+  line-height: 1.45;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+input, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
