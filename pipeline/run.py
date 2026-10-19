@@ -161,7 +161,8 @@ def main(dry: bool = False) -> None:
 
     url, key = os.environ.get("SUPABASE_URL"), os.environ.get("SUPABASE_SECRET_KEY")
     if not url or not key:
-        sys.exit("SUPABASE_SECRET_KEY is not set: add it under GitHub → repo Settings → Secrets → Actions.")
+        print("::error title=daily-update::SUPABASE_SECRET_KEY is not set (GitHub → Settings → Secrets → Actions)")
+        sys.exit(1)
     db = Supa(url, key)
 
     price_rows = [clean(dict(ticker=r.ticker, date=r.date, open=r.open, high=r.high, low=r.low, close=r.close,
@@ -187,7 +188,15 @@ def main(dry: bool = False) -> None:
     db.insert("pipeline_runs", [dict(ran_at=started.isoformat(), as_of=result["as_of"],
                                      status="ok" if not stale else "warning", message=msg)])
     print(f"Loaded {len(price_rows)} prices, signals as of {result['as_of']} ({msg})")
+    print(f"::notice title=daily-update::{len(price_rows)} prices, signals as of {result['as_of']}: "
+          + ", ".join(f"{k}={v['state']}" for k, v in result["signals"].items()) + f" ({msg})")
 
 
 if __name__ == "__main__":
-    main(dry="--dry" in sys.argv)
+    try:
+        main(dry="--dry" in sys.argv)
+    except SystemExit:
+        raise
+    except Exception as e:  # surface the reason as a GitHub annotation, readable without the full log
+        print(f"::error title=daily-update failed::{type(e).__name__}: {str(e)[:900]}")
+        raise
