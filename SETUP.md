@@ -14,13 +14,13 @@ About 30 minutes, once. Everything here is free. Keep a note open: you'll collec
 
 ## Step 1. GitHub (stores the code)
 
-1. At **github.com** click **+ → New repository**. Name it `investing-app`, set it to **Private**, and don't add a README.
-2. Send Claude the name, e.g. `your-username/investing-app`. Claude pushes the code into it.
+1. At **github.com** click **+ → New repository**. Name it `investe`, set it to **Private**, and don't add a README.
+2. Send Claude the name, e.g. `Rookiedevv/investe`. Claude pushes the code into it.
 
 ## Step 2. Supabase (database and sign-in)
 
 1. At **supabase.com** click **New project**.
-   - Name: `investing-app`
+   - Name: `investe`
    - Database password: click *Generate* and store it in your password manager.
    - Region: **Central EU (Frankfurt)**.
 2. Wait about 2 minutes.
@@ -36,7 +36,7 @@ About 30 minutes, once. Everything here is free. Keep a note open: you'll collec
 
 ## Step 3. Google sign-in
 
-1. At **console.cloud.google.com** create a new project called `investing-app`.
+1. At **console.cloud.google.com** create a new project called `investe`.
 2. **APIs & Services → OAuth consent screen** (may be called *Google Auth Platform*):
    - App name: `Inwestycje`; support email: yours.
    - Audience: **External**.
@@ -50,7 +50,7 @@ About 30 minutes, once. Everything here is free. Keep a note open: you'll collec
 ## Step 4. Vercel (hosts the app)
 
 1. At **vercel.com** sign in with **Continue with GitHub**.
-2. **Add New → Project** → import `investing-app`.
+2. **Add New → Project** → import `investe`.
 3. Under **Environment Variables** add:
    | Name | Value |
    |---|---|
