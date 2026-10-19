@@ -2,19 +2,15 @@ name: probe
 on:
   push:
     paths: [".github/workflows/probe.yml"]
+permissions:
+  contents: write
 jobs:
-  probe:
+  snapshot:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - run: python3 pipeline/fetch_prices.py /tmp/prices.csv
       - run: |
-          for s in PGE.WA TPE.WA ENA.WA PEP.WA CAR.WA APR.WA WIG.WA ^WIG WIG20.WA WIG-BANKI.WA; do
-            out=$(curl -sS -m 20 -A "Mozilla/5.0" "https://query1.finance.yahoo.com/v8/finance/chart/$s?range=10y&interval=1d&events=div" | python3 -c "
-          import sys,json
-          try:
-            r=json.load(sys.stdin)['chart']['result'][0]; t=r['timestamp']; q=r['indicators']['quote'][0]; a=r['indicators'].get('adjclose',[{}])[0].get('adjclose')
-            import datetime as D
-            f=lambda x:D.datetime.utcfromtimestamp(x).date()
-            print(len(t), f(t[0]), f(t[-1]), q['close'][-1], (a or [None])[-1])
-          except Exception as e: print('ERR', str(e)[:80])")
-            echo "::notice title=$s::$out"; sleep 0.3
-          done
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git checkout --orphan snapshot; git rm -rqf .; cp /tmp/prices.csv prices.csv
+          git add prices.csv; git commit -qm "Price snapshot"; git push -f origin snapshot
