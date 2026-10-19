@@ -7,9 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          for s in pko car apr pge wig_banki; do
-            out=$(curl -sS -m 20 -A "Mozilla/5.0" "https://stooq.pl/q/d/l/?s=$s&i=d" 2>&1 | tail -n 2 | tr '\n' ' ')
-            echo "::notice title=stooq $s::$out"
+          for s in PKO.WA PEO.WA SPL.WA EBP.WA MBK.WA ING.WA MIL.WA ALR.WA BHW.WA BNP.WA PGE.WA TPE.WA ENA.WA PEP.WA CAR.WA APR.WA WIG.WA ^WIG WIG20.WA WIG-BANKI.WA; do
+            out=$(curl -sS -m 20 -A "Mozilla/5.0" "https://query1.finance.yahoo.com/v8/finance/chart/$s?range=10y&interval=1d&events=div" | python3 -c "
+          import sys,json
+          try:
+            r=json.load(sys.stdin)['chart']['result'][0]; t=r['timestamp']; q=r['indicators']['quote'][0]; a=r['indicators'].get('adjclose',[{}])[0].get('adjclose')
+            import datetime as D
+            f=lambda x:D.datetime.utcfromtimestamp(x).date()
+            print(len(t), f(t[0]), f(t[-1]), q['close'][-1], (a or [None])[-1])
+          except Exception as e: print('ERR', str(e)[:80])")
+            echo "::notice title=$s::$out"
           done
-          out=$(curl -sS -m 20 -A "Mozilla/5.0" "https://query1.finance.yahoo.com/v8/finance/chart/CAR.WA?range=5d&interval=1d" 2>&1 | head -c 300)
-          echo "::notice title=yahoo::$out"
