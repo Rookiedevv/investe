@@ -7,8 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          for s in pko car apr pge tpe ena pep wig wig_banki; do
-            echo "== $s"; curl -sS -m 20 -A "Mozilla/5.0" "https://stooq.pl/q/d/l/?s=$s&i=d" | tail -n 3
+          for s in pko car apr pge wig_banki; do
+            out=$(curl -sS -m 20 -A "Mozilla/5.0" "https://stooq.pl/q/d/l/?s=$s&i=d" 2>&1 | tail -n 2 | tr '\n' ' ')
+            echo "::notice title=stooq $s::$out"
           done
-          echo "== stooq.com"; curl -sS -m 20 -A "Mozilla/5.0" "https://stooq.com/q/d/l/?s=car&i=d" | head -n 3
-          echo "== yahoo"; curl -sS -m 20 -A "Mozilla/5.0" "https://query1.finance.yahoo.com/v8/finance/chart/CAR.WA?range=5d&interval=1d" | head -c 400
+          out=$(curl -sS -m 20 -A "Mozilla/5.0" "https://query1.finance.yahoo.com/v8/finance/chart/CAR.WA?range=5d&interval=1d" 2>&1 | head -c 300)
+          echo "::notice title=yahoo::$out"
