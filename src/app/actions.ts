@@ -31,53 +31,9 @@ export async function signOut() {
 
 // ───────────────────────── Helpers ─────────────────────────
 
-const blankToUndef = (v: unknown) => (v === "" || v === null ? undefined : v);
-const opt = <T extends z.ZodType>(s: T) => z.preprocess(blankToUndef, s.optional());
 
 function fail(path: string): never {
   redirect(`${path}?error=1`);
-}
-
-// ───────────────────────── Events ─────────────────────────
-
-const eventSchema = z.object({
-  date: z.iso.date(),
-  time: opt(z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/)),
-  session_timing: z.enum(["before", "during", "after", "unknown"]),
-  ticker: z.string().trim().toUpperCase().regex(/^[A-Z0-9_]{2,16}$/),
-  category: z.string().trim().min(1).max(40),
-  event_type: z.string().trim().min(1).max(60),
-  status: z.enum(["published", "planned_only", "scheduled"]),
-  severity: opt(z.coerce.number().int().min(1).max(5)),
-  direction: opt(z.enum(["positive", "negative", "mixed"])),
-  description: z.string().trim().max(2000),
-  source_url: opt(z.url()),
-});
-
-export async function addEvent(form: FormData) {
-  const { supabase } = await requireUser();
-  const parsed = eventSchema.safeParse(Object.fromEntries(form));
-  if (!parsed.success) fail("/events");
-  const { error } = await supabase.from("events").insert({
-    ...parsed.data,
-    time: parsed.data.time ?? null,
-    severity: parsed.data.severity ?? null,
-    direction: parsed.data.direction ?? null,
-    source_url: parsed.data.source_url ?? null,
-  });
-  if (error) fail("/events");
-  revalidatePath("/events");
-  revalidatePath("/");
-  redirect("/events");
-}
-
-export async function deleteEvent(form: FormData) {
-  const { supabase } = await requireUser();
-  const id = z.coerce.number().int().positive().safeParse(form.get("id"));
-  if (!id.success) fail("/events");
-  await supabase.from("events").delete().eq("id", id.data);
-  revalidatePath("/events");
-  revalidatePath("/");
 }
 
 // ───────────────────────── Paper trades ─────────────────────────

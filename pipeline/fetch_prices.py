@@ -38,14 +38,16 @@ def fetch(symbol: str) -> list[dict]:
     rows = []
     for i, ts in enumerate(res["timestamp"]):
         c = q["close"][i]
-        if c is None or q["open"][i] is None:
+        if c is None:
             continue
+        # Index bars sometimes lack open/high/low; fall back to the close.
+        o, h, lo = (q["open"][i] or c), (q["high"][i] or c), (q["low"][i] or c)
         # Yahoo stamps Warsaw sessions at local open; the date part is the session day.
         day = dt.datetime.fromtimestamp(ts + res["meta"].get("gmtoffset", 0), dt.timezone.utc).date()
         rows.append({
             "date": day.isoformat(),
-            "open": round(q["open"][i], 4), "high": round(q["high"][i], 4),
-            "low": round(q["low"][i], 4), "close": round(c, 4),
+            "open": round(o, 4), "high": round(max(h, o, c), 4),
+            "low": round(min(lo, o, c), 4), "close": round(c, 4),
             "adj_close": round(adj[i] if adj[i] is not None else c, 4),
             "volume": int(q["volume"][i] or 0),
         })

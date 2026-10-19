@@ -1,6 +1,6 @@
 # Inwestycje
 
-Private investing workbench: event calendar for GPW banks and power utilities, watchlist with last closes, and a paper-trading journal with real eMakler costs. See `SETUP.md` for putting it online.
+Private investing workbench: daily signals from the rules that survived the research (car-parts sales acceleration, bank early-reporter read-through, bank blackout after bad news, utilities after bank hits), the research event calendar, a findings page, and a paper-trading journal with real eMakler costs. See `SETUP.md` for putting it online.
 
 ## Stack
 Next.js 16 (App Router) · TypeScript · Tailwind 4 · Supabase (Postgres + RLS, Google auth) · Vercel. Same foundations as Coś ty żarła.

@@ -1,0 +1,28 @@
+name: daily-update
+on:
+  schedule:
+    # Weekdays after the Warsaw close (17:05 local): 16:30 UTC = 18:30 summer / 17:30 winter
+    - cron: "30 16 * * 1-5"
+  push:
+    branches: [main]
+    paths: ["data/**", "pipeline/**", ".github/workflows/daily.yml"]
+  workflow_dispatch:
+concurrency:
+  group: daily-update
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pandas==2.2.3 pytest==8.3.4
+      - run: python -m pytest pipeline -q
+      - name: Fetch prices, load events, compute signals
+        env:
+          SUPABASE_URL: https://ooxqojkcbsoquuaruwkm.supabase.co
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+        run: python pipeline/run.py

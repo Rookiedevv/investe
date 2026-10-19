@@ -1,131 +1,96 @@
 import Link from "next/link";
-import { addEvent, deleteEvent } from "@/app/actions";
-import { Button, Card, ErrorNote, Field, H1, H2, Select } from "@/components/ui";
-import { GROUPS, todayWarsaw, type EventRow, type Instrument } from "@/lib/data";
+import { Card, H1, H2 } from "@/components/ui";
+import { COMPANY, todayWarsaw, type EventRow } from "@/lib/data";
 import { fmtDate } from "@/lib/i18n";
 import { requireUser } from "@/lib/session";
 
-const CATEGORIES = ["bank_results", "company_results", "rates", "sector_shock", "politics", "other"];
+const SECTORS = ["banks", "utilities", "carparts", "politics"] as const;
+type SectorFilter = (typeof SECTORS)[number];
 
-export default async function EventsPage({ searchParams }: { searchParams: Promise<{ ticker?: string; error?: string }> }) {
-  const { ticker, error } = await searchParams;
+export default async function EventsPage({ searchParams }: { searchParams: Promise<{ sector?: string; limit?: string }> }) {
+  const sp = await searchParams;
+  const sector = SECTORS.includes(sp.sector as SectorFilter) ? (sp.sector as SectorFilter) : undefined;
+  const limit = Math.min(Number(sp.limit) || 60, 1000);
   const { supabase, profile, t } = await requireUser();
   const lang = profile.language;
   const tx = t.events;
+  const today = todayWarsaw();
 
-  const { data: instruments } = await supabase.from("instruments").select("*").order("ticker").returns<Instrument[]>();
-  const tickers = [...Object.keys(GROUPS), ...(instruments ?? []).map((i) => i.ticker)];
-
-  let q = supabase.from("events").select("*").order("date", { ascending: false }).limit(200);
-  if (ticker) {
-    // A company's list also shows events for its whole sector (e.g. ALL_BANKS).
-    const sector = instruments?.find((i) => i.ticker === ticker)?.sector;
-    const group = Object.entries(GROUPS).find(([, s]) => s === sector)?.[0];
-    q = q.in("ticker", group ? [ticker, group] : [ticker]);
+  let upQ = supabase.from("events").select("*").gte("date", today).order("date").limit(50);
+  let pastQ = supabase.from("events").select("*").lt("date", today).order("date", { ascending: false }).limit(limit);
+  if (sector) {
+    upQ = upQ.eq("sector", sector);
+    pastQ = pastQ.eq("sector", sector);
   }
-  const { data: events } = await q.returns<EventRow[]>();
-
-  const dirLabel = (d: EventRow["direction"]) => (d ? tx[d] : tx.none);
+  const [{ data: upcoming }, { data: past }] = await Promise.all([upQ.returns<EventRow[]>(), pastQ.returns<EventRow[]>()]);
+  const qs = (extra: Record<string, string | undefined>) => {
+    const p = new URLSearchParams();
+    for (const [k, v] of Object.entries({ sector, ...extra })) if (v) p.set(k, v);
+    const s = p.toString();
+    return s ? `/events?${s}` : "/events";
+  };
 
   return (
     <main className="space-y-4">
       <H1>{tx.title}</H1>
-      <ErrorNote show={!!error} text={t.error} />
+      <p className="-mt-2 text-sm text-ink-soft">{tx.intro}</p>
 
       <div className="-mx-1 flex gap-2 overflow-x-auto pb-1">
-        <Chip href="/events" active={!ticker} label={tx.all} />
-        {tickers.map((tk) => (
-          <Chip key={tk} href={`/events?ticker=${tk}`} active={ticker === tk} label={tk} />
+        <Chip href="/events" active={!sector} label={tx.all} />
+        {SECTORS.map((s) => (
+          <Chip key={s} href={`/events?sector=${s}`} active={sector === s} label={t.sectors[s]} />
         ))}
       </div>
 
-      <Card>
-        {events?.length ? (
-          <ul className="divide-y divide-line">
-            {events.map((e) => (
-              <li key={e.id} className="py-3">
-                <div className="flex flex-wrap items-baseline gap-x-3">
-                  <span className="num text-sm text-ink-soft">
-                    {fmtDate(e.date, lang)}
-                    {e.time && ` ${e.time.slice(0, 5)}`}
-                  </span>
-                  <span className="font-semibold">{e.ticker}</span>
-                  <span className="text-sm">{e.event_type}</span>
-                  {e.severity && <span className="text-xs text-ink-soft">● {e.severity}/5</span>}
-                  <span className={`text-xs ${e.direction === "positive" ? "text-up" : e.direction === "negative" ? "text-down" : "text-ink-soft"}`}>
-                    {dirLabel(e.direction)}
-                  </span>
-                </div>
-                {e.description && <p className="mt-1 text-sm text-ink-soft">{e.description}</p>}
-                <div className="mt-1 flex gap-4 text-xs">
-                  {e.source_url && (
-                    <a href={e.source_url} target="_blank" rel="noreferrer" className="underline">
-                      {tx.source}
-                    </a>
-                  )}
-                  <form action={deleteEvent}>
-                    <input type="hidden" name="id" value={e.id} />
-                    <button className="text-ink-soft underline">{tx.delete}</button>
-                  </form>
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-sm text-ink-soft">{tx.empty}</p>
-        )}
-      </Card>
+      {!!upcoming?.length && (
+        <Card>
+          <H2>{tx.upcoming}</H2>
+          <EventList events={upcoming} lang={lang} t={t} />
+        </Card>
+      )}
 
       <Card>
-        <H2>{tx.add}</H2>
-        <form action={addEvent} className="grid grid-cols-2 gap-3">
-          <Field label={tx.date} name="date" type="date" required defaultValue={todayWarsaw()} />
-          <Field label={tx.time} name="time" type="time" />
-          <Select label={tx.ticker} name="ticker" defaultValue={ticker ?? "ALL_BANKS"}>
-            {tickers.map((tk) => (
-              <option key={tk}>{tk}</option>
-            ))}
-          </Select>
-          <Select label={tx.session} name="session_timing" defaultValue="unknown">
-            <option value="before">before</option>
-            <option value="during">during</option>
-            <option value="after">after</option>
-            <option value="unknown">unknown</option>
-          </Select>
-          <Select label={tx.category} name="category" defaultValue="sector_shock">
-            {CATEGORIES.map((c) => (
-              <option key={c}>{c}</option>
-            ))}
-          </Select>
-          <Field label={tx.type} name="event_type" required placeholder="chf_ruling" />
-          <Select label={tx.severity} name="severity" defaultValue="">
-            <option value="">{tx.none}</option>
-            {[1, 2, 3, 4, 5].map((n) => (
-              <option key={n}>{n}</option>
-            ))}
-          </Select>
-          <Select label={tx.direction} name="direction" defaultValue="">
-            <option value="">{tx.none}</option>
-            <option value="positive">{tx.positive}</option>
-            <option value="negative">{tx.negative}</option>
-            <option value="mixed">{tx.mixed}</option>
-          </Select>
-          <Select label="Status" name="status" defaultValue="published">
-            <option value="published">published</option>
-            <option value="scheduled">scheduled</option>
-            <option value="planned_only">planned_only</option>
-          </Select>
-          <Field label={tx.source} name="source_url" type="url" />
-          <label className="col-span-2 block text-sm font-medium">
-            {tx.description}
-            <textarea name="description" rows={3} className="mt-1 block w-full rounded-xl border-2 border-line bg-card px-3 py-2" />
-          </label>
-          <Button type="submit" className="col-span-2">
-            {tx.save}
-          </Button>
-        </form>
+        <H2>{tx.past}</H2>
+        {past?.length ? <EventList events={past} lang={lang} t={t} /> : <p className="text-sm text-ink-soft">{tx.empty}</p>}
+        {past?.length === limit && (
+          <Link href={qs({ limit: String(limit + 100) })} className="mt-3 block text-center text-sm font-semibold underline">
+            {tx.more}
+          </Link>
+        )}
       </Card>
     </main>
+  );
+}
+
+function EventList({ events, lang, t }: { events: EventRow[]; lang: "pl" | "en"; t: Awaited<ReturnType<typeof requireUser>>["t"] }) {
+  const tx = t.events;
+  return (
+    <ul className="divide-y divide-line">
+      {events.map((e) => {
+        const dot = e.sign === 1 ? "bg-up" : e.sign === -1 ? "bg-down" : "bg-line";
+        const signLabel = e.sign === 1 ? tx.positive : e.sign === -1 ? tx.negative : tx.neutral;
+        return (
+          <li key={e.id} className="py-3">
+            <div className="flex flex-wrap items-baseline gap-x-2">
+              <span className={`inline-block size-2.5 shrink-0 rounded-full ${dot}`} title={signLabel} aria-label={signLabel} />
+              <span className="num text-sm text-ink-soft">
+                {fmtDate(e.date, lang)}
+                {e.time && ` ${e.time.slice(0, 5)}`}
+              </span>
+              <span className="font-semibold">{COMPANY[e.ticker] ?? e.ticker.replace("ALL_", "").replace("_", " ")}</span>
+              <span className="text-xs text-ink-soft">{e.event_type.replaceAll("_", " ")}</span>
+              {e.status !== "published" && <span className="rounded bg-warn-bg px-1.5 text-xs">{tx.scheduled}</span>}
+            </div>
+            {e.description && <p className="mt-1 text-sm">{e.description}</p>}
+            {e.source_url && (
+              <a href={e.source_url} target="_blank" rel="noreferrer" className="mt-0.5 inline-block text-xs text-ink-soft underline">
+                {tx.source}
+              </a>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 

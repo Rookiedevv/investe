@@ -5,15 +5,15 @@ import { todayWarsaw, type Instrument, type Trade } from "@/lib/data";
 import { fmtDate, fmtMoney, fmtNum, fmtPct } from "@/lib/i18n";
 import { requireUser } from "@/lib/session";
 
-export default async function JournalPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
-  const { error } = await searchParams;
+export default async function JournalPage({ searchParams }: { searchParams: Promise<{ error?: string; ticker?: string; reason?: string }> }) {
+  const { error, ticker: preTicker, reason: preReason } = await searchParams;
   const { supabase, profile, t } = await requireUser();
   const lang = profile.language;
   const tj = t.journal;
   const today = todayWarsaw();
 
   const [{ data: instruments }, { data: trades }] = await Promise.all([
-    supabase.from("instruments").select("*").order("ticker").returns<Instrument[]>(),
+    supabase.from("instruments").select("*").neq("sector", "index").order("ticker").returns<Instrument[]>(),
     supabase.from("paper_trades").select("*").order("opened_on", { ascending: false }).returns<Trade[]>(),
   ]);
   const open = (trades ?? []).filter((x) => !x.closed_on);
@@ -67,7 +67,7 @@ export default async function JournalPage({ searchParams }: { searchParams: Prom
       <Card>
         <H2>{tj.open}</H2>
         <form action={openTrade} className="grid grid-cols-2 gap-3">
-          <Select label={tj.ticker} name="ticker">
+          <Select label={tj.ticker} name="ticker" defaultValue={preTicker}>
             {(instruments ?? []).map((i) => (
               <option key={i.ticker} value={i.ticker}>
                 {i.ticker} · {i.name}
@@ -79,7 +79,7 @@ export default async function JournalPage({ searchParams }: { searchParams: Prom
           <Field label={tj.price} name="entry_price" type="number" min="0" step="0.0001" required inputMode="decimal" />
           <label className="col-span-2 block text-sm font-medium">
             {tj.reason}
-            <textarea name="reason" rows={2} className="mt-1 block w-full rounded-xl border-2 border-line bg-card px-3 py-2" />
+            <textarea name="reason" rows={2} defaultValue={preReason} className="mt-1 block w-full rounded-xl border-2 border-line bg-card px-3 py-2" />
           </label>
           <Button type="submit" className="col-span-2">
             {tj.save}
