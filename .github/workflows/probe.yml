@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          for s in PKO.WA PEO.WA SPL.WA EBP.WA MBK.WA ING.WA MIL.WA ALR.WA BHW.WA BNP.WA PGE.WA TPE.WA ENA.WA PEP.WA CAR.WA APR.WA WIG.WA ^WIG WIG20.WA WIG-BANKI.WA; do
+          for s in PGE.WA TPE.WA ENA.WA PEP.WA CAR.WA APR.WA WIG.WA ^WIG WIG20.WA WIG-BANKI.WA; do
             out=$(curl -sS -m 20 -A "Mozilla/5.0" "https://query1.finance.yahoo.com/v8/finance/chart/$s?range=10y&interval=1d&events=div" | python3 -c "
           import sys,json
           try:
@@ -16,5 +16,5 @@ jobs:
             f=lambda x:D.datetime.utcfromtimestamp(x).date()
             print(len(t), f(t[0]), f(t[-1]), q['close'][-1], (a or [None])[-1])
           except Exception as e: print('ERR', str(e)[:80])")
-            echo "::notice title=$s::$out"
+            echo "::notice title=$s::$out"; sleep 0.3
           done
