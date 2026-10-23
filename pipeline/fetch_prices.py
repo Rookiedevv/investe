@@ -21,26 +21,31 @@ SYMBOLS = {
     "MIL": "MIL.WA", "ALR": "ALR.WA", "BHW": "BHW.WA", "BNP": "BNP.WA",
     "PGE": "PGE.WA", "TPE": "TPE.WA", "ENA": "ENA.WA", "PEP": "PEP.WA",
     "CAR": "CAR.WA", "APR": "APR.WA",
-    "WIG": "WIG.WA",
+    "WIG": ["WIG.WA", "^WIG"],
 }
 
-# ticker -> (yahoo symbol, name, sector for the instruments table, market)
+# ticker -> (yahoo symbols to try in order, name, sector for the instruments table, market)
 MARKET = {
-    "WIG20": ("WIG20.WA", "WIG20 (indeks)", "index", "GPW"),
-    "SPX": ("^GSPC", "S&P 500", "index", "US"),
-    "NDQ": ("^IXIC", "Nasdaq Composite", "index", "US"),
-    "DAX": ("^GDAXI", "DAX", "index", "DE"),
-    "VIX": ("^VIX", "VIX", "index", "US"),
-    "BRENT": ("BZ=F", "Brent (futures)", "other", "ICE"),
-    "EURPLN": ("EURPLN=X", "EUR/PLN", "other", "FX"),
-    "USDPLN": ("USDPLN=X", "USD/PLN", "other", "FX"),
+    "WIG20": (["WIG20.WA", "^WIG20", "WIG20"], "WIG20 (indeks)", "index", "GPW"),
+    "SPX": (["^GSPC"], "S&P 500", "index", "US"),
+    "NDQ": (["^IXIC"], "Nasdaq Composite", "index", "US"),
+    "DAX": (["^GDAXI"], "DAX", "index", "DE"),
+    "VIX": (["^VIX"], "VIX", "index", "US"),
+    "BRENT": (["BZ=F"], "Brent (futures)", "other", "ICE"),
+    "EURPLN": (["EURPLN=X"], "EUR/PLN", "other", "FX"),
+    "USDPLN": (["USDPLN=X"], "USD/PLN", "other", "FX"),
 }
 
-URL = "https://query1.finance.yahoo.com/v8/finance/chart/{s}?range={r}&interval=1d&events=div"
+# Explicit period1/period2: with range=max Yahoo silently returns quarterly bars.
+URL = ("https://query1.finance.yahoo.com/v8/finance/chart/{s}"
+       "?period1={p1}&period2={p2}&interval=1d&events=div")
+YEAR = 365 * 86400
 
 
-def fetch(symbol: str, rng: str = "10y") -> list[dict]:
-    req = urllib.request.Request(URL.format(s=symbol, r=rng), headers={"User-Agent": "Mozilla/5.0"})
+def fetch(symbol: str, years: int = 10) -> list[dict]:
+    now = int(time.time())
+    req = urllib.request.Request(URL.format(s=symbol, p1=max(0, now - years * YEAR), p2=now + 86400),
+                                 headers={"User-Agent": "Mozilla/5.0"})
     for attempt in range(4):
         try:
             with urllib.request.urlopen(req, timeout=60) as r:
@@ -75,17 +80,46 @@ def fetch(symbol: str, rng: str = "10y") -> list[dict]:
     return [by_day[d] for d in sorted(by_day)]
 
 
-def main(out_path: str) -> None:
-    jobs = [(t, s, "10y") for t, s in SYMBOLS.items()] + [(t, m[0], "max") for t, m in MARKET.items()]
+def fetch_any(symbols: list[str], years: int) -> tuple[list[dict], str]:
+    """First symbol that returns a real daily series (> 200 rows); else the longest one."""
+    best: tuple[list[dict], str] = ([], symbols[0])
+    for sym in symbols:
+        try:
+            rows = fetch(sym, years)
+        except Exception as e:
+            print(f"  {sym}: {e}")
+            continue
+        if len(rows) > 200:
+            return rows, sym
+        if len(rows) > len(best[0]):
+            best = (rows, sym)
+    return best
+
+
+def main(out_path: str, log_path: str | None = None) -> None:
+    """Stocks (SYMBOLS) must all succeed; a market series that fails is logged and skipped."""
+    jobs = ([(t, [s] if isinstance(s, str) else s, 10, t != "WIG") for t, s in SYMBOLS.items()]
+            + [(t, m[0], 60, False) for t, m in MARKET.items()])
+    log = [f"fetched {dt.datetime.now(dt.timezone.utc):%Y-%m-%d %H:%M} UTC"]
     with open(out_path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["date", "ticker", "open", "high", "low", "close", "adj_close", "volume"])
         w.writeheader()
-        for ticker, symbol, rng in jobs:
-            rows = fetch(symbol, rng)
-            for r in rows:
-                w.writerow({"ticker": ticker, **r})
-            print(f"{ticker}: {len(rows)} days, last {rows[-1]['date']} close {rows[-1]['close']}")
+        for ticker, symbols, years, required in jobs:
+            rows, used = fetch_any(symbols, years)
+            if not rows:
+                if required:
+                    raise RuntimeError(f"{ticker}: no data from Yahoo ({symbols})")
+                line = f"{ticker}: NO DATA (tried {symbols})"
+            else:
+                for r in rows:
+                    w.writerow({"ticker": ticker, **r})
+                line = f"{ticker} ({used}): {len(rows)} days, {rows[0]['date']} .. {rows[-1]['date']}, last close {rows[-1]['close']}"
+            print(line)
+            log.append(line)
             time.sleep(0.5)
+    if log_path:
+        with open(log_path, "w") as f:
+            f.write("\n".join(log) + "\n")
 
 
 if __name__ == "__main__":

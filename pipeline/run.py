@@ -147,7 +147,8 @@ def main(dry: bool = False) -> None:
     started = dt.datetime.now(dt.timezone.utc)
     with tempfile.TemporaryDirectory() as tmp:
         path = Path(tmp) / "prices.csv"
-        fetch_prices.main(str(path))
+        (DATA / "prices").mkdir(parents=True, exist_ok=True)
+        fetch_prices.main(str(path), str(DATA / "prices" / "_fetch_log.txt"))
         prices = pd.read_csv(path)
 
     # Drop today's bar if the job runs before the session is over (Warsaw close 17:05).
@@ -182,6 +183,11 @@ def main(dry: bool = False) -> None:
     # Market series (WIG20, S&P 500, ...) must exist in instruments before their prices (FK).
     db.upsert("instruments", [dict(ticker=t, name=m[1], sector=m[2], market=m[3], watched=False)
                               for t, m in fetch_prices.MARKET.items()], "ticker")
+
+    # Market series are replaced whole (an earlier run stored quarterly bars for them under daily dates).
+    present = sorted(set(prices["ticker"]) & set(fetch_prices.MARKET))
+    if present:
+        db.delete("prices", "ticker=in.(" + ",".join(present) + ")")
 
     price_rows = [clean(dict(ticker=r.ticker, date=r.date, open=r.open, high=r.high, low=r.low, close=r.close,
                              adj_close=r.adj_close, volume=r.volume)) for r in prices.itertuples()]
