@@ -1,0 +1,175 @@
+<main>
+<header style="display:grid;gap:8px">
+  <p class="eyebrow">Walk-forward test · WIG20 (proxy: Beta ETF WIG20TR) · S&amp;P 500, Nasdaq, DAX, VIX, Brent, EUR/PLN, USD/PLN</p>
+  <h1>WIG20 Dip Model</h1>
+  <p class="lede">Every evening after the US close the models are asked: will WIG20 fall from tomorrow's open to the close 1, 3 or 5 sessions later? Models are refitted every 63 sessions on past data only, so every probability below was computable on the evening it is dated. Trade entry is the next Warsaw open; costs default to the FW20 round trip.</p>
+</header>
+
+<section class="panel" id="today">
+  <div><p class="eyebrow">Latest reading</p><h2 id="todayTitle">Reading for the next session</h2></div>
+  <div class="tiles" id="todayTiles"></div>
+  <p class="note" id="todayNote"></p>
+</section>
+
+<section class="panel" id="scorecard">
+  <div><p class="eyebrow">Out-of-sample scorecard</p><h2>Can the direction be predicted at all?</h2></div>
+  <p class="note">AUC measures ranking skill: 0.50 is a coin flip, 0.55 is a weak but real edge, 0.60 would be remarkable for a daily index. Accuracy counts a day as predicted "down" when the probability is above 0.5. The base rate is how often the move actually was negative.</p>
+  <div class="scroll"><table id="scoreTable"></table></div>
+  <div class="verdict" id="scoreVerdict"></div>
+</section>
+
+<section class="panel" id="sim">
+  <div><p class="eyebrow">Short simulator</p><h2>Short FW20 when P(down) exceeds a threshold</h2></div>
+  <div class="controls">
+    <label class="ctl">Model<select id="simModel"><option value="ens">Ensemble (LR + boosting, all inputs)</option><option value="all_lr">Logistic regression, all inputs</option><option value="all_gb">Gradient boosting, all inputs</option><option value="wig_gb">Gradient boosting, WIG20 only</option><option value="all_base">Base rate only (no model)</option></select></label>
+    <label class="ctl">Holding period<select id="simH"><option value="1">1 session (open → close)</option><option value="3">3 sessions</option><option value="5">5 sessions</option></select></label>
+    <label class="ctl">Threshold P(down) <output id="simThrOut">0.55</output><input type="range" id="simThr" min="0.30" max="0.80" step="0.01" value="0.55"></label>
+    <label class="ctl">Round-trip cost, %<input type="number" id="simCost" value="0.10" step="0.01" min="0" max="2"></label>
+  </div>
+  <div class="tiles" id="simTiles"></div>
+  <div id="simChart"></div>
+  <div class="scroll"><table id="simYears"></table></div>
+  <p class="note">Each trade: enter short at the next session's open, cover at the close N sessions later, then wait for the next signal. "Always short" and "always long" use the same calendar with no signal. Cost 0.10% ≈ 38 zł commissions + one tick of spread on one FW20 contract (~84k zł exposure).</p>
+</section>
+
+<section class="panel" id="explore">
+  <div><p class="eyebrow">Dip explorer</p><h2>What happens after a given situation?</h2></div>
+  <p class="note">Pick one or more conditions (all must hold on the evening of the decision). The table shows what WIG20 then did from the next open, against all days. This uses the whole 2020–2026 sample, not just the model's test window.</p>
+  <div class="chips" id="chips"></div>
+  <div class="scroll"><table id="expTable"></table></div>
+  <div id="expChart"></div>
+</section>
+
+<section class="panel">
+  <div><p class="eyebrow">Data and method</p><h2>What this is built on</h2></div>
+  <dl class="kv" id="meta"></dl>
+  <p class="note">Yahoo no longer serves WIG20 history, so the index is represented by the Beta ETF WIG20TR (listed Jan 2019), whose close tracks the total-return index; its open is the ETF's first trade and is noisier than the index open. Real WIG20 bars are being collected daily from now on, and a Stooq WIG20 file would extend the history to 1994. Inputs: WIG20 returns over 1–60 days, volatility, range, gap, distance from 20/60/250-day highs and lows, moving averages, RSI, streaks, volume; previous-day and 5-day moves of S&amp;P 500, Nasdaq, DAX, Brent, EUR/PLN, USD/PLN; VIX level and changes; weekday, month, turn of month, expiry week.</p>
+</section>
+</main>
+<script id="data" type="application/json">__DATA__</script>
+<script>
+const DATA = JSON.parse(document.getElementById('data').textContent);
+const R = DATA.rows;
+const fmtP = (x, d=2) => (x*100).toFixed(d) + '%';
+const sgn = x => x > 0 ? '+' : '';
+const el = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+// ---------- Latest reading ----------
+(function(){
+  const last = R[R.length-1];
+  const nextSession = (() => { const d = new Date(last.d + 'T12:00:00'); do { d.setDate(d.getDate()+1); } while (d.getDay()===0 || d.getDay()===6); return d.toISOString().slice(0,10); })();
+  el('todayTitle').textContent = `Reading on ${last.d} evening, for the session of ${nextSession}`;
+  const tiles = [
+    ['ens_h1','P(down) next session'], ['ens_h3','P(down) over 3 sessions'], ['ens_h5','P(down) over 5 sessions']
+  ].map(([k,l]) => { const p = last[k]; const cls = p > 0.55 ? 'down' : p < 0.45 ? 'up' : '';
+    return `<div class="tile ${cls}"><div class="v">${(p*100).toFixed(0)}%</div><div class="l">${l}</div><div class="gauge"><i style="left:${(p*100).toFixed(1)}%"></i></div></div>`; });
+  tiles.push(`<div class="tile"><div class="v">${sgn(last.r1)}${fmtP(last.r1)}</div><div class="l">WIG20 last session</div></div>`);
+  tiles.push(`<div class="tile"><div class="v">${sgn(last.spx_r1)}${fmtP(last.spx_r1)}</div><div class="l">S&amp;P 500 last session</div></div>`);
+  tiles.push(`<div class="tile"><div class="v">${last.vix.toFixed(1)}</div><div class="l">VIX (z-score ${last.vix_z.toFixed(1)})</div></div>`);
+  el('todayTiles').innerHTML = tiles.join('');
+  el('todayNote').textContent = `Ensemble probabilities. Read them with the scorecard below in mind: on the test window the models' skill is close to a coin flip, so a reading like ${(last.ens_h1*100).toFixed(0)}% is not a trading signal. Streak: ${last.streak} day(s); ${fmtP(last.dd20,1)} from the 20-day high.`;
+})();
+
+// ---------- Scorecard ----------
+(function(){
+  const names = {ens:'Ensemble', all_lr:'Logistic, all inputs', all_gb:'Boosting, all inputs', wig_lr:'Logistic, WIG20 only', wig_gb:'Boosting, WIG20 only', all_base:'Base rate', wig_base:'Base rate'};
+  const hz = {h1:'1 session', h3:'3 sessions', h5:'5 sessions'};
+  const rows = DATA.scores.filter(s => !s.model.startsWith('wig_base'));
+  let html = '<thead><tr><th>Model</th><th>Horizon</th><th class="num">Days</th><th class="num">AUC</th><th class="num">Accuracy</th><th class="num">Base rate (down)</th><th class="num">Brier</th></tr></thead><tbody>';
+  for (const s of rows) {
+    const key = s.model.replace(/_h\d$/,''); const nm = names[key] || key;
+    const auc = s.auc; const cls = auc >= 0.55 ? 'pos' : '';
+    html += `<tr><td>${esc(nm)}</td><td>${hz[s.horizon]}</td><td class="num">${s.n}</td><td class="num ${cls}">${auc.toFixed(3)}</td><td class="num">${(s.acc*100).toFixed(1)}%</td><td class="num">${(s.base_down*100).toFixed(1)}%</td><td class="num">${s.brier.toFixed(3)}</td></tr>`;
+  }
+  el('scoreTable').innerHTML = html + '</tbody>';
+  const best1 = Math.max(...rows.filter(s=>s.horizon==='h1').map(s=>s.auc));
+  const best5 = Math.max(...rows.filter(s=>s.horizon==='h5').map(s=>s.auc));
+  el('scoreVerdict').innerHTML = `<strong>Verdict.</strong> Next-session direction: best AUC ${best1.toFixed(3)}, which is noise. Five-session direction: best AUC ${best5.toFixed(3)}, a faint signal that does not survive costs in the simulator below. The base rate itself is the strongest fact: over 5 sessions WIG20 fell only ${(rows.find(s=>s.model==='all_base_h5').base_down*100).toFixed(0)}% of the time in this period, so shorting starts from a structural disadvantage.`;
+})();
+
+// ---------- Simulator ----------
+const T = R.filter(r => r.ens_h1 !== undefined);   // out-of-sample window
+function simulate(modelKey, h, thr, cost){
+  const pk = modelKey === 'ens' ? `ens_h${h}` : modelKey === 'wig_gb' && h !== 1 ? `all_gb_h${h}` : modelKey === 'all_base' ? 'all_base_h1' : `${modelKey}_h${h}`;
+  const tk = `t_oc${h}`;
+  const trades = []; let i = 0;
+  while (i < T.length) {
+    const r = T[i];
+    const p = modelKey === 'all_base' ? (h===1 ? r.all_base_h1 : 1) : r[pk];
+    if (p !== undefined && p > thr && r[tk] !== undefined) { trades.push({d:r.d, ret:-r[tk]-cost}); i += h; } else i++;
+  }
+  // benchmarks: same calendar, always short / always long, non-overlapping blocks
+  const alwaysShort=[], alwaysLong=[];
+  for (let j=0;j<T.length;j+=h){ const r=T[j]; if(r[tk]!==undefined){ alwaysShort.push(-r[tk]-cost); alwaysLong.push(r[tk]-cost);} }
+  return {trades, alwaysShort, alwaysLong};
+}
+function stats(rets){ const n=rets.length; if(!n) return {n:0,avg:0,win:0,total:0,dd:0}; let cum=0,peak=0,dd=0; for(const x of rets){cum+=x; peak=Math.max(peak,cum); dd=Math.min(dd,cum-peak);} return {n, avg:rets.reduce((a,b)=>a+b,0)/n, win:rets.filter(x=>x>0).length/n, total:cum, dd}; }
+function renderSim(){
+  const m = el('simModel').value, h = +el('simH').value, thr = +el('simThr').value, cost = +el('simCost').value/100;
+  el('simThrOut').value = thr.toFixed(2);
+  const s = simulate(m,h,thr,cost); const st = stats(s.trades.map(t=>t.ret)); const bs = stats(s.alwaysShort), bl = stats(s.alwaysLong);
+  const cls = x => x>0?'pos':x<0?'neg':'';
+  el('simTiles').innerHTML = [
+    [`${st.n}`,'trades',''], [`${sgn(st.avg)}${fmtP(st.avg,3)}`,'average per trade, net',cls(st.avg)], [`${(st.win*100).toFixed(0)}%`,'winning trades',''],
+    [`${sgn(st.total)}${fmtP(st.total,1)}`,'sum of trade returns',cls(st.total)], [`${fmtP(st.dd,1)}`,'worst drawdown','neg'],
+    [`${sgn(bs.total)}${fmtP(bs.total,1)}`,`always short, ${bs.n} trades`,cls(bs.total)], [`${sgn(bl.total)}${fmtP(bl.total,1)}`,`always long, ${bl.n} trades`,cls(bl.total)]
+  ].map(([v,l,c])=>`<div class="tile"><div class="v ${c}">${v}</div><div class="l">${l}</div></div>`).join('');
+  // equity chart
+  const W=960,H=260,pl=56,pr=16,pt=14,pb=28; let cum=0; const pts=s.trades.map(t=>{cum+=t.ret; return [t.d,cum];});
+  if (!pts.length) { el('simChart').innerHTML = '<p class="note">No trades at this threshold.</p>'; } else {
+    const x0=new Date(T[0].d).getTime(), x1=new Date(T[T.length-1].d).getTime();
+    const ys=pts.map(p=>p[1]); const ymin=Math.min(0,...ys), ymax=Math.max(0,...ys); const span=(ymax-ymin)||0.01;
+    const X=d=>pl+(new Date(d).getTime()-x0)/(x1-x0)*(W-pl-pr), Y=v=>pt+(ymax-v)/span*(H-pt-pb);
+    let path=`M${X(T[0].d).toFixed(1)},${Y(0).toFixed(1)}`; for(const p of pts) path+=` L${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`;
+    const ticks=[]; for(let k=0;k<=4;k++){ const v=ymin+span*k/4; ticks.push(`<line x1="${pl}" x2="${W-pr}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" stroke="var(--grid)"/><text x="${pl-6}" y="${(Y(v)+4).toFixed(1)}" text-anchor="end">${(v*100).toFixed(0)}%</text>`);}
+    const years=[]; for(let y=new Date(T[0].d).getFullYear()+1;y<=new Date(T[T.length-1].d).getFullYear();y++){ years.push(`<text x="${X(y+'-01-01').toFixed(1)}" y="${H-8}" text-anchor="middle">${y}</text>`);}
+    el('simChart').innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Cumulative return of the short strategy">${ticks.join('')}${years.join('')}<line x1="${pl}" x2="${W-pr}" y1="${Y(0).toFixed(1)}" y2="${Y(0).toFixed(1)}" stroke="var(--muted)" stroke-dasharray="3 3"/><path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="${X(pts[pts.length-1][0]).toFixed(1)}" cy="${Y(pts[pts.length-1][1]).toFixed(1)}" r="4" fill="var(--accent)"/></svg>`;
+  }
+  // per year
+  const by={}; for(const t of s.trades){ const y=t.d.slice(0,4); (by[y]=by[y]||[]).push(t.ret);}
+  let html='<thead><tr><th>Year</th><th class="num">Trades</th><th class="num">Avg / trade</th><th class="num">Win rate</th><th class="num">Sum</th></tr></thead><tbody>';
+  for(const y of Object.keys(by).sort()){ const q=stats(by[y]); html+=`<tr><td>${y}</td><td class="num">${q.n}</td><td class="num ${cls(q.avg)}">${sgn(q.avg)}${fmtP(q.avg,3)}</td><td class="num">${(q.win*100).toFixed(0)}%</td><td class="num ${cls(q.total)}">${sgn(q.total)}${fmtP(q.total,1)}</td></tr>`; }
+  el('simYears').innerHTML = html+'</tbody>';
+}
+for (const id of ['simModel','simH','simThr','simCost']) el(id).addEventListener('input', renderSim);
+renderSim();
+
+// ---------- Dip explorer ----------
+const CONDS = [
+  ['down1','WIG20 fell today', r=>r.r1<0], ['down2','2+ down days in a row', r=>r.streak<=-2], ['down3','3+ down days in a row', r=>r.streak<=-3],
+  ['up3','3+ up days in a row', r=>r.streak>=3], ['dip3','≥3% below 20-day high', r=>r.dd20<=-0.03], ['dip5','≥5% below 20-day high', r=>r.dd20<=-0.05],
+  ['athigh','at the 20-day high', r=>r.dd20>-0.002], ['spxdn','S&P 500 fell ≥1% (same day)', r=>r.spx_r1<=-0.01], ['spxup','S&P 500 rose ≥1%', r=>r.spx_r1>=0.01],
+  ['vixhi','VIX high (z-score > 1)', r=>r.vix_z>1], ['vixsp','VIX jumped ≥10%', r=>r.vix_chg1>=0.0953], ['rsihi','RSI(14) > 70', r=>r.rsi14>70], ['rsilo','RSI(14) < 30', r=>r.rsi14<30],
+  ['gapdn','opened with a gap down', r=>r.gap<=-0.005], ['fri','Friday (next session is Monday)', r=>r.dow===4], ['tom','turn of the month', r=>r.turn_of_month===1],
+  ['hivol','20-day volatility above 1.3%', r=>r.vol20>0.013], ['plnwk','złoty weakened ≥0.5% vs EUR', r=>r.eurpln_r1>=0.005]
+];
+const active = new Set();
+el('chips').innerHTML = CONDS.map(c=>`<button class="chip" type="button" id="chip_${c[0]}" aria-pressed="false">${c[1]}</button>`).join('');
+for (const c of CONDS) el('chip_'+c[0]).addEventListener('click', e=>{ const on=!active.has(c[0]); if(on) active.add(c[0]); else active.delete(c[0]); e.currentTarget.setAttribute('aria-pressed', on); renderExp(); });
+function dist(rows,k){ const v=rows.map(r=>r[k]).filter(x=>x!==undefined); const n=v.length; if(!n) return {n:0}; const mean=v.reduce((a,b)=>a+b,0)/n; const sd=Math.sqrt(v.reduce((a,b)=>a+(b-mean)**2,0)/Math.max(1,n-1)); return {n, mean, down:v.filter(x=>x<0).length/n, se:sd/Math.sqrt(n), worst:Math.min(...v), best:Math.max(...v)}; }
+function renderExp(){
+  const fs = CONDS.filter(c=>active.has(c[0])).map(c=>c[2]);
+  const sel = R.filter(r => fs.every(f=>f(r)));
+  const hz=[['t_oc1','next session (open→close)'],['t_oc3','3 sessions'],['t_oc5','5 sessions']];
+  let html=`<thead><tr><th>Horizon</th><th class="num">Days matching</th><th class="num">Mean move</th><th class="num">P(down)</th><th class="num">All days: mean</th><th class="num">All days: P(down)</th><th class="num">Difference ± 2 s.e.</th></tr></thead><tbody>`;
+  for(const [k,l] of hz){ const a=dist(sel,k), b=dist(R,k); if(!a.n){ html+=`<tr><td>${l}</td><td class="num">0</td><td colspan="5"></td></tr>`; continue;} const diff=a.mean-b.mean; const sig=Math.abs(diff)>2*a.se;
+    html+=`<tr><td>${l}</td><td class="num">${a.n}</td><td class="num ${a.mean<0?'neg':'pos'}">${sgn(a.mean)}${fmtP(a.mean)}</td><td class="num">${(a.down*100).toFixed(0)}%</td><td class="num">${sgn(b.mean)}${fmtP(b.mean)}</td><td class="num">${(b.down*100).toFixed(0)}%</td><td class="num ${sig?(diff<0?'neg':'pos'):''}">${sgn(diff)}${fmtP(diff)} ± ${fmtP(2*a.se)}${sig?' *':''}</td></tr>`; }
+  el('expTable').innerHTML = html+'</tbody>';
+  // histogram of 3-session moves, selection vs all
+  const k='t_oc3'; const bins=[-0.08,-0.06,-0.04,-0.03,-0.02,-0.01,0,0.01,0.02,0.03,0.04,0.06,0.08];
+  const hist=rows=>{ const v=rows.map(r=>r[k]).filter(x=>x!==undefined); const h=new Array(bins.length+1).fill(0); for(const x of v){ let i=0; while(i<bins.length&&x>=bins[i]) i++; h[i]++; } return h.map(c=>c/Math.max(1,v.length)); };
+  const ha=hist(sel), hb=hist(R); const W=960,H=200,pl=40,pr=10,pt=10,pb=30; const n=ha.length; const bw=(W-pl-pr)/n; const ymax=Math.max(...ha,...hb,0.01);
+  let g=''; for(let i=0;i<n;i++){ const x=pl+i*bw; const lab=i===0?`<${(bins[0]*100)}%`:i===n-1?`≥${(bins[n-2]*100)}%`:`${(bins[i-1]*100)}…${(bins[i]*100)}`;
+    g+=`<rect x="${(x+2).toFixed(1)}" y="${(pt+(1-hb[i]/ymax)*(H-pt-pb)).toFixed(1)}" width="${(bw/2-3).toFixed(1)}" height="${(hb[i]/ymax*(H-pt-pb)).toFixed(1)}" fill="var(--grid)"/>`;
+    g+=`<rect x="${(x+bw/2).toFixed(1)}" y="${(pt+(1-ha[i]/ymax)*(H-pt-pb)).toFixed(1)}" width="${(bw/2-3).toFixed(1)}" height="${(ha[i]/ymax*(H-pt-pb)).toFixed(1)}" fill="${i<6?'var(--down)':'var(--up)'}" opacity="0.85"/>`;
+    g+=`<text x="${(x+bw/2).toFixed(1)}" y="${H-10}" text-anchor="middle" font-size="9">${lab}</text>`; }
+  el('expChart').innerHTML = `<p class="note" style="margin-bottom:6px">3-session move from the next open: selected days (coloured) vs all days (grey), share of days per bucket.</p><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribution of 3-session moves">${g}<text x="${pl-4}" y="${pt+8}" text-anchor="end">${(ymax*100).toFixed(0)}%</text><text x="${pl-4}" y="${H-pb}" text-anchor="end">0</text></svg>`;
+}
+renderExp();
+
+// ---------- meta ----------
+(function(){ const first=R[0].d, last=R[R.length-1].d, oos=T[0].d;
+  el('meta').innerHTML = `<dt>Series</dt><dd>${esc(DATA.base)} (WIG20 total-return ETF) daily OHLC, foreign series from Yahoo</dd><dt>Feature window</dt><dd>${first} … ${last} (${R.length} sessions)</dd><dt>Out-of-sample window</dt><dd>${oos} … ${last} (${T.length} sessions)</dd><dt>Refit</dt><dd>every 63 sessions, expanding window, targets shifted so no label leaks into training</dd><dt>Learners</dt><dd>logistic regression (C=0.05, standardised), histogram gradient boosting (depth 3, 250 rounds), ensemble = mean</dd><dt>Data pipeline</dt><dd>investe repo, GitHub Action daily 16:30 UTC → data/prices/*.csv and Supabase prices</dd>`;
+})();
+</script>

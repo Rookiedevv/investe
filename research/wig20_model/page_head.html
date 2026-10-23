@@ -1,0 +1,58 @@
+<title>WIG20 Dip Model</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single column of panels, summary first (today's reading), then scorecard, simulator, explorer. */
+:root{
+  --bg:#f5f6f8; --panel:#ffffff; --fg:#17202a; --muted:#5b6774; --line:#d9dee5;
+  --accent:#1f4e8c; --accent-soft:#e3ecf7; --down:#b42318; --down-soft:#fbe9e7; --up:#1d7a4a; --up-soft:#e3f3ea;
+  --grid:#e6eaef; --font-body:"IBM Plex Sans",system-ui,sans-serif; --font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141a; --panel:#171e26; --fg:#e6ebf0; --muted:#9aa6b2; --line:#2a3440;
+  --accent:#7fb0ea; --accent-soft:#1c2c40; --down:#f08c80; --down-soft:#3a1d1a; --up:#6cc394; --up-soft:#173126; --grid:#232d38; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141a; --panel:#171e26; --fg:#e6ebf0; --muted:#9aa6b2; --line:#2a3440;
+  --accent:#7fb0ea; --accent-soft:#1c2c40; --down:#f08c80; --down-soft:#3a1d1a; --up:#6cc394; --up-soft:#173126; --grid:#232d38; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+main{max-width:1080px;margin:0 auto;display:grid;gap:22px}
+h1{font-size:26px;font-weight:600;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h2{font-size:17px;font-weight:600;margin:0 0 4px}
+p{margin:0}
+.lede{color:var(--muted);max-width:68ch}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:grid;gap:14px;min-width:0}
+.eyebrow{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:500}
+.mono,.num,td.num,th.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start}
+.row>*{min-width:0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.tile{border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:2px}
+.tile .v{font-family:var(--font-mono);font-size:24px;font-weight:500;line-height:1.15}
+.tile .l{font-size:12.5px;color:var(--muted)}
+.tile.down{background:var(--down-soft)} .tile.up{background:var(--up-soft)}
+.gauge{height:10px;border-radius:5px;background:linear-gradient(90deg,var(--up) 0%,var(--grid) 50%,var(--down) 100%);position:relative;margin-top:6px}
+.gauge i{position:absolute;top:-4px;width:4px;height:18px;background:var(--fg);border-radius:2px;transform:translateX(-50%)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{font-weight:500;color:var(--muted);font-size:12.5px}
+td.num,th.num{text-align:right}
+.scroll{overflow-x:auto;min-width:0}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px 18px}
+label.ctl{display:grid;gap:4px;font-size:13px;color:var(--muted)}
+label.ctl select,label.ctl input[type=number]{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+label.ctl output{color:var(--fg);font-family:var(--font-mono)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+svg{max-width:100%;height:auto;display:block}
+svg text{font-family:var(--font-mono);font-size:11px;fill:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.chip:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.note{font-size:13px;color:var(--muted);max-width:70ch}
+.verdict{border-left:3px solid var(--accent);padding:6px 12px;background:var(--accent-soft);border-radius:0 6px 6px 0}
+.neg{color:var(--down)} .pos{color:var(--up)}
+dl.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:13.5px}
+dl.kv dt{color:var(--muted)} dl.kv dd{margin:0;font-family:var(--font-mono)}
+@media (prefers-reduced-motion:no-preference){.gauge i{transition:left .3s}}
+</style>
