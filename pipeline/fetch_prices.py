@@ -21,12 +21,21 @@ SYMBOLS = {
     "MIL": "MIL.WA", "ALR": "ALR.WA", "BHW": "BHW.WA", "BNP": "BNP.WA",
     "PGE": "PGE.WA", "TPE": "TPE.WA", "ENA": "ENA.WA", "PEP": "PEP.WA",
     "CAR": "CAR.WA", "APR": "APR.WA",
-    "WIG": ["WIG.WA", "^WIG"],
+    "WIG": ["WIG.WA"],  # Yahoo: current day only; accumulated like WIG20
 }
+
+# Series whose history Yahoo no longer serves: keep every row ever fetched (plus Stooq seeds).
+ACCUMULATE = {"WIG20", "WIG"}
 
 # ticker -> (yahoo symbols to try in order, name, sector for the instruments table, market)
 MARKET = {
-    "WIG20": (["WIG20.WA", "^WIG20", "WIG20"], "WIG20 (indeks)", "index", "GPW"),
+    # Yahoo serves only the current day for GPW indices; these rows are ACCUMULATED in
+    # data/prices/<T>.csv by run.py (older history comes from Stooq files Zuzanna provides once).
+    "WIG20": (["WIG20.WA"], "WIG20 (indeks)", "index", "GPW"),
+    # Index-tracking ETFs with real daily history, used as WIG20 proxies for the years before
+    # the accumulated index rows exist.
+    "ETFW20L": (["ETFW20L.WA"], "Lyxor/Amundi WIG20 UCITS ETF", "index", "GPW"),
+    "ETFBW20TR": (["ETFBW20TR.WA"], "Beta ETF WIG20TR", "index", "GPW"),
     "SPX": (["^GSPC"], "S&P 500", "index", "US"),
     "NDQ": (["^IXIC"], "Nasdaq Composite", "index", "US"),
     "DAX": (["^GDAXI"], "DAX", "index", "DE"),
@@ -89,7 +98,7 @@ def fetch_any(symbols: list[str], years: int) -> tuple[list[dict], str]:
         except Exception as e:
             print(f"  {sym}: {e}")
             continue
-        if len(rows) > 200:
+        if len(rows) > 200 or len(symbols) == 1:
             return rows, sym
         if len(rows) > len(best[0]):
             best = (rows, sym)

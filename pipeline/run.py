@@ -133,12 +133,55 @@ def sales_rows(releases: pd.DataFrame) -> list[dict]:
 
 # ───────────────────────── Snapshots ─────────────────────────
 
-def write_snapshots(prices: pd.DataFrame, folder: Path) -> None:
-    """One CSV per ticker: date,open,high,low,close,adj_close,volume (sorted by date)."""
+def write_snapshots(prices: pd.DataFrame, folder: Path) -> pd.DataFrame:
+    """One CSV per ticker: date,open,high,low,close,adj_close,volume (sorted by date).
+
+    Accumulated tickers (WIG20, WIG) are merged with the existing file and with seed files
+    data/prices/seed/<TICKER>.csv (Stooq downloads: Data/Date,Open,High,Low,Close,Volume);
+    freshly fetched rows win on the same date. Returns the frame with the merged series."""
     folder.mkdir(parents=True, exist_ok=True)
     cols = ["date", "open", "high", "low", "close", "adj_close", "volume"]
+    parts = []
     for ticker, g in prices.groupby("ticker"):
-        g.sort_values("date")[cols].to_csv(folder / f"{ticker}.csv", index=False)
+        g = g.sort_values("date")[cols]
+        if ticker in fetch_prices.ACCUMULATE:
+            g = merge_history(ticker, g, folder)
+        g.to_csv(folder / f"{ticker}.csv", index=False)
+        parts.append(g.assign(ticker=ticker))
+    # accumulated tickers may have a seed/snapshot even when today's fetch returned nothing
+    for ticker in fetch_prices.ACCUMULATE - set(prices["ticker"]):
+        g = merge_history(ticker, pd.DataFrame(columns=cols), folder)
+        if len(g):
+            g.to_csv(folder / f"{ticker}.csv", index=False)
+            parts.append(g.assign(ticker=ticker))
+    return pd.concat(parts, ignore_index=True) if parts else prices
+
+
+def merge_history(ticker: str, new: pd.DataFrame, folder: Path) -> pd.DataFrame:
+    cols = ["date", "open", "high", "low", "close", "adj_close", "volume"]
+    frames = []
+    seed = folder / "seed" / f"{ticker}.csv"
+    if seed.exists():
+        sd = pd.read_csv(seed)
+        sd.columns = [c.strip().lower() for c in sd.columns]
+        ren = {"data": "date", "otwarcie": "open", "najwyzszy": "high", "najwyższy": "high",
+               "najnizszy": "low", "najniższy": "low", "zamkniecie": "close", "zamknięcie": "close",
+               "wolumen": "volume"}
+        sd = sd.rename(columns=ren)
+        if "adj_close" not in sd:
+            sd["adj_close"] = sd["close"]
+        if "volume" not in sd:
+            sd["volume"] = 0
+        frames.append(sd[cols])
+    old = folder / f"{ticker}.csv"
+    if old.exists():
+        frames.append(pd.read_csv(old)[cols])
+    frames.append(new[cols])
+    allr = pd.concat(frames, ignore_index=True)
+    allr["date"] = allr["date"].astype(str).str[:10]
+    allr = allr.dropna(subset=["close"])
+    allr["volume"] = allr["volume"].fillna(0).astype(int)
+    return allr.drop_duplicates("date", keep="last").sort_values("date").reset_index(drop=True)
 
 
 # ───────────────────────── Main ─────────────────────────
@@ -159,7 +202,7 @@ def main(dry: bool = False) -> None:
 
     # Snapshots per ticker, committed to the repo by the workflow (data/prices/<TICKER>.csv),
     # so research sessions can read the history from GitHub without any upload.
-    write_snapshots(prices, DATA / "prices")
+    prices = write_snapshots(prices, DATA / "prices")
 
     bank = pd.read_csv(DATA / "bank_events.csv", dtype=str).fillna("")
     sales = pd.read_csv(DATA / "carparts_sales.csv", dtype=str)
