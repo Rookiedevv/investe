@@ -25,13 +25,14 @@ SYMBOLS = {
 }
 
 # Series whose history Yahoo no longer serves: keep every row ever fetched (plus Stooq seeds).
-ACCUMULATE = {"WIG20", "WIG"}
+ACCUMULATE = {"WIG20", "WIG", "FW20"}
 
 # ticker -> (yahoo symbols to try in order, name, sector for the instruments table, market)
 MARKET = {
     # Yahoo serves only the current day for GPW indices; these rows are ACCUMULATED in
     # data/prices/<T>.csv by run.py (older history comes from Stooq files Zuzanna provides once).
     "WIG20": (["WIG20.WA"], "WIG20 (indeks)", "index", "GPW"),
+    "FW20": ([], "FW20 (kontrakt ciągły, Stooq seed only)", "index", "GPW"),
     # Index-tracking ETFs with real daily history, used as WIG20 proxies for the years before
     # the accumulated index rows exist.
     "ETFW20L": (["ETFW20L.WA"], "Lyxor/Amundi WIG20 UCITS ETF", "index", "GPW"),
@@ -91,7 +92,7 @@ def fetch(symbol: str, years: int = 10) -> list[dict]:
 
 def fetch_any(symbols: list[str], years: int) -> tuple[list[dict], str]:
     """First symbol that returns a real daily series (> 200 rows); else the longest one."""
-    best: tuple[list[dict], str] = ([], symbols[0])
+    best: tuple[list[dict], str] = ([], symbols[0] if symbols else "")
     for sym in symbols:
         try:
             rows = fetch(sym, years)
