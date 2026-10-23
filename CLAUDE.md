@@ -7,7 +7,8 @@ Zuzanna's private investing workbench (template stage). GPW banks + power utilit
 
 ## How data flows
 - `data/*.csv`: research event files (banks, utilities, politics, car-parts sales). Add new events here; never ask Zuzanna to type events in.
-- `pipeline/` (Python): `fetch_prices.py` (Yahoo; Stooq now blocks bots), `signals.py` (the four rules + backtests), `run.py` (writes to Supabase).
+- `pipeline/` (Python): `fetch_prices.py` (Yahoo; Stooq now blocks bots; `SYMBOLS` = GPW stocks 10y, `MARKET` = WIG20, S&P 500, Nasdaq, DAX, VIX, Brent, EUR/PLN, USD/PLN full history), `signals.py` (the four rules + backtests), `run.py` (writes to Supabase and the snapshots).
+- `data/prices/<TICKER>.csv`: price snapshots written by the daily job and committed back by the workflow (`[skip ci]`). **Research sessions read price history from here (raw GitHub) — never ask Zuzanna to upload price files.** Same rows go to the Supabase `prices` table; market tickers are registered in `instruments` by `run.py` (sector index/other, watched=false).
 - `.github/workflows/daily-update`: weekdays 16:30 UTC and on every push to `data/` or `pipeline/`. Needs repo secret `SUPABASE_SECRET_KEY`.
 - App reads `signals`, `backtest_trades`, `events`, `prices`, `sales_releases`, `pipeline_runs`; users write only `paper_trades` and settings.
 - Findings page text lives in `src/lib/findings.ts` (summary of the project's research_log.md).

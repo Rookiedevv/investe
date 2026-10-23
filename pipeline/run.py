@@ -131,6 +131,16 @@ def sales_rows(releases: pd.DataFrame) -> list[dict]:
             for r in releases.itertuples()]
 
 
+# ───────────────────────── Snapshots ─────────────────────────
+
+def write_snapshots(prices: pd.DataFrame, folder: Path) -> None:
+    """One CSV per ticker: date,open,high,low,close,adj_close,volume (sorted by date)."""
+    folder.mkdir(parents=True, exist_ok=True)
+    cols = ["date", "open", "high", "low", "close", "adj_close", "volume"]
+    for ticker, g in prices.groupby("ticker"):
+        g.sort_values("date")[cols].to_csv(folder / f"{ticker}.csv", index=False)
+
+
 # ───────────────────────── Main ─────────────────────────
 
 def main(dry: bool = False) -> None:
@@ -146,9 +156,13 @@ def main(dry: bool = False) -> None:
     if now_waw.hour < 17 or (now_waw.hour == 17 and now_waw.minute < 15):
         prices = prices[prices["date"] < today]
 
+    # Snapshots per ticker, committed to the repo by the workflow (data/prices/<TICKER>.csv),
+    # so research sessions can read the history from GitHub without any upload.
+    write_snapshots(prices, DATA / "prices")
+
     bank = pd.read_csv(DATA / "bank_events.csv", dtype=str).fillna("")
     sales = pd.read_csv(DATA / "carparts_sales.csv", dtype=str)
-    stocks = prices[prices["ticker"] != "WIG"]
+    stocks = prices[~prices["ticker"].isin(set(fetch_prices.MARKET) | {"WIG"})]
     result = S.run_all(stocks, bank, sales)
     releases = S.carparts_releases(sales)
 
@@ -164,6 +178,10 @@ def main(dry: bool = False) -> None:
         print("::error title=daily-update::SUPABASE_SECRET_KEY is not set (GitHub → Settings → Secrets → Actions)")
         sys.exit(1)
     db = Supa(url, key)
+
+    # Market series (WIG20, S&P 500, ...) must exist in instruments before their prices (FK).
+    db.upsert("instruments", [dict(ticker=t, name=m[1], sector=m[2], market=m[3], watched=False)
+                              for t, m in fetch_prices.MARKET.items()], "ticker")
 
     price_rows = [clean(dict(ticker=r.ticker, date=r.date, open=r.open, high=r.high, low=r.low, close=r.close,
                              adj_close=r.adj_close, volume=r.volume)) for r in prices.itertuples()]

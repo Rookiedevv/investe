@@ -3,6 +3,11 @@
 Writes one long CSV: date,ticker,open,high,low,close,adj_close,volume.
 Stooq (used for the original research) now blocks automated downloads,
 so Yahoo is the live source. adj_close includes dividends.
+
+Two groups:
+- SYMBOLS: GPW stocks and WIG (10 years, enough for the sector rules).
+- MARKET: WIG20 and the foreign series used by the WIG20 dip model
+  (full history; all are known before the Warsaw open the next day).
 """
 import csv
 import datetime as dt
@@ -19,14 +24,26 @@ SYMBOLS = {
     "WIG": "WIG.WA",
 }
 
-URL = "https://query1.finance.yahoo.com/v8/finance/chart/{s}?range=10y&interval=1d&events=div"
+# ticker -> (yahoo symbol, name, sector for the instruments table, market)
+MARKET = {
+    "WIG20": ("WIG20.WA", "WIG20 (indeks)", "index", "GPW"),
+    "SPX": ("^GSPC", "S&P 500", "index", "US"),
+    "NDQ": ("^IXIC", "Nasdaq Composite", "index", "US"),
+    "DAX": ("^GDAXI", "DAX", "index", "DE"),
+    "VIX": ("^VIX", "VIX", "index", "US"),
+    "BRENT": ("BZ=F", "Brent (futures)", "other", "ICE"),
+    "EURPLN": ("EURPLN=X", "EUR/PLN", "other", "FX"),
+    "USDPLN": ("USDPLN=X", "USD/PLN", "other", "FX"),
+}
+
+URL = "https://query1.finance.yahoo.com/v8/finance/chart/{s}?range={r}&interval=1d&events=div"
 
 
-def fetch(symbol: str) -> list[dict]:
-    req = urllib.request.Request(URL.format(s=symbol), headers={"User-Agent": "Mozilla/5.0"})
+def fetch(symbol: str, rng: str = "10y") -> list[dict]:
+    req = urllib.request.Request(URL.format(s=symbol, r=rng), headers={"User-Agent": "Mozilla/5.0"})
     for attempt in range(4):
         try:
-            with urllib.request.urlopen(req, timeout=30) as r:
+            with urllib.request.urlopen(req, timeout=60) as r:
                 res = json.load(r)["chart"]["result"][0]
             break
         except Exception as e:  # network hiccup or rate limit: back off and retry
@@ -38,11 +55,13 @@ def fetch(symbol: str) -> list[dict]:
     rows = []
     for i, ts in enumerate(res["timestamp"]):
         c = q["close"][i]
-        if c is None:
+        if c is None or c <= 0:
             continue
         # Index bars sometimes lack open/high/low; fall back to the close.
         o, h, lo = (q["open"][i] or c), (q["high"][i] or c), (q["low"][i] or c)
-        # Yahoo stamps Warsaw sessions at local open; the date part is the session day.
+        if o <= 0 or h <= 0 or lo <= 0:
+            o, h, lo = c, c, c
+        # Yahoo stamps sessions at the local open; the date part is the session day.
         day = dt.datetime.fromtimestamp(ts + res["meta"].get("gmtoffset", 0), dt.timezone.utc).date()
         rows.append({
             "date": day.isoformat(),
@@ -57,11 +76,12 @@ def fetch(symbol: str) -> list[dict]:
 
 
 def main(out_path: str) -> None:
+    jobs = [(t, s, "10y") for t, s in SYMBOLS.items()] + [(t, m[0], "max") for t, m in MARKET.items()]
     with open(out_path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["date", "ticker", "open", "high", "low", "close", "adj_close", "volume"])
         w.writeheader()
-        for ticker, symbol in SYMBOLS.items():
-            rows = fetch(symbol)
+        for ticker, symbol, rng in jobs:
+            rows = fetch(symbol, rng)
             for r in rows:
                 w.writerow({"ticker": ticker, **r})
             print(f"{ticker}: {len(rows)} days, last {rows[-1]['date']} close {rows[-1]['close']}")
