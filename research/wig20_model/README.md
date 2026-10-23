@@ -29,3 +29,7 @@ Implication: with daily data alone there is no way to call WIG20 dips in advance
 | GARCH(1,1) (walk-forward) | Predicts magnitude (corr 0.23 with next absolute move), not sign. |
 | Events: 134 political, 56 bank shocks, 98 utility, mapped to the correct session | No follow-through after the reaction day (−0.1% to +0.4%); elections/government −0.5% over 3 days on 12/21 cases. |
 | Overnight vs intraday | +0.14%/session overnight, −0.10% intraday, every year; not tradable, but a short should be opened at the open. |
+
+## Full history (WIG20 Stooq seed 1995–2026, 23 Oct 2026)
+Walk-forward (train from 1995, refit every 126 sessions): 6,459 OOS sessions 2001–2026, AUC 0.51–0.52 at 1/3/5 days for every model — the 5-day signal on the ETF proxy was noise. Rule battery (165 tests): only September passes at day level; by month −2.0% per September, down 19/32 years (t −1.7), negative 2015–2024, positive 2025–26. 4-down-days rule from the proxy disappears (next session up 63%); 5 down days (n=94): −0.5 to −0.8% over 3–5 sessions, t −1.8, fails correction. HMM stormy regime still a buy (+0.24–0.32% over 5 sessions, t ~3). GARCH magnitude only (corr 0.30). Events: no follow-through. Overnight effect only +0.04%/session over the full history. Calendar longs robust: turn of month +0.5%, December +0.7% over 5 sessions (t 5.1 / 4.7). FW20 tracks WIG20 (corr 0.977, basis +0.04%, tick 0.024%).
+Verdict unchanged: no reliable short signal from prices, regimes, volatility, calendar or the event files. Only a modest "avoid/short in September" seasonal is worth watching.

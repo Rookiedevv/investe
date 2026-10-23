@@ -24,8 +24,8 @@ import features as F  # noqa: E402
 
 warnings.filterwarnings("ignore")
 
-REFIT = 63            # refit every quarter of sessions
-MIN_TRAIN = 750       # ~3 years before the first out-of-sample prediction (proxy history starts 2019)
+REFIT = 126           # refit twice a year
+MIN_TRAIN = 1500      # ~6 years of training before the first out-of-sample prediction
 HORIZONS = {"h1": ("t_oc1", 1), "h3": ("t_oc3", 3), "h5": ("t_oc5", 5)}
 
 
@@ -33,9 +33,12 @@ def models():
     return {
         "lr": lambda: make_pipeline(SimpleImputer(), StandardScaler(),
                                     LogisticRegression(C=0.05, max_iter=2000)),
-        "gb": lambda: HistGradientBoostingClassifier(max_depth=3, learning_rate=0.04, max_iter=250,
-                                                     l2_regularization=1.0, min_samples_leaf=40,
-                                                     random_state=0),
+        # median-imputed because some foreign series start late (FX 2002, Brent 2007) and an
+        # all-NaN column breaks the boosting binner
+        "gb": lambda: make_pipeline(SimpleImputer(strategy="median"),
+                                    HistGradientBoostingClassifier(max_depth=3, learning_rate=0.04, max_iter=250,
+                                                                   l2_regularization=1.0, min_samples_leaf=40,
+                                                                   random_state=0)),
     }
 
 
@@ -72,6 +75,7 @@ def walk(df: pd.DataFrame, feats: list[str], tag: str) -> pd.DataFrame:
 def main():
     base = sys.argv[1] if len(sys.argv) > 1 else "ETFBW20TR"
     f = F.build(base)
+    f = f[f.index >= "1995-01-01"]  # WIG20 sessions are daily only from 1995
     f = f.dropna(subset=["r60", "dd250", "ma200"]).copy()  # warm-up
     have_foreign = all(c in f.columns for c in ("spx_r1", "vix"))
     feats_wig = F.FEATURES_WIG
@@ -91,7 +95,7 @@ def main():
     keep = [c for c in keep if c in f.columns]
     pred = f[keep].join(res)
     pred = pred[pred.filter(like="_h1").notna().any(axis=1)]
-    pred.to_csv("research/wig20_model/predictions.csv", float_format="%.6f")
+    pred.to_csv(f"research/wig20_model/predictions_{base}.csv", float_format="%.6f")
 
     # Scores, out of sample
     rows = []
@@ -110,7 +114,7 @@ def main():
                              base_down=round(y[m].mean(), 4)))
     scores = pd.DataFrame(rows).sort_values(["horizon", "auc"], ascending=[True, False])
     print(scores.to_string(index=False))
-    scores.to_csv("research/wig20_model/scores.csv", index=False)
+    scores.to_csv(f"research/wig20_model/scores_{base}.csv", index=False)
 
 
 if __name__ == "__main__":

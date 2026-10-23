@@ -4,12 +4,14 @@ involved (expanding window), otherwise full sample with the number of tests acco
 from __future__ import annotations
 import sys, warnings
 import numpy as np, pandas as pd
-sys.path.insert(0, "research/wig20_model")
+sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent))
 import features as F
 warnings.filterwarnings("ignore")
 DATA = "data"
 
-f = F.build("ETFBW20TR")
+base = sys.argv[1] if len(sys.argv) > 1 else "ETFBW20TR"
+f = F.build(base)
+if base == "WIG20": f = f[f.index >= "1995-01-01"]
 f["gap_next"] = np.log(f["next_open"] / f["close"])          # overnight t -> t+1 open (not tradable at open)
 f["t_oc1"] = f["t_oc1"]; ok = f["t_oc1"].notna() & f["r60"].notna()
 f = f[ok].copy()
@@ -56,7 +58,7 @@ print("Most negative (short candidates), by t vs all days:")
 print(B.sort_values("t_vs_all").head(12).to_string(index=False, float_format=lambda v: f"{v:.2f}"))
 print("\nMost positive (do-not-short), by t vs all days:")
 print(B.sort_values("t_vs_all", ascending=False).head(8).to_string(index=False, float_format=lambda v: f"{v:.2f}"))
-B.to_csv("research/wig20_model/battery_rules.csv", index=False)
+B.to_csv(f"research/wig20_model/battery_rules_{base}.csv", index=False)
 
 # ───────── 2. Overnight vs intraday decomposition
 print("\nOVERNIGHT vs INTRADAY (mean per session, t):")
@@ -90,11 +92,11 @@ def hmm_filter(x, mu, sd, A, pi):
     return out
 
 r = f["r1"].values; probs = np.full(N, np.nan); exp_next = np.full(N, np.nan)
-for s in range(500, N, 63):
-    mu, sd, A, pi = hmm_fit(r[:s])
+for s in range(500, N, 252):
+    mu, sd, A, pi = hmm_fit(r[:s], iters=40)
     bear = int(np.argmin(mu))
-    fl = hmm_filter(r[:min(N, s+63)], mu, sd, A, pi)
-    for t in range(s, min(N, s+63)):
+    fl = hmm_filter(r[:min(N, s+252)], mu, sd, A, pi)
+    for t in range(s, min(N, s+252)):
         nxt = fl[t] @ A; probs[t] = nxt[bear]; exp_next[t] = nxt @ mu
 f["hmm_pbear"] = probs; f["hmm_exp"] = exp_next
 m = f.hmm_pbear.notna()
@@ -114,10 +116,10 @@ def garch_ll(params, x):
     return -0.5*np.sum(np.log(2*np.pi*s2) + x**2/s2)
 from scipy.optimize import minimize
 e = (f["r1"] - f["r1"].mean()).values; vol_fc = np.full(N, np.nan)
-for s in range(500, N, 126):
+for s in range(500, N, 252):
     res = minimize(lambda p: -garch_ll(p, e[:s]), x0=[1e-6, 0.08, 0.9], bounds=[(1e-8, 1e-4), (0.01, 0.4), (0.5, 0.98)])
     w, a, b = res.x; s2 = e[:s].var()
-    for t in range(1, min(N, s+126)):
+    for t in range(1, min(N, s+252)):
         s2 = w + a*e[t-1]**2 + b*s2
         if t >= s: vol_fc[t] = np.sqrt(s2)
 f["garch_vol"] = vol_fc; m = f.garch_vol.notna()
@@ -164,4 +166,4 @@ for kind, g in E.groupby("kind"):
     if len(g) < 10: continue
     d0 = cc[g.i.values-1]; x3 = f["t_oc3"].values[g.i.values]
     print(f"  {kind:40s} n={len(g):3d} day0 {np.nanmean(d0)*100:+.2f}%  next3 {np.nanmean(x3)*100:+.2f}% P(down3) {(x3[~np.isnan(x3)]<0).mean():.2f}")
-f.to_pickle("research/wig20_model/battery_frame.pkl")
+f.to_pickle(f"research/wig20_model/battery_frame_{base}.pkl")

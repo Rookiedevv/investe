@@ -1,8 +1,8 @@
 <main>
 <header style="display:grid;gap:8px">
-  <p class="eyebrow">Walk-forward test · WIG20 (proxy: Beta ETF WIG20TR) · S&amp;P 500, Nasdaq, DAX, VIX, Brent, EUR/PLN, USD/PLN</p>
+  <p class="eyebrow">Walk-forward test · WIG20 1995–2026 (Stooq) · S&amp;P 500, Nasdaq, DAX, VIX, Brent, EUR/PLN, USD/PLN</p>
   <h1>WIG20 Dip Model</h1>
-  <p class="lede">Every evening after the US close the models are asked: will WIG20 fall from tomorrow's open to the close 1, 3 or 5 sessions later? Models are refitted every 63 sessions on past data only, so every probability below was computable on the evening it is dated. Trade entry is the next Warsaw open; costs default to the FW20 round trip.</p>
+  <p class="lede">Every evening after the US close the models are asked: will WIG20 fall from tomorrow's open to the close 1, 3 or 5 sessions later? Models are refitted every 126 sessions on past data only, so every probability below was computable on the evening it is dated. Trade entry is the next Warsaw open; costs default to the FW20 round trip.</p>
 </header>
 
 <section class="panel" id="today">
@@ -29,12 +29,27 @@
   <div class="tiles" id="simTiles"></div>
   <div id="simChart"></div>
   <div class="scroll"><table id="simYears"></table></div>
-  <p class="note">Each trade: enter short at the next session's open, cover at the close N sessions later, then wait for the next signal. "Always short" and "always long" use the same calendar with no signal. Cost 0.10% ≈ 38 zł commissions + one tick of spread on one FW20 contract (~84k zł exposure).</p>
+  <p class="note">Each trade: enter short at the next session's open, cover at the close N sessions later, then wait for the next signal. "Always short" and "always long" use the same calendar with no signal. Cost 0.10% ≈ 38 zł commissions + one tick of spread on one FW20 contract (one tick = 0.024% of the price at 4,200).</p>
+</section>
+
+<section class="panel" id="battery">
+  <div><p class="eyebrow">Second round</p><h2>Every approach tested, and what it found</h2></div>
+  <div class="scroll"><table>
+    <thead><tr><th>Approach</th><th>What was tested</th><th>Result for a short</th></tr></thead>
+    <tbody>
+    <tr><td>Supervised learning</td><td>Logistic regression and gradient boosting on 55 features, walk-forward, refit quarterly; WIG20-only and all-inputs variants; ensemble</td><td class="neg">Coin flip at every horizon: AUC 0.51–0.52 at 1, 3 and 5 days on 6,459 out-of-sample sessions (2001–2026). The faint 5-day signal seen on the 2019–2026 ETF proxy did not exist on the real index</td></tr>
+    <tr><td>Rule battery</td><td>55 conditions × 3 horizons (165 tests): streaks, dips from highs, MA200, RSI, z-scores, gaps, volatility, volume, S&amp;P/Nasdaq/DAX/VIX/Brent/złoty moves, relative strength, calendar</td><td class="neg">Only "September" survives the 165-test correction at day level, and counted by month it is weaker: −2.0% per September on average, down in 19 of 32 years (t −1.7), negative 9 years in a row 2015–2024, then positive in 2025 and 2026. Down-streaks: after 4 down days the next session rose 63% of the time; after 5 down days (94 cases) the next 3–5 sessions lost 0.5–0.8% (t −1.8, fails the correction). VIX spikes: nothing</td></tr>
+    <tr><td>Regime model</td><td>2-state hidden Markov model on daily returns, walk-forward; calm state (+0.07%/d, 1.2% vol) vs stormy (−0.08%/d, 2.3% vol)</td><td class="neg">Stormy regime is a <em>buy</em>: next 5 sessions +0.24 to +0.32% (t 2.9–3.4) on 1,600–2,400 sessions. Direction AUC 0.47–0.49</td></tr>
+    <tr><td>Volatility model</td><td>GARCH(1,1), walk-forward</td><td class="neg">Predicts the size of moves (corr 0.30 with the next absolute move), not the sign (stormiest quartile P(down) 0.52, 1,865 sessions)</td></tr>
+    <tr><td>Event-driven</td><td>134 political events, 56 bank sector shocks, 98 utility events mapped to the correct session (before/after close, weekends)</td><td class="neg">No follow-through after the reaction day (next 1–5 sessions −0.1% to +0.3%). Elections and government events −0.4 to −0.5% over 3 days on 12 and 21 cases; even after a reaction worse than −1% the next sessions were flat</td></tr>
+    <tr><td>Overnight vs intraday</td><td>Close→open vs open→close, every year 2019–2026</td><td>Over 1995–2026 only +0.04%/session overnight and −0.01% intraday (t 3.2 and −1.0); the large gap seen in 2019–2026 is a recent phenomenon. Calendar longs are the robust finding: turn of month +0.5% and December +0.7% over 5 sessions (t 5.1 and 4.7) — days not to be short</td></tr>
+    </tbody></table></div>
+  <p class="note">All tests on the real WIG20 index, Jan 1995 – Oct 2026 (7,960 sessions; before 1995 the index did not trade daily). Rules that look strong in the explorer below when counted day by day often shrink once trades are not allowed to overlap; the figures above use non-overlapping trades or whole-month counts.</p>
 </section>
 
 <section class="panel" id="explore">
   <div><p class="eyebrow">Dip explorer</p><h2>What happens after a given situation?</h2></div>
-  <p class="note">Pick one or more conditions (all must hold on the evening of the decision). The table shows what WIG20 then did from the next open, against all days. This uses the whole 2020–2026 sample, not just the model's test window.</p>
+  <p class="note">Pick one or more conditions (all must hold on the evening of the decision). The table shows what WIG20 then did from the next open, against all days, over the whole 1995–2026 sample. Consecutive matching days overlap, so a run of down days counts several times; the "day a streak reaches…" conditions avoid that.</p>
   <div class="chips" id="chips"></div>
   <div class="scroll"><table id="expTable"></table></div>
   <div id="expChart"></div>
@@ -43,7 +58,7 @@
 <section class="panel">
   <div><p class="eyebrow">Data and method</p><h2>What this is built on</h2></div>
   <dl class="kv" id="meta"></dl>
-  <p class="note">Yahoo no longer serves WIG20 history, so the index is represented by the Beta ETF WIG20TR (listed Jan 2019), whose close tracks the total-return index; its open is the ETF's first trade and is noisier than the index open. Real WIG20 bars are being collected daily from now on, and a Stooq WIG20 file would extend the history to 1994. Inputs: WIG20 returns over 1–60 days, volatility, range, gap, distance from 20/60/250-day highs and lows, moving averages, RSI, streaks, volume; previous-day and 5-day moves of S&amp;P 500, Nasdaq, DAX, Brent, EUR/PLN, USD/PLN; VIX level and changes; weekday, month, turn of month, expiry week.</p>
+  <p class="note">WIG20 daily OHLCV from Stooq (1991–2026, used from 1995 when sessions became daily), stored in the investe repo and extended every evening by the pipeline. FW20 futures (1998–2026) are stored alongside: they track the index with correlation 0.98 and an average basis of +0.04%, so costs and fills can be modelled on them. Inputs: WIG20 returns over 1–60 days, volatility, range, gap, distance from 20/60/250-day highs and lows, moving averages, RSI, streaks, volume; previous-day and 5-day moves of S&amp;P 500, Nasdaq, DAX, Brent, EUR/PLN, USD/PLN; VIX level and changes; weekday, month, turn of month, expiry week.</p>
 </section>
 </main>
 <script id="data" type="application/json">__DATA__</script>
@@ -137,11 +152,11 @@ renderSim();
 
 // ---------- Dip explorer ----------
 const CONDS = [
-  ['down1','WIG20 fell today', r=>r.r1<0], ['down2','2+ down days in a row', r=>r.streak<=-2], ['down3','3+ down days in a row', r=>r.streak<=-3],
+  ['down1','WIG20 fell today', r=>r.r1<0], ['down2','2+ down days in a row', r=>r.streak<=-2], ['down3','3+ down days in a row', r=>r.streak<=-3], ['s3','day a streak reaches 3 down (non-overlapping)', r=>r.streak===-3], ['s4','day a streak reaches 4 down (non-overlapping)', r=>r.streak===-4],
   ['up3','3+ up days in a row', r=>r.streak>=3], ['dip3','≥3% below 20-day high', r=>r.dd20<=-0.03], ['dip5','≥5% below 20-day high', r=>r.dd20<=-0.05],
   ['athigh','at the 20-day high', r=>r.dd20>-0.002], ['spxdn','S&P 500 fell ≥1% (same day)', r=>r.spx_r1<=-0.01], ['spxup','S&P 500 rose ≥1%', r=>r.spx_r1>=0.01],
   ['vixhi','VIX high (z-score > 1)', r=>r.vix_z>1], ['vixsp','VIX jumped ≥10%', r=>r.vix_chg1>=0.0953], ['rsihi','RSI(14) > 70', r=>r.rsi14>70], ['rsilo','RSI(14) < 30', r=>r.rsi14<30],
-  ['gapdn','opened with a gap down', r=>r.gap<=-0.005], ['fri','Friday (next session is Monday)', r=>r.dow===4], ['tom','turn of the month', r=>r.turn_of_month===1],
+  ['gapdn','opened with a gap down', r=>r.gap<=-0.005], ['fri','Friday (next session is Monday)', r=>r.dow===4], ['sep','September', r=>r.month===9], ['dec','December', r=>r.month===12], ['tom','turn of the month', r=>r.turn_of_month===1],
   ['hivol','20-day volatility above 1.3%', r=>r.vol20>0.013], ['plnwk','złoty weakened ≥0.5% vs EUR', r=>r.eurpln_r1>=0.005]
 ];
 const active = new Set();
@@ -170,6 +185,6 @@ renderExp();
 
 // ---------- meta ----------
 (function(){ const first=R[0].d, last=R[R.length-1].d, oos=T[0].d;
-  el('meta').innerHTML = `<dt>Series</dt><dd>${esc(DATA.base)} (WIG20 total-return ETF) daily OHLC, foreign series from Yahoo</dd><dt>Feature window</dt><dd>${first} … ${last} (${R.length} sessions)</dd><dt>Out-of-sample window</dt><dd>${oos} … ${last} (${T.length} sessions)</dd><dt>Refit</dt><dd>every 63 sessions, expanding window, targets shifted so no label leaks into training</dd><dt>Learners</dt><dd>logistic regression (C=0.05, standardised), histogram gradient boosting (depth 3, 250 rounds), ensemble = mean</dd><dt>Data pipeline</dt><dd>investe repo, GitHub Action daily 16:30 UTC → data/prices/*.csv and Supabase prices</dd>`;
+  el('meta').innerHTML = `<dt>Series</dt><dd>${esc(DATA.base)} daily OHLCV from Stooq; foreign series from Yahoo</dd><dt>Feature window</dt><dd>${first} … ${last} (${R.length} sessions)</dd><dt>Out-of-sample window</dt><dd>${oos} … ${last} (${T.length} sessions)</dd><dt>Refit</dt><dd>every 126 sessions, expanding window from 1,500 sessions, targets shifted so no label leaks into training</dd><dt>Learners</dt><dd>logistic regression (C=0.05, standardised), histogram gradient boosting (depth 3, 250 rounds), ensemble = mean</dd><dt>Data pipeline</dt><dd>investe repo, GitHub Action daily 16:30 UTC → data/prices/*.csv and Supabase prices</dd>`;
 })();
 </script>
