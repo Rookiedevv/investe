@@ -39,3 +39,9 @@ Verdict unchanged: no reliable short signal from prices, regimes, volatility, ca
 - FW20 basis / open interest (1998–2026): corr with next 1–5 days −0.04..+0.01; cheap futures (basis z<−1.5) → +0.29% over 5d (t 2.3), a long signal.
 - Holidays: pre/post ±0.08%, t≈1. Monthly momentum: 12m lookback hit 56% = base rate (54.5% months up); after negative 12m, next month down 51%.
 - Note: the models beat a coin toss statistically (52% on 6,459 days, 3 s.e.) but not costs; a usable short needs ~55%+ or the big days. Untested avenues: intraday FW20 (5-min from Stooq) and a pre-open news feed.
+
+## Polish events (23 Oct 2026) — dips.csv, calendar_test.py, calendar_results.csv
+- 75 dips ≥8% within 30 sessions since 1995: 23 global, 24 mixed, 28 Polish/EM (classified by concurrent S&P/DAX moves). Modern Polish-driven dips: OFE Jun/Sep/Nov 2013, bank tax Mar–May 2016, CHF AG/ruling Apr–May & Nov–Dec 2019, Oct–Nov 2021 (NBP surprise, rule of law), Dec 2023–Jan 2024 (board changes), Aug–Sep 2025 (bank CIT). No election produced a dip.
+- 82 Polish-specific shock days (WIG20 ≤ −2%, DAX & S&P > −0.5%): next 5 sessions −0.08%, next 20 +0.57%; since 2010, 20-session outcome negative 11/24. Bull-market subset: 5d −0.79%, P(down) 0.60, n=42, t −1.3 (lead only). No drift after the shock.
+- Scheduled dates (NBP 54, CHF rulings 15, KNF 8, bank results 175, elections 24, expiry 114): no pre-drift (|t|<1.2), no negative asymmetry (CHF +0.9%, NBP +0.75% over 5 sessions after), index moves 0.8–0.95× normal on those days; banks 1.2–1.5× on their own dates, direction unpredictable.
+- Conclusion: Polish events cause dips only as unscheduled announcements, and only on the day; nothing to position for from a calendar. Calendar is useful for the app (bank volatility dates), not for a WIG20 short.
