@@ -33,7 +33,8 @@
 </section>
 
 <section class="panel" id="battery">
-  <div><p class="eyebrow">Second round</p><h2>Every approach tested, and what it found</h2></div>
+  <div><p class="eyebrow">Rounds two and three</p><h2>Every approach tested, and what it found</h2></div>
+  <p class="note">The models already beat a coin toss statistically (51.5–52% correct on 6,459 days is 3 standard errors above 50%). The bar that matters is costs: a 52% hit rate on ±1% moves earns ~0.02% a day before a 0.10% round trip, so a usable short needs roughly 55%+ or has to be right on the big days. Nothing below reaches that.</p>
   <div class="scroll"><table>
     <thead><tr><th>Approach</th><th>What was tested</th><th>Result for a short</th></tr></thead>
     <tbody>
@@ -42,6 +43,10 @@
     <tr><td>Regime model</td><td>2-state hidden Markov model on daily returns, walk-forward; calm state (+0.07%/d, 1.2% vol) vs stormy (−0.08%/d, 2.3% vol)</td><td class="neg">Stormy regime is a <em>buy</em>: next 5 sessions +0.24 to +0.32% (t 2.9–3.4) on 1,600–2,400 sessions. Direction AUC 0.47–0.49</td></tr>
     <tr><td>Volatility model</td><td>GARCH(1,1), walk-forward</td><td class="neg">Predicts the size of moves (corr 0.30 with the next absolute move), not the sign (stormiest quartile P(down) 0.52, 1,865 sessions)</td></tr>
     <tr><td>Event-driven</td><td>134 political events, 56 bank sector shocks, 98 utility events mapped to the correct session (before/after close, weekends)</td><td class="neg">No follow-through after the reaction day (next 1–5 sessions −0.1% to +0.3%). Elections and government events −0.4 to −0.5% over 3 days on 12 and 21 cases; even after a reaction worse than −1% the next sessions were flat</td></tr>
+    <tr><td>Decision at 9:01 (gap known)</td><td>Opening gap, gap vs what Wall Street implied, gap × yesterday, gap × trend, same-day open→close target; walk-forward models on lagged features plus the gap</td><td class="neg">Gaps continue a little: gap down &gt;0.5% → −0.11% (t −2.9), gap up &gt;1% → +0.18%; but after a gap down the session still rose 54% of the time. Same-day model AUC 0.52, accuracy 51.7%, −0.05 to −0.10% per trade after costs</td></tr>
+    <tr><td>FW20 basis and open interest</td><td>Futures premium/discount to the index (z-scored), basis changes, open-interest changes and levels, futures volume, 1998–2026</td><td class="neg">Correlations with the next 1–5 days between −0.04 and +0.01. Cheap futures (basis z &lt; −1.5) → +0.29% over 5 days (t 2.3): a long signal</td></tr>
+    <tr><td>Holidays</td><td>Pre- and post-holiday sessions from the real exchange calendar (246 each)</td><td class="neg">±0.08%, t ≈ 1. Nothing</td></tr>
+    <tr><td>Monthly momentum</td><td>1/3/6/12-month lookbacks, decision at month end, 426 months</td><td class="neg">Hit rate 55–56% is the base rate (54.5% of months are up). After a negative 12-month return the next month is down 51% of the time</td></tr>
     <tr><td>Overnight vs intraday</td><td>Close→open vs open→close, every year 2019–2026</td><td>Over 1995–2026 only +0.04%/session overnight and −0.01% intraday (t 3.2 and −1.0); the large gap seen in 2019–2026 is a recent phenomenon. Calendar longs are the robust finding: turn of month +0.5% and December +0.7% over 5 sessions (t 5.1 and 4.7) — days not to be short</td></tr>
     </tbody></table></div>
   <p class="note">All tests on the real WIG20 index, Jan 1995 – Oct 2026 (7,960 sessions; before 1995 the index did not trade daily). Rules that look strong in the explorer below when counted day by day often shrink once trades are not allowed to overlap; the figures above use non-overlapping trades or whole-month counts.</p>
