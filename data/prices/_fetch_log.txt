@@ -1,0 +1,25 @@
+fetched 2026-10-23 10:03 UTC
+PKO (PKO.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 109.72
+PEO (PEO.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 252.0
+EBP (EBP.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 742.0
+MBK (MBK.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 1382.0
+ING (ING.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 434.8
+MIL (MIL.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 21.65
+ALR (ALR.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 128.05
+BHW (BHW.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 118.8
+BNP (BNP.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 162.6
+PGE (PGE.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 16.525
+TPE (TPE.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 9.44
+ENA (ENA.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 21.62
+PEP (PEP.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 53.3
+CAR (CAR.WA): 2538 days, 2016-10-25 .. 2026-10-23, last close 1032.0
+APR (APR.WA): 2525 days, 2016-11-15 .. 2026-10-23, last close 27.75
+WIG (WIG.WA): 2 days, 2019-07-26 .. 2026-10-23, last close 156727.2031
+WIG20 (WIG20.WA): 1 days, 2026-10-23 .. 2026-10-23, last close 4147.6099
+SPX (^GSPC): 14324 days, 1970-01-02 .. 2026-10-22, last close 7663.4302
+NDQ (^IXIC): 14046 days, 1971-02-05 .. 2026-10-22, last close 26008.8594
+DAX (^GDAXI): 9817 days, 1987-12-30 .. 2026-10-23, last close 25146.1699
+VIX (^VIX): 9273 days, 1990-01-02 .. 2026-10-23, last close 19.53
+BRENT (BZ=F): 4789 days, 2007-07-30 .. 2026-10-23, last close 109.74
+EURPLN (EURPLN=X): 6351 days, 2002-04-01 .. 2026-10-23, last close 4.3956
+USDPLN (USDPLN=X): 5940 days, 2003-12-01 .. 2026-10-23, last close 3.9237
