@@ -20,3 +20,12 @@ Data: Beta ETF WIG20TR (Yahoo, Jan 2019 – 22 Oct 2026) as WIG20 proxy (Yahoo n
 | Dips continue ("take advantage of dips however long they take") | Rejected — dips revert | ≥3% below the 20-day high (318 days): next session −0.00%, next 5 sessions +0.65% (P(down) 0.41). Open→close returns have negative autocorrelation (−0.12), i.e. a down day is more often followed by an up day. Structural drift: next-session open→close mean −0.02%, overnight gap +0.13%/day — the index gains overnight, not during the session. |
 
 Implication: with daily data alone there is no way to call WIG20 dips in advance; the only robust facts are that WIG20 drifted up (gaps) over 2020–26 and that falls reverted. A short-FW20 approach would need an event-driven trigger (an actual announcement before the open), not a price pattern. Real WIG20 bars are now collected daily by the investe pipeline (data/prices/); a Stooq WIG20 file would allow re-running from 1994 and a check of whether 2008/2011/2020-type regimes behave differently.
+
+## Second round (battery.py, 23 Oct 2026)
+| Approach | Result for a short |
+|---|---|
+| Rule battery: 55 conditions × 3 horizons (165 tests) | Nothing survives Bonferroni. Best candidate: 4 consecutive down days → next 3 sessions −0.9% (46 non-overlapping trades, 61% down, 7/8 years negative, t −2.0); absent in PKO/PEO/PGE/CAR. "VIX<15" is 2019–early 2020 only. |
+| 2-state HMM regime (walk-forward) | Stormy regime is a buy: next 5 sessions +1.0 to +1.5% (t>3); direction AUC 0.50. |
+| GARCH(1,1) (walk-forward) | Predicts magnitude (corr 0.23 with next absolute move), not sign. |
+| Events: 134 political, 56 bank shocks, 98 utility, mapped to the correct session | No follow-through after the reaction day (−0.1% to +0.4%); elections/government −0.5% over 3 days on 12/21 cases. |
+| Overnight vs intraday | +0.14%/session overnight, −0.10% intraday, every year; not tradable, but a short should be opened at the open. |
