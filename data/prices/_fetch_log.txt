@@ -1,4 +1,4 @@
-fetched 2026-10-27 20:30 UTC
+fetched 2026-10-27 20:49 UTC
 PKO (PKO.WA): 2536 days, 2016-10-31 .. 2026-10-27, last close 115.48
 PEO (PEO.WA): 2536 days, 2016-10-31 .. 2026-10-27, last close 262.6
 EBP (EBP.WA): 2536 days, 2016-10-31 .. 2026-10-27, last close 770.2
@@ -23,6 +23,6 @@ SPX (^GSPC): 14327 days, 1970-01-02 .. 2026-10-27, last close 7722.6001
 NDQ (^IXIC): 14049 days, 1971-02-05 .. 2026-10-27, last close 26477.8105
 DAX (^GDAXI): 9819 days, 1987-12-30 .. 2026-10-27, last close 25590.7695
 VIX (^VIX): 9275 days, 1990-01-02 .. 2026-10-27, last close 17.52
-BRENT (BZ=F): 4791 days, 2007-07-30 .. 2026-10-27, last close 109.62
-EURPLN (EURPLN=X): 6353 days, 2002-03-31 .. 2026-10-27, last close 4.3972
-USDPLN (USDPLN=X): 5942 days, 2003-12-01 .. 2026-10-27, last close 3.9509
+BRENT (BZ=F): 4791 days, 2007-07-30 .. 2026-10-27, last close 109.79
+EURPLN (EURPLN=X): 6353 days, 2002-03-31 .. 2026-10-27, last close 4.3974
+USDPLN (USDPLN=X): 5942 days, 2003-12-01 .. 2026-10-27, last close 3.9529
