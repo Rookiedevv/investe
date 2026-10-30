@@ -27,6 +27,8 @@
 ## Lead: 52-week-high breakout on volume
 **Rule:** a liquid stock closes at a new 52-week high for the first time (yesterday it was below the previous 252-session high), and that day's volume is at least 2× its 60-session median. Buy at that close and sell after 21 sessions.
 
+**Benchmark (corrected 30 Oct):** the "vs WIG20" column is before costs. Net of costs over the same dates: +2.4 pp vs WIG20, +2.5 pp vs the WIG20 total-return ETF (ETFBW20TR, eMakler fees included; median +1.1 pp), +2.7 pp vs WIG. It beats the ETF in only 55% of trades, so the average rests on a minority of big winners. Weak lead, not a strong one.
+
 **Checks:**
 - Same stock, random month: +1.9 pp better (t 3.2), so the result isn't just picking stocks that rose.
 - Averaged per calendar month (116 months): +2.7% (t 2.9).
