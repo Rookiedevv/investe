@@ -37,3 +37,8 @@ LKQ
 ITX.MC
 HM-B.ST
 JMT.LS
+# Round 19 additions: CHF/PLN (CHF-mortgage banks), iShares MSCI Poland ETF (US-hours proxy), Rotterdam coal and TTF gas futures
+CHFPLN=X
+EPOL
+MTF=F
+TTF=F
