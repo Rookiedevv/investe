@@ -18,6 +18,9 @@ Correlation between S and the late reporters' result vs the ETF: 0.13. Season by
 
 **Verdict:** the read-through buy side does not beat the ETF over 2021–26 (0 to +1 pp, 8 signal seasons). Its gains were the bank sector moving with the market. The "stay out after a bad early report" side is weakly supported (late reporters lag the ETF by ~0.9 pp, beating it in a third of cases) but not worth a short. Keep the open paper trades to their exit, then move the rule from "paper-trade lead" to "weak / regime", and don't add it to the app's rule set. Note the clustering of seasons changes the numbers by ±1 pp, which is itself a sign there is little there.
 
+## C. WIG20 index reversal (`r13b.py`, WIG20 2011–26, cost 0.78%)
+Buying the index after a bad day or week does nothing (≤ −3% day → +1.3% over 21 sessions, 62%, t 0.8, vs −0.4% unconditional; 5-day ≤ −5% → +0.5%). The only mildly positive cell is a monthly drawdown: **WIG20 down ≥ 10% over 21 sessions → next 21 sessions +4.0% net, 73% wins, n=15, t 1.5** (2019+: +4.6%). Fifteen cases in 15 years; weak lead, not a rule. After strong months (+10%) there is no continuation and no reversal.
+
 ## B. Pending (need web pages the session could not open — approval requests timed out)
 - Tender offers (wezwania) 2018–26: buy at the announcement-day close, hold to settlement; spread, raise frequency, failure losses; vs deposit and vs ETF.
 - KNF net short-position register: do new disclosed shorts (≥ 0.5%) predict underperformance over the next month?
