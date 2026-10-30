@@ -28,3 +28,16 @@ Yahoo has usable histories for only 21 of 46 listings (many start months after t
 **Standard-index additions reverse after the flow day.** Short at the effective-date close, cover after 5 sessions: +3.8% net, 11 of 12 (t 3.4); 15 sessions +4.9%, 83%; 21 sessions +3.7%, 75%. Random same-stock shorts −2.4%. 10 of 12 events negative vs WIG20 over the next month (JSW −28, MBK −14, ZAB −14, BDX −11, PCO −7, CDR −7, ALR −6, MIL −3; DNP +6, BDX 2023 +2). The "run-up" from announcement to effective date does not exist (−1.1 pp) — the inclusion is priced on the announcement day (+2.7%) and the passive buying at the effective close is what gets reversed. **Caveat that decides tradability:** most of the drop is on the first session after the flow day (entry one session later gives only +0.9%, 58%). The short has to be opened at or into the effective-day close; XTB CFDs stop trading before the closing auction, so the fill is the ~16:50 price, not the fixing — intraday data for the 12 effective days are needed to confirm how much of the spike is in the auction itself. Also: 12 events in 10 years, ~1–2 a year. Next review: announced ~5 Nov 2026, effective 24 Nov 2026 close (analysts expect no Polish changes).
 
 Also real but unusable for her: Small Cap additions fall 5.8 pp between announcement and effective date (short +1.6% net, n=19) — the names are not shortable on XTB.
+
+## G. Execution check for the MSCI short (`r19g.py`) — the lead holds with a next-morning entry
+On the effective day the close is **not** a spike (close 2.7% below the day's high, close ≈ open, volume 17× normal) and the next-day open gap is ≈ 0 (+0.2%); the fall is **intraday during the session after the flow day** (open→close −2.6%, 10 of 12). So the short can be opened at the 09:00 open of the session after the effective date — no auction access needed.
+
+| entry open of eff+1, cover at close of eff+k | k=1 | k=2 | k=5 | k=10 | k=15 | k=21 |
+|---|---|---|---|---|---|---|
+| XTB short net | +1.6% | +2.2% | **+4.3%** | +3.8% | +5.4% | +4.3% |
+| win | 58% | 58% | **92% (11/12)** | 83% | 75% | 75% |
+| t | 2.3 | 2.9 | **3.5** | 2.2 | 2.8 | 1.9 |
+
+k=5 per event: JSW +14.3, BDX'25 +10.1, ALR +6.1, CDR +5.4, MIL +5.2, ALE +4.2, PCO +2.4, MBK +2.3, BDX'23 +2.0, ZAB +1.1, ACP +1.0, DNP −2.6. Mirror trades do not work (Standard deletions long from next open +0.6%, 43%; Small Cap additions short −0.7%).
+
+**Status: short paper-trade lead** — short on XTB at the open of the session after the effective date of a Polish addition to MSCI Poland Standard, cover at the close 5 sessions later (15 sessions as the longer variant). Reviews: Feb/May/Aug/Nov; announcement ~2 weeks before the last trading day of the month; next: announced ~5 Nov 2026, effective 24 Nov 2026.
