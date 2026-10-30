@@ -16,6 +16,7 @@ All research write-ups, raw data and scripts live here; there is no size limit. 
 | `round9_2026-10-30/` | Round 9: results drift on all pre-session reports (holds; +3–6% band best) and analyst recommendations 2018–26 (no tradable edge; target cuts = weak avoid). |
 | `round10_2026-10-30/` | Round 10: surviving rules (Asbis, results drift, Biedronka→Dino, car parts) simulated as one portfolio 2019–26. |
 | `round11_2026-10-30/` | Round 11: search for more monthly-sales publishers (none liquid); XTB short leads re-run (Pepco, Eurocash hold; JSW downgraded). |
+| `round12_2026-10-30/` | Round 12: results drift by filing time (only pre-session works), negative-reaction shorts, index changes, ABB re-run, turn of month, non-bank sector read-through, drift-rule design variants — all rejected except soft notes on the live rule. |
 | `prices_foreign/` | Yahoo history for 29 foreign peers (list in `foreign_tickers.txt`). |
 
 New research rounds go in their own dated folder with a `README.md` of results plus the scripts that produced them.
