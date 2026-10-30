@@ -78,3 +78,5 @@ ZAB
 KGH
 PKN
 PZU
+# results-calendar tickers missing from prices (30 Oct 2026, round 12: developers / builders / other reporters)
+1AT ALL ATT BFT DVL GPW TAR TOR TXT UNI VOT WTN ERB ARH
