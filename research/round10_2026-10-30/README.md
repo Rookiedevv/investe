@@ -35,3 +35,23 @@
 4. The worst fall comes from single Asbis trades (−40%).
 
 The money is out of the market about 60% of the time, earning deposit interest. A realistic expectation is far below 39%/yr. The paper trades are the real test.
+
+## Monthly industry data → related stocks (`r10b.py`, data in `industry/`)
+**Data:** Eurostat monthly production indices for Poland (2021=100, calendar-adjusted), 2015 – Aug/Sep 2026: hard-coal mining (B05), total industry (B–D) and construction output (F).
+- Cement (C2351, C235) and refined petroleum after 2022 are confidential on Eurostat.
+- GUS's own pages block automated reading, so GUS data could not be used.
+
+**Entry:** GUS publishes these figures around the 18th–23rd of the following month, so the entry is conservatively the close on or after the 25th. Hold 21 sessions.
+
+**Comparison:** after costs, vs the WIG20 total-return ETF over the same dates.
+
+**Signals:** acceleration = this month's y/y minus the average y/y of the previous 3 months.
+
+| Data → stocks | Best signal | vs ETF | Beats ETF | Verdict |
+|---|---|---|---|---|
+| Coal output → JSW, Bogdanka | y/y > 0: +2.7 pp; acceleration > 5 pp: +1.6 pp | median −2 to −3 pp | 37–44% | Rejected: the miners lag the ETF in almost every split |
+| Construction output → Budimex, Polimex, Mirbud | acceleration > 2 pp: +1.0 pp | median −2.2 | 43% | Rejected |
+| Industrial production → KGHM, Orlen, Kęty | acceleration > 2 pp: +0.5 pp | median +1.4 | 57% | Rejected (too small, flips between periods) |
+| Car registrations (PZPM, cars + vans, Jan 2019 – Sep 2026, `industry/pzpm_registrations.csv`; entry at the next session after PZPM's publication date) → Inter Cars, Auto Partner | acceleration > 10 pp: +1.5 pp | median −0.1 | 47% (sign flips: +2.5 before 2023, +0.3 after) | Rejected. corr(acceleration, next month) 0.11. The companies' own monthly sales (round 8) remain the better signal |
+
+**Conclusion:** none of the official monthly industry figures predicts the related stocks. Only company-published monthly figures (Asbis, Inter Cars/Auto Partner) have worked.
