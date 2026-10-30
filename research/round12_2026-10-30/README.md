@@ -85,6 +85,26 @@ The six bank filings that happened to be in the round-9 calendar (mostly 2021: A
 
 **Recommendation:** the evening results-drift check should skip the nine banks (PKO, PEO, MBK, ALR, ING, MIL, EBP, BNP, BHW) as it skips XTB. Bank results days stay covered by the separate bank read-through rule (first reporter → later reporters), which is a different mechanism.
 
+## H. Widening the Eurocash short lead with Biedronka releases (`r12f.py`, 33 Jerónimo Martins quarterly releases 2018–26)
+Same mechanism as the Dino-results trigger: food-retail news that hits Dino is followed by Eurocash over the next month.
+
+| Trigger on a Biedronka (JM) release day | n | Eurocash XTB short, net | Wins | t |
+|---|---|---|---|---|
+| **Dino's reaction that day ≤ −3 pp vs WIG20** | 8 | **+4.9%** | **88%** | 3.6 |
+| JM share ≥ +3% in Lisbon | 11 | +3.9% | 73% | 1.1 |
+| JM share ≤ −3% | 13 | +2.2% | 62% | 0.8 |
+| Biedronka LFL worsened q/q | 17 | +2.0% | 65% | 0.8 |
+| LFL improved > 2 pp (the Dino buy signal) | 8 | −1.1% | 50% | — |
+| all releases | 33 | +0.5% | 61% | 0.3 |
+
+- Eurocash long after any Biedronka release: −4.7 pp vs the ETF, 30% beat it (n=33) — the stock drifts down after food-retail news days regardless.
+- **Control:** Dino ≤ −3% vs WIG20 on *any* day (63 non-overlapping cases) → Eurocash short +0.6%, t 0.5 (random Eurocash shorts −0.2%). The edge is specific to news days, not a general lead-lag (consistent with the rejected statistical pairs tests).
+- Combined with the Dino-results trigger (n=10, +4.6%, 80%), the Eurocash short lead now has 18 cases at +4.6–4.9% with 80–88% wins, two independent triggers, same mechanism.
+- Dino/Żabka/Pepco longs on JM release days: nothing beyond the existing Biedronka → Dino rule (LFL > +2 pp: +6.9 pp, 75%, n=8).
+
+**Suggested change to the short-lead check:** add the Biedronka-release trigger (JM quarterly release day; if Dino closes ≤ −3 pp vs WIG20 on the Warsaw reaction day → paper-short Eurocash at that close, hold 21).
+
 ## Summary
 - Rejected: after-session and during-session drift, banks' own-results drift (+0.4 pp, n=23 → skip banks in the evening check), negative-reaction shorts, index promotions/demotions (long and short), ABB buys, turn of month, non-bank sector read-through.
+- Widened: Eurocash short lead gains a second trigger (Dino ≤ −3 pp on a Biedronka release day: +4.9%, 88%, n=8).
 - Kept: the pre-session drift rule as it is, with two soft notes (late entry is fine; six-month momentum and high reaction-day volume tilt the odds, neither robust enough to be a filter).
