@@ -9,5 +9,6 @@ All research write-ups, raw data and scripts live here; there is no size limit. 
 | `xtb_shorts/` | XTB short tests of avoid signals (29 Oct 2026). |
 | `wig20_model/` | WIG20 dip predictor and calendar tests (Oct 2026). |
 | `round4_2026-10-30/` | Round 4: 52-week-high breakout (lead), momentum (weak), results/dividend run-ups and volume spikes (rejected). |
+| `round5_2026-10-30/` | Round 5: zloty, global lag, VIX, sector rotation, turn of year (none pass vs WIG20 ETF). |
 
 New research rounds go in their own dated folder with a `README.md` of results plus the scripts that produced them.
