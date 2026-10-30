@@ -22,6 +22,7 @@ All research write-ups, raw data and scripts live here; there is no size limit. 
 | `round15_2026-10-30/` | Round 15: Polish 10-year yield vs banks (sharp 3-month rise → banks lag next month, avoid filter only); web-source status (KNF, SII, tenders). |
 | `round16_2026-10-30/` | Round 16: analyst-recommendation aggregates (initiations, consensus, implied upside) — rejected; closes the recommendation family. |
 | `round17_2026-10-30/` | Round 17: KNF short-selling register (2,300 rows saved; following or fading disclosed shorts — rejected) and SII sentiment index (806 weeks saved; z ≤ −1.5 contrarian tilt +2.1%/4w, not a rule). |
+| `round18_2026-10-30/` | Round 18: futures basis, ETF seasonality, monthly reversal/continuation, drift-rule history conditioning — all rejected; SII-panic + 8% drawdown overlap (+5.3%/4w, n=13) noted as an ETF timing tilt. |
 | `prices_foreign/` | Yahoo history for 29 foreign peers (list in `foreign_tickers.txt`). |
 
 New research rounds go in their own dated folder with a `README.md` of results plus the scripts that produced them.
