@@ -21,6 +21,7 @@ All research write-ups, raw data and scripts live here; there is no size limit. 
 | `round14_2026-10-30/` | Round 14: quarterly revenue acceleration on 9 liquid companies — no one-month edge (accelerating quarters +1.1 pp, 46%); slow 3-month tilt only. |
 | `round15_2026-10-30/` | Round 15: Polish 10-year yield vs banks (sharp 3-month rise → banks lag next month, avoid filter only); web-source status (KNF, SII, tenders). |
 | `round16_2026-10-30/` | Round 16: analyst-recommendation aggregates (initiations, consensus, implied upside) — rejected; closes the recommendation family. |
+| `round17_2026-10-30/` | Round 17: KNF short-selling register (2,300 rows saved; following or fading disclosed shorts — rejected) and SII sentiment index (806 weeks saved; z ≤ −1.5 contrarian tilt +2.1%/4w, not a rule). |
 | `prices_foreign/` | Yahoo history for 29 foreign peers (list in `foreign_tickers.txt`). |
 
 New research rounds go in their own dated folder with a `README.md` of results plus the scripts that produced them.
