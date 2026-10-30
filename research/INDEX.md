@@ -12,6 +12,7 @@ All research write-ups, raw data and scripts live here; there is no size limit. 
 | `round5_2026-10-30/` | Round 5: zloty, global lag, VIX, sector rotation, turn of year (none pass vs WIG20 ETF). |
 | `round6_2026-10-30/` | Round 6: foreign peer results (gaming, e-commerce, copper, oil, CFD brokers, debt collectors, banks, car parts) → Polish stocks. None pass. |
 | `round7_2026-10-30/` | Round 7: GUS retail sales and wage releases (surprise vs consensus, acceleration) → retailers, banks, WIG20. None pass. |
+| `round8_2026-10-30/` | Round 8: live rules re-checked vs WIG20 ETF (Asbis, results drift, Biedronka→Dino, car parts, PZU). |
 | `prices_foreign/` | Yahoo history for 29 foreign peers (list in `foreign_tickers.txt`). |
 
 New research rounds go in their own dated folder with a `README.md` of results plus the scripts that produced them.
