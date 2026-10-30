@@ -42,14 +42,15 @@ For each sector and quarter, the first company to report (any filing time) gives
 
 | Sector | Pairs | Corr(first's reaction, later's reaction) | First ≥ +3% → later reporters vs ETF |
 |---|---|---|---|
+| Developers (DOM, 1AT, DVL, ATT; prices added later in the round) | 76 | −0.12 overall, **+0.45 when the first reporter is up ≥ 3%** | +2.2 pp, 71%, n=17 (t 1.0) — but −0.3 pp before 2022 and +8.1 pp since; weak lead, not adopted |
 | Retail (LPP, CCC, VRG, PCO, ALE, DNP, EUR, ZAB) | 93 | +0.15 | +3.0 pp, 70%, n=20 (t 1.6); first ≤ −3% → −3.3 pp |
 | Utilities (PGE, TPE, ENA) | 43 | −0.19 | −2.3 pp (n=5) |
 | Finance-other (KRU, GPW, XTB, PZU) | 58 | −0.33 | −1.2 pp |
 | Industrial (KTY, STP, KGH, JSW, LWB, GEA, APR, CAR) | 57 | +0.06 | −0.4 pp |
 | Telecom-media, IT, construction | 14–28 each | ≈ 0 | nothing |
-| **All sectors pooled** | 311 | −0.05 | −0.1 pp, 46%; first ≤ −3% → −0.3 pp (XTB short −1.2%) |
+| **All sectors pooled (with developers)** | 503 | 0.00 | first ≥ +3% → +1.4 pp, 54% (t 1.5); first ≤ −3% → +0.1 pp |
 
-**Verdict:** rejected. Outside the banks there is no read-through: one company's results day says nothing about the next company's. Developers could not be tested (1AT, DVL, ATT prices missing; now requested).
+**Verdict:** rejected. Outside the banks there is no read-through: one company's results day says nothing about the next company's. Developers are the only cohort whose reactions correlate (+0.45 after a strong first reporter), but the later reporters' drift is too weak and too recent to trade.
 
 ## F. Design variants of the live drift rule (`r12d.py`, L1 ex XTB, pre-session, +3–6%, n=42)
 | Variant | vs ETF | Beats | Note |
