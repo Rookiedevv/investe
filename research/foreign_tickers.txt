@@ -1,0 +1,39 @@
+# Foreign peers for read-through tests (raw Yahoo symbols). Fetched to research/prices_foreign/.
+# Gaming -> CDR, 11B, TEN, PLW, CIG
+TTWO
+EA
+UBI.PA
+EMBRAC-B.ST
+# E-commerce -> ALE
+AMZN
+ZAL.DE
+# Copper -> KGH
+FCX
+ANTO.L
+# Oil majors/refiners -> PKN
+BP.L
+SHEL.L
+OMV.VI
+# CFD brokers -> XTB
+IGG.L
+PLUS.L
+CMCX.L
+# Debt collectors -> KRU
+INTRUM.ST
+HOFI.ST
+# CEE and parent banks -> Polish banks
+EBS.VI
+OTP.BD
+RBI.VI
+KOMB.PR
+INGA.AS
+SAN.MC
+BNP.PA
+UCG.MI
+CBK.DE
+# Car parts -> CAR, APR
+LKQ
+# Fashion and grocery (already tested via calendars, kept for reuse)
+ITX.MC
+HM-B.ST
+JMT.LS

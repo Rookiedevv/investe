@@ -37,6 +37,23 @@ def main() -> None:
             for r in rows:
                 w.writerow({k: r[k] for k in COLS})
         log.append(f"{t} ({used}): {len(rows)} days, {rows[0]['date']} .. {rows[-1]['date']}")
+    fout = ROOT / "research" / "prices_foreign"
+    fout.mkdir(parents=True, exist_ok=True)
+    ff = ROOT / "research" / "foreign_tickers.txt"
+    for line in (ff.read_text().splitlines() if ff.exists() else []):
+        sym = line.split("#")[0].strip()
+        if not sym:
+            continue
+        rows, used = fetch_prices.fetch_any([sym], 12)
+        if not rows:
+            log.append(f"{sym}: NO DATA")
+            continue
+        with open(fout / f"{sym}.csv", "w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=COLS)
+            w.writeheader()
+            for r in rows:
+                w.writerow({k: r[k] for k in COLS})
+        log.append(f"{sym}: {len(rows)} days, {rows[0]['date']} .. {rows[-1]['date']}")
     (OUT / "_fetch_log.txt").write_text("\n".join(log) + "\n")
     print("\n".join(log))
 
