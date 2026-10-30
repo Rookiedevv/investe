@@ -1,6 +1,6 @@
 """Fetch daily Yahoo history for research-only tickers (not loaded into Supabase).
 
-Reads research/prices_tickers.txt (one GPW ticker per line, '#' comments),
+Reads research/prices_tickers.txt (GPW tickers, one or more per line, '#' comments),
 writes research/prices/<TICKER>.csv (date,open,high,low,close,adj_close,volume)
 and research/prices/_fetch_log.txt. A ticker Yahoo doesn't serve is logged and skipped.
 Run by .github/workflows/research-prices.yml (manual or on change of the ticker list).
@@ -22,9 +22,9 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     tickers = []
     for line in (ROOT / "research" / "prices_tickers.txt").read_text().splitlines():
-        t = line.split("#")[0].strip().upper()
-        if t and t not in tickers:
-            tickers.append(t)
+        for t in line.split("#")[0].upper().split():  # one or several tickers per line
+            if t not in tickers:
+                tickers.append(t)
     log = [f"fetched {dt.datetime.now(dt.timezone.utc):%Y-%m-%d %H:%M} UTC"]
     for t in tickers:
         rows, used = fetch_prices.fetch_any([f"{t}.WA"], 12)
