@@ -81,3 +81,4 @@ PZU
 # results-calendar tickers missing from prices (30 Oct 2026, round 12: developers / builders / other reporters)
 1AT ALL ATT BFT DVL GPW TAR TOR TXT UNI VOT WTN ERB ARH
 ANR SHO STH OND CTX CAV PCF DAD GIF GOP WPL ENT PLY MAX BBT BCS CLN AMC ARH LKM ACG BRG MBR SCW CMP DIG MOC
+IDA BKM MPH I2D STL UNT GPR GBK NTU
