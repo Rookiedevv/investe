@@ -68,6 +68,23 @@ For each sector and quarter, the first company to report (any filing time) gives
 
 **Takeaways for the evening check and the app:** keep entry at the reaction close and the 21-session hold; a signal found a day late is still worth taking; prefer (but don't require) names that beat WIG20 over the previous six months.
 
+## G. Banks: no drift after their own results (`r12e.py`, 197 first-news bank filings 2021–26 from `claude/bank_events.csv`, 9 banks)
+Banks file before the session by habit (PKO, Pekao and Alior at night; the rest 07:00–08:50), so nearly all of them qualify for the live rule's filing window.
+
+| Pre-session bank filing, reaction vs WIG20 | n | vs ETF | Beats | 2021–22 / 2023+ |
+|---|---|---|---|---|
+| **+3% to +6%** | 23 | **+0.4 pp** | 52% | +0.2 / +0.6 |
+| +2% to +6% | 36 | +0.1 pp | 50% | −0.1 / +0.3 |
+| above +6% | 5 | +1.7 pp | 60% | |
+| +1% to +3% | 32 | +0.9 pp | 50% | |
+| below −3% | 18 | +2.3 pp | 50% | bad bank results don't keep falling either |
+
+Correlation between the reaction and the next 21 sessions vs the ETF: −0.03. Per bank, only Alior (+6.0 pp, n=6) and mBank (+4.5 pp, n=4) are positive after a ≥ +2% reaction; BNP is −8.1 pp (n=5).
+
+The six bank filings that happened to be in the round-9 calendar (mostly 2021: Alior +14.6 pp, mBank +21.2 pp) made banks look as good as the rest; the full 2021–26 set says otherwise. Excluding banks from the round-9 pre-session set changes nothing for the others: +5.5 pp, 71% (n=34); excluding banks and XTB: **+6.3 pp, 75% (n=32)**.
+
+**Recommendation:** the evening results-drift check should skip the nine banks (PKO, PEO, MBK, ALR, ING, MIL, EBP, BNP, BHW) as it skips XTB. Bank results days stay covered by the separate bank read-through rule (first reporter → later reporters), which is a different mechanism.
+
 ## Summary
-- Rejected: after-session and during-session drift, negative-reaction shorts, index promotions/demotions (long and short), ABB buys, turn of month, non-bank sector read-through.
+- Rejected: after-session and during-session drift, banks' own-results drift (+0.4 pp, n=23 → skip banks in the evening check), negative-reaction shorts, index promotions/demotions (long and short), ABB buys, turn of month, non-bank sector read-through.
 - Kept: the pre-session drift rule as it is, with two soft notes (late entry is fine; six-month momentum and high reaction-day volume tilt the odds, neither robust enough to be a filter).
