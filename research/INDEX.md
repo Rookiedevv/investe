@@ -24,6 +24,7 @@ All research write-ups, raw data and scripts live here; there is no size limit. 
 | `round17_2026-10-30/` | Round 17: KNF short-selling register (2,300 rows saved; following or fading disclosed shorts — rejected) and SII sentiment index (806 weeks saved; z ≤ −1.5 contrarian tilt +2.1%/4w, not a rule). |
 | `round18_2026-10-30/` | Round 18: futures basis, ETF seasonality, monthly reversal/continuation, drift-rule history conditioning — all rejected; SII-panic + 8% drawdown overlap (+5.3%/4w, n=13) noted as an ETF timing tilt. |
 | `round19_2026-10-30/` | Round 19: CHF/PLN, EPOL, coal/gas futures, IPO lock-ups, MSCI review lists (86 events saved). MSCI Standard-addition reversal: XTB short from the effective close +3.7–4.9%, 75–92%, n=12 — short lead pending an execution check; CHF-jump bank short weak; rest rejected. |
+| `round20_2026-10-30/` | Round 20: official size and sector indices (bankier, saved). Size rotation among the three Beta ETFs: 6–12m momentum +11%/yr vs WIG20 +4.2% (allocation rule for the ETF leg, not a 1-month trade); sector momentum exists but costs eat it; worst-3-month sector lags 2 pp/month → avoid filter. |
 | `prices_foreign/` | Yahoo history for 29 foreign peers (list in `foreign_tickers.txt`). |
 
 New research rounds go in their own dated folder with a `README.md` of results plus the scripts that produced them.
