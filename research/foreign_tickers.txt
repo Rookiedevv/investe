@@ -49,3 +49,10 @@ VOE.VI
 SZG.DE
 YAR.OL
 CF
+# Round 26 additions: aluminium -> KTY, silver -> KGH, bitcoin -> XTB, refining cracks -> PKN, UNT
+ALI=F
+SI=F
+BTC-USD
+HO=F
+RB=F
+BZ=F
