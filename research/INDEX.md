@@ -27,6 +27,7 @@ All research write-ups, raw data and scripts live here; there is no size limit. 
 | `round20_2026-10-30/` | Round 20: official size and sector indices (bankier, saved). Size rotation among the three Beta ETFs: 6–12m momentum +11%/yr vs WIG20 +4.2% (allocation rule for the ETF leg, not a 1-month trade); sector momentum exists but costs eat it; worst-3-month sector lags 2 pp/month → avoid filter. |
 | `round21_2026-11-02/` | Round 21: share buyback announcements (138 events, 33 companies, 2014–26) → buy and hold 21 sessions: no edge (median −1.4 pp vs ETF, 41% beat it; means driven by Mercator 2020). Post-tender fall noted, not shortable. Rejected. |
 | `round22_2026-11-02/` | Round 22: financial investors (OFE/TFI/foreign) crossing 5/10/15% → follow 21 sessions. 82 notices found by web search (incomplete): upward +1.1 pp vs ETF, 52%; downward 0 pp; nothing significant. Inconclusive — full test needs a browser scrape of ESPI archives. |
+| `round23_2026-11-02/` | Round 23: Poland sovereign rating actions 2007–26 (16 changes): negative actions don't hit the next session (WIG20 +1.0%, FW20 short loses 6/7; only the 2016 S&P downgrade fell). Rejected. |
 | `prices_foreign/` | Yahoo history for 29 foreign peers (list in `foreign_tickers.txt`). |
 
 New research rounds go in their own dated folder with a `README.md` of results plus the scripts that produced them.
