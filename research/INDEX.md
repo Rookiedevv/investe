@@ -30,6 +30,7 @@ All research write-ups, raw data and scripts live here; there is no size limit. 
 | `round23_2026-11-02/` | Round 23: Poland sovereign rating actions 2007–26 (16 changes): negative actions don't hit the next session (WIG20 +1.0%, FW20 short loses 6/7; only the 2016 S&P downgrade fell). Rejected. |
 | `round24_2026-11-02/` | Round 24: dividend proposals vs last year (179 dated, 44 companies): raises/first/cuts/skips give no edge after the day; liquid cuts/skips lag −2.9 pp (weak avoid); proposed yield ≥8% +2.5 pp/69% at 21 sessions only (gone at 10 and 42) — not a rule. Rejected. |
 | `round25_2026-11-02/` | Round 25: TTF gas / US HRC steel / foreign peers → Azoty, Police, Cognor, Stalprodukt. Gas rises hurt Azoty/Police but they lag anyway (short ≈ deposit); Cognor steel signal is look-ahead + two outliers. Weak illiquid lead: Stalprodukt after HRC ≥ +10% month → +4.6 pp vs ETF, 64%, n=22, both periods. New foreign prices: HRC=F, MT.AS, VOE.VI, SZG.DE, YAR.OL, CF; PCE added. |
+| `round26_2026-11-02/` | Round 26: aluminium→Kęty, silver→KGHM, bitcoin→XTB, cracks→Orlen/Unimot. New lead: Orlen after diesel crack (HO×42−Brent) +5 USD/bbl month → +3.6 pp vs ETF, 76%, n=17 (≤ −5 → −2.1 pp, 29%: avoid). `signal_now.py` for the monthly check. Rest rejected. New prices: ALI=F, SI=F, BTC-USD, HO=F, RB=F, BZ=F. |
 | `prices_foreign/` | Yahoo history for 29 foreign peers (list in `foreign_tickers.txt`). |
 
 New research rounds go in their own dated folder with a `README.md` of results plus the scripts that produced them.

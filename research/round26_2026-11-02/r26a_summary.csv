@@ -1,0 +1,33 @@
+stock,driver,bucket,n,vs_etf,median,beats,pre2021,from2021,xtb_short
+KTY,ALI=F,top 20% of signal,29,-1.25,1.15,55.17,-1.68,-1.06,-2.84
+KTY,ALI=F,top third,48,0.03,1.08,54.17,1.08,-0.61,-3.93
+KTY,ALI=F,bottom third,48,-0.07,-0.02,50.0,-0.3,0.1,-2.49
+KTY,ALI=F,bottom 20%,29,-0.01,0.58,55.17,-1.19,0.71,-2.65
+KGH,SI=F,top 20% of signal,29,0.23,-2.58,37.93,-1.09,0.82,-2.51
+KGH,SI=F,top third,48,0.23,-2.74,39.58,-2.45,1.99,-2.38
+KGH,SI=F,bottom third,48,0.77,-0.73,45.83,3.19,-1.66,-2.4
+KGH,SI=F,bottom 20%,29,-0.95,-1.76,41.38,4.55,-4.31,-0.48
+XTB,BTC-USD,top 20% of signal,25,2.48,1.48,56.0,1.97,3.56,-6.26
+XTB,BTC-USD,top third,42,2.16,2.39,59.52,0.14,4.39,-5.79
+XTB,BTC-USD,bottom third,42,2.04,-1.33,42.86,2.15,1.92,-4.78
+XTB,BTC-USD,bottom 20%,25,4.59,2.14,52.0,7.49,2.66,-7.98
+XTB,BTC_VOL,top 20% of signal,25,1.3,1.48,52.0,-1.55,4.38,-5.87
+XTB,BTC_VOL,top third,42,1.45,1.1,52.38,-0.69,3.39,-5.97
+XTB,BTC_VOL,bottom third,42,-0.19,-1.62,42.86,-1.02,0.5,-2.87
+XTB,BTC_VOL,bottom 20%,25,2.17,1.22,52.0,2.66,1.72,-5.23
+PKN,CRACK_DIESEL,top 20% of signal,29,2.78,2.04,65.52,4.1,2.36,-5.0
+PKN,CRACK_DIESEL,top third,48,2.35,1.91,58.33,3.67,1.56,-5.12
+PKN,CRACK_DIESEL,bottom third,48,-0.7,-2.34,39.58,0.28,-1.41,-0.78
+PKN,CRACK_DIESEL,bottom 20%,29,-1.66,-2.59,27.59,-0.46,-2.04,-0.64
+PKN,CRACK_GASOLINE,top 20% of signal,29,1.54,1.34,58.62,3.7,-0.22,-4.46
+PKN,CRACK_GASOLINE,top third,48,0.91,1.17,54.17,1.84,-0.1,-2.29
+PKN,CRACK_GASOLINE,bottom third,48,-1.04,-2.42,31.25,-0.45,-1.67,-1.51
+PKN,CRACK_GASOLINE,bottom 20%,29,0.58,-0.26,41.38,1.25,-0.04,-3.06
+UNT,CRACK_DIESEL,top 20% of signal,29,0.39,-0.62,44.83,3.69,-0.65,-6.17
+UNT,CRACK_DIESEL,top third,48,1.47,-0.43,47.92,3.59,0.21,-7.81
+UNT,CRACK_DIESEL,bottom third,48,-0.25,-2.92,37.5,0.54,-0.82,-4.81
+UNT,CRACK_DIESEL,bottom 20%,29,2.52,-0.31,41.38,11.04,-0.19,-8.42
+PKN,BZ=F,top 20% of signal,29,0.56,0.58,58.62,-1.87,2.82,-2.33
+PKN,BZ=F,top third,48,-0.19,0.2,52.08,-1.69,1.59,-1.03
+PKN,BZ=F,bottom third,48,0.85,-0.18,47.92,1.83,-0.31,-3.1
+PKN,BZ=F,bottom 20%,29,1.14,0.93,51.72,2.47,-1.04,-3.4
