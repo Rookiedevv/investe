@@ -42,3 +42,10 @@ CHFPLN=X
 EPOL
 MTF=F
 TTF=F
+# Round 25 additions: steel and fertilizer drivers -> ATT, COG, STP, PCE
+HRC=F
+MT.AS
+VOE.VI
+SZG.DE
+YAR.OL
+CF
