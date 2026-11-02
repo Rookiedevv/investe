@@ -8,8 +8,12 @@ def ld(p):
     d = pd.read_csv(p, parse_dates=['date']).set_index('date'); return d[~d.index.duplicated()].sort_index()
 W = ld(R / 'data/prices/WIG20.csv'); idx = W.index[W.index >= '2014-01-01']
 pkn = ld(R / 'research/prices/PKN.csv')['close'].reindex(idx)
-ho = ld(R / 'research/prices_foreign/HO=F.csv')['adj_close'].reindex(idx).ffill(limit=5)
-bz = ld(R / 'research/prices_foreign/BZ=F.csv')['adj_close'].reindex(idx).ffill(limit=5)
+def pick(daily, research):   # prefer the daily-refreshed data/prices file, fall back to the research snapshot
+    a = ld(R / daily)['adj_close'] if (R / daily).exists() else None
+    b = ld(R / research)['adj_close']
+    return (b if a is None else a.combine_first(b)).reindex(idx).ffill(limit=5)
+ho = pick('data/prices/HO.csv', 'research/prices_foreign/HO=F.csv')
+bz = pick('data/prices/BRENT.csv', 'research/prices_foreign/BZ=F.csv')
 crack = ho * 42 - bz
 month = pd.Period(sys.argv[1], 'M') if len(sys.argv) > 1 else pd.Timestamp.today().to_period('M')
 prev = idx[idx.to_period('M') == month - 1]

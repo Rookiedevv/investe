@@ -42,6 +42,8 @@ MARKET = {
     "DAX": (["^GDAXI"], "DAX", "index", "DE"),
     "VIX": (["^VIX"], "VIX", "index", "US"),
     "BRENT": (["BZ=F"], "Brent (futures)", "other", "ICE"),
+    # Heating oil (NY Harbor ULSD) futures: diesel crack = HO*42 - Brent, for the Orlen paper-trade lead (research round 26).
+    "HO": (["HO=F"], "Heating oil / ULSD (futures)", "other", "NYMEX"),
     "EURPLN": (["EURPLN=X"], "EUR/PLN", "other", "FX"),
     "USDPLN": (["USDPLN=X"], "USD/PLN", "other", "FX"),
 }
