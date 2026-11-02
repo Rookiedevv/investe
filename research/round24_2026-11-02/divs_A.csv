@@ -1,0 +1,89 @@
+date,time,session_timing,ticker,fiscal_year,dps_proposed,dps_prev,with_results,note,source_url
+2021-03-23,unknown,unknown,ACP,2020,3.11,3.01,unknown,new dividend policy announced same day,https://strefainwestorow.pl/wiadomosci/20210323/asseco-poland-chce-z-zysku-za-20-wyplacic-311-zl-dywidendy-na-akcje-ma-nowa
+2023-04-18,unknown,unknown,ACP,2022,3.5,3.36,unknown,,https://strefainwestorow.pl/wiadomosci/20230418/zarzad-asseco-poland-rekomenduje-35-zl-dywidendy-na-akcje
+2025-03-27,unknown,unknown,ACP,2024,3.94,3.66,unknown,,https://strefainwestorow.pl/wiadomosci/20250327/asseco-poland-chce-wyplacic-394-zl-dywidendy-na-akcje-z-zysku-za-24
+2026-03-31,unknown,unknown,ACP,2025,13.05,3.94,yes,"uncertain: 'possible 13.05' in results write-up (order backlog); special-size payout, 3x prior year",https://strefainwestorow.pl/wiadomosci/20260331/grupa-asseco-z-wyzszym-portfelem-zamowien-mozliwe-1305-zl-dywidendy-na-akcje
+2019-04-10,unknown,unknown,BDX,2018,6.3,17.61,unknown,,https://strefainwestorow.pl/wiadomosci/20190410/budimex-rekomenduje-wyplate-63-zl-dywidendy-na-akcje-za-2018-r
+2020-05-11,unknown,unknown,BDX,2019,4.56,6.3,unknown,,https://strefainwestorow.pl/wiadomosci/20200511/zarzad-budimeksu-rekomenduje-456-zl-dywidendy-na-akcje
+2024-04-09,unknown,unknown,BDX,2023,35.69,17.99,unknown,uncertain: date of analysis article; whole profit plus reserve capital,https://strefainwestorow.pl/artykuly/dywidendy/20240409/budimex-dywidenda-2024
+2025-04-10,unknown,unknown,BDX,2024,25.43,35.69,unknown,,https://strefainwestorow.pl/wiadomosci/20250410/zarzad-budimeksu-rekomenduje-zwz-wyplate-dywidendy-w-wysokosci-2543-zl-brutto
+2026-03-26,unknown,unknown,BDX,2025,32.42,25.43,unknown,,https://strefainwestorow.pl/wiadomosci/20260326/zarzad-budimeksu-rekomenduje-zwz-wyplate-dywidendy-w-wys-3242-zl-brutto-na
+2018-05-30,unknown,unknown,CPS,2017,0,0.32,no,board recommended no dividend,https://www.biznesradar.pl/dywidenda/CPS
+2021-12-20,unknown,unknown,CPS,2021,1,1.2,no,"dividend policy: board intends at least 1.00/sh per year in 2022-24 (minimum, not a final proposal); actual FY2021 1.20",https://strefainwestorow.pl/wiadomosci/20211220/zarzad-cyfrowego-polsatu-zamierza-rekomendowac-w-22-24-dywidende-co-najmniej-1
+2023-05-31,unknown,unknown,CPS,2022,0,1.2,no,policy formally maintained but no dividend for 2022,https://strefainwestorow.pl/wiadomosci/20230531/cyfrowy-polsat-nie-planuje-wyplacic-dywidendy-za-22-podtrzymuje-polityke
+2024-05-24,unknown,unknown,CPS,2023,0,0,no,profit to reserve capital,https://strefainwestorow.pl/wiadomosci/20240524/cyfrowy-polsat-planuje-zysk-za-23-przeznaczyc-na-kapital-zapasowy
+2018-05-17,unknown,unknown,ENA,2017,0,0.25,no,,https://www.biznesradar.pl/dywidenda/ENA
+2019-04-08,unknown,unknown,ENA,2018,0,0,unknown,,https://www.biznesradar.pl/dywidenda/ENA
+2023-04-18,unknown,unknown,ENA,2022,0,0,unknown,whole 2022 profit to reserve capital for investments,https://strefainwestorow.pl/wiadomosci/20230418/zarzad-enei-rekomenduje-przeznaczyc-caly-zysk-za-22-na-kapital-rezerwowy-pod
+2024-05-06,unknown,unknown,ENA,2023,0,0,unknown,net loss to be covered from future profits,https://strefainwestorow.pl/wiadomosci/20240506/zarzad-enea-proponuje-pokrycie-straty-netto-z-przyszlych-zyskow
+2025-05-12,13:20,during,ENA,2024,0.5,0,no,first dividend in ~7 years; time from bankier ESPI copy,https://www.bankier.pl/wiadomosc/ENEA-Informacja-w-sprawie-propozycji-pokrycia-straty-za-rok-2023-oraz-podzialu-zysku-za-rok-2024-8939965.html
+2026-04-14,unknown,unknown,ENA,2025,0.56,0.5,no,296.6m PLN,https://www.bankier.pl/wiadomosc/ENEA-Informacja-w-sprawie-propozycji-podzialu-zysku-za-rok-2025-9113563.html
+2018-03-14,unknown,unknown,JSW,2017,0,0,unknown,board withheld dividend recommendation,https://strefainwestorow.pl/artykuly/20180314/jsw-dywidenda-2018-rekomendacja
+2020-03-19,unknown,unknown,JSW,2019,0,1.71,unknown,,https://strefainwestorow.pl/wiadomosci/20200319/zarzad-jsw-nie-bedzie-rekomendowal-dywidendy-za-2019-rok-opis
+2023-03-21,unknown,unknown,JSW,2022,0,0,unknown,uncertain whether in results release (annual results discussed 2023-03-23),https://strefainwestorow.pl/wiadomosci/20230321/zarzad-jsw-nie-bedzie-rekomendowal-wyplaty-dywidendy-za-rok-2022
+2017-05-12,unknown,unknown,KGH,2016,1,1.5,no,,https://strefainwestorow.pl/wiadomosci/20170512/kghm-polska-miedz-rekomenduje-wyplate-1-zl-dywidendy-na-akcje
+2018-05-22,unknown,unknown,KGH,2017,0,1,no,board recommended no dividend,https://www.biznesradar.pl/dywidenda/KGH
+2019-04-17,unknown,unknown,KGH,2018,0,0,unknown,board recommended retaining 2018 profit,https://www.biznesradar.pl/dywidenda/KGH
+2020-05-20,unknown,unknown,KGH,2019,0,0,unknown,uncertain: date of article 'KGHM kolejny raz nie wypłaci dywidendy',https://www.biznesradar.pl/dywidenda/KGH
+2022-05-23,unknown,unknown,KGH,2021,3,1.5,no,uncertain: date of analysis article,https://strefainwestorow.pl/artykuly/debiut-ipo/20220523/kghm-dywidenda-2022
+2023-05-11,unknown,unknown,KGH,2022,1,3,no,uncertain: date of analysis article,https://strefainwestorow.pl/artykuly/dywidendy/20230511/kghm-dywidenda-2023
+2024-05-09,unknown,unknown,KGH,2023,1.5,1,no,uncertain: date of analysis article; 300m PLN partly from reserve capital,https://strefainwestorow.pl/artykuly/dywidendy/20240509/kghm-dywidenda-2024
+2025-05-15,unknown,unknown,KGH,2024,0,1.5,no,whole 2024 profit to reserve capital,https://strefainwestorow.pl/wiadomosci/20250515/kghm-rekomenduje-niewyplacanie-dywidendy-z-zysku-za-2024-rok
+2026-04-27,unknown,unknown,KGH,2025,1.5,0,no,300m PLN; news article 14:27 (ESPI time not shown),https://strefainwestorow.pl/wiadomosci/20260427/kghm-chce-wyplacic-300-mln-zl-dywidendy-z-zysku-za-25-co-da-15-zl-na-akcje
+2021-04-08,unknown,unknown,KTY,2020,44.67,35,unknown,two tranches; paid 44.57 (biznesradar),https://strefainwestorow.pl/wiadomosci/20210408/zarzad-grupy-kety-rekomenduje-wyplate-4467-zl-dywidendy-na-akcje-wyplata-w-dwoch
+2022-04-22,unknown,unknown,KTY,2021,52.4,44.57,unknown,505.67m PLN; paid 52.37,https://strefainwestorow.pl/wiadomosci/20220422/zarzad-grupy-kety-rekomenduje-wyplate-524-zl-dywidendy-na-akcje-czyli-lacznie
+2023-04-17,unknown,unknown,KTY,2022,62.5,52.37,unknown,603.1m PLN,https://strefainwestorow.pl/wiadomosci/20230417/zarzad-grupy-kety-rekomenduje-przeznaczyc-na-dywidende-6031-mln-zl-czyli-6250-zl
+2024-04-22,unknown,unknown,KTY,2023,55.7,62.5,unknown,paid 55.41 per biznesradar,https://strefainwestorow.pl/wiadomosci/20240422/zarzad-grupy-kety-rekomenduje-wyplate-5570-zl-dywidendy-na-akcje
+2025-04-22,unknown,unknown,KTY,2024,48.78,55.41,unknown,GM raised: Allianz OFE proposed 55.78 (2025-05-23); paid 55.46 per biznesradar,https://strefainwestorow.pl/wiadomosci/20250422/grupa-kety-rekomenduje-wyplate-4878-zl-dywidendy-na-akcje-za-24
+2026-04-20,unknown,unknown,KTY,2025,49.05,55.46,unknown,biznesradar shows 48.96 adopted,https://strefainwestorow.pl/wiadomosci/20260420/grupa-kety-rekomenduje-wyplate-4905-zl-dywidendy-na-akcje-za-25
+2020-03-30,unknown,unknown,LPP,2019,0,60,unknown,COVID: board recommended no dividend,https://www.biznesradar.pl/dywidenda/LPP
+2023-04-26,unknown,unknown,LPP,2022,430,350,unknown,two instalments,https://strefainwestorow.pl/wiadomosci/20230426/zarzad-lpp-rekomenduje-wyplate-dywidendy-w-wysokosci-430-zl-na-akcje
+2024-01-31,unknown,unknown,LPP,2023,570,430,no,advance 285 + total at least 570; board raised to 610 on 2024-03-27 (with annual results),https://strefainwestorow.pl/wiadomosci/20240131/lpp-wyplaci-285-zl-na-akcje-zaliczki-na-poczet-dywidendy-dywidenda-ma-wyniesc-co
+2025-01-31,unknown,unknown,LPP,2024,660,610,no,advance 330 + total at least 660; article 14:25,https://strefainwestorow.pl/dywidendy/lpp-dywidenda-2025-zaliczka
+2026-03-25,unknown,unknown,LPP,2025,900,660,unknown,"uncertain: board 'considering' recommending 900 total incl. 400 advance; advance itself was announced earlier (~Jan 2026, not verified)",https://strefainwestorow.pl/wiadomosci/20260325/lpp-rozwaza-zarekomendowanie-wyplaty-dywidendy-w-lacznej-kwocie-900-zl-na-akcje
+2018-05-17,unknown,unknown,LWB,2017,0,1,no,,https://www.biznesradar.pl/dywidenda/LWB
+2020-05-15,unknown,unknown,LWB,2019,0,0.75,no,,https://www.biznesradar.pl/dywidenda/LWB
+2024-05-20,unknown,unknown,LWB,2023,2.5,2.58,no,,https://strefainwestorow.pl/wiadomosci/20240520/zarzad-bogdanki-rekomenduje-wyplate-25-zl-dywidendy-na-akcje
+2025-05-15,unknown,unknown,LWB,2024,0,2.5,no,,https://strefainwestorow.pl/wiadomosci/20250515/zarzad-bogdanki-rekomenduje-niewyplacanie-dywidendy-w-2025-roku
+2026-04-24,unknown,unknown,LWB,2025,0,0,no,also no payout from prior years' retained profits,https://strefainwestorow.pl/wiadomosci/20260424/zarzad-bogdanki-rekomenduje-niewyplacanie-dywidendy-z-zyskow-lat-ubieglych
+2020-05-20,unknown,unknown,OPL,2019,0,0,no,profit to reserve capital with option of later dividend,https://www.biznesradar.pl/dywidenda/OPL
+2021-05-19,unknown,unknown,OPL,2020,0,0,no,no dividend in 2021; signalled possible 0.25 in 2022,https://strefainwestorow.pl/wiadomosci/20210519/orange-polska-rekomenduje-niewyplacenie-dywidendy-w-21-w-22-moze-zaproponowac
+2023-02-15,unknown,unknown,OPL,2022,0.35,0.25,yes,"uncertain: date of FY2022 results; dividend proposal assumed to be in results release, not verified",https://strefainwestorow.pl/wiadomosci/20230215/ebitdaal-orange-polska-w-iv-kw-zgodna-z-konsensusem-w-23-stabilna-lub-lekko
+2024-02-14,unknown,unknown,OPL,2023,0.48,0.35,unknown,likely with FY results (not verified),https://strefainwestorow.pl/wiadomosci/20240214/orange-polska-rekomenduje-wyplate-048-zl-dywidendy-na-akcje-w-2024-roku-opis
+2025-02-12,unknown,unknown,OPL,2024,0.53,0.48,unknown,likely with FY results (not verified); 0.53 base level 2025-28 in strategy (2025-03-19),https://strefainwestorow.pl/wiadomosci/20250212/orange-polska-chce-wyplacic-053-zl-dywidendy-na-akcje-z-zysku-za-2024-r
+2026-02-18,unknown,unknown,OPL,2025,0.61,0.53,unknown,likely with FY results (not verified),https://strefainwestorow.pl/wiadomosci/20260218/orange-polska-chce-wyplacic-061-zl-dywidendy-na-akcje-z-zysku-za-2025-r
+2019-03-06,unknown,unknown,PEO,2018,6.6,7.9,unknown,uncertain: date of analysis article on board's proposal (lowest dividend in 7 years); ESPI date may be earlier,https://strefainwestorow.pl/artykuly/dywidendy/20190306/dywidenda-pekao-2019
+2020-04-22,unknown,unknown,PEO,2019,0,6.6,no,"COVID/KNF: board proposed 25% of profit to reserve capital, rest undivided",https://www.biznesradar.pl/dywidenda/PEO
+2021-06-10,unknown,unknown,PEO,2020,3.21,0,no,uncertain: not a board proposal - shareholder PZU motion for up to 3.21/sh; KNF recommendation 2021-07-16 confirmed 3.21,https://strefainwestorow.pl/wiadomosci/20210610/pzu-zlozylo-wniosek-o-wyplate-do-321-zl-dywidendy-na-akcje-banku-pekao-opis
+2023-04-20,unknown,unknown,PEO,2022,3.65,4.3,no,GM raised to 5.42 at PFR request (2023-06-05),https://strefainwestorow.pl/artykuly/dywidendy/20230420/dywidenda-pekao-2023
+2024-02-22,unknown,unknown,PEO,2023,19.2,5.42,unknown,50% of 2023 profit plus 2019 retained earnings (5.04bn PLN); news article 12:06,https://strefainwestorow.pl/artykuly/dywidendy/20240222/dywidenda-bank-pekao-2024
+2025-03-18,unknown,unknown,PEO,2024,12.6,19.2,unknown,GM raised to 18.36 at PFR request (PFR motion 2025-04-22),https://strefainwestorow.pl/wiadomosci/20250318/bank-pekao-chce-wyplacic-126-zl-dywidendy-na-akcje-z-zysku-za-24
+2026-03-12,unknown,unknown,PEO,2025,19.77,18.36,unknown,5.18bn PLN; news article 18:32 (ESPI time not shown),https://strefainwestorow.pl/wiadomosci/20260312/bank-pekao-chce-wyplacic-1977-zl-dywidendy-na-akcje-z-zysku-za-2025-r
+2018-05-30,unknown,unknown,PGE,2017,0,0,no,uncertain: date of GM-agenda article; board proposal of no dividend may be earlier,https://www.biznesradar.pl/dywidenda/PGE
+2020-05-28,unknown,unknown,PGE,2019,0,0,no,,https://strefainwestorow.pl/wiadomosci/20200528/zarzad-pge-rekomenduje-niewyplacanie-dywidendy-za-2019-r
+2025-04-14,unknown,unknown,PGE,2024,0,0,no,,https://strefainwestorow.pl/wiadomosci/20250414/zarzad-pge-rekomenduje-niewyplacanie-dywidendy-za-2024-rok
+2026-04-14,unknown,unknown,PGE,2025,0,0,no,strategy update 2026-10-19: dividends to resume from 2026 profit,https://strefainwestorow.pl/wiadomosci/20260414/zarzad-pge-rekomenduje-niewyplacanie-dywidendy-za-2025-rok
+2020-05-05,unknown,unknown,PKN,2019,1,3.5,no,"uncertain: this is the REVISED proposal (board cut its earlier recommendation, COVID); first recommendation date not found",https://strefainwestorow.pl/wiadomosci/20200505/zarzad-pkn-orlen-obniza-rekomendacje-dywidendy-za-2019-rok-do-1-zl-na-akcje-opis
+2022-03-30,unknown,unknown,PKN,2021,3.5,3.5,no,,https://strefainwestorow.pl/wiadomosci/20220330/zarzad-pkn-orlen-rekomenduje-wyplate-350-zl-dywidendy-na-akcje
+2025-02-27,unknown,unknown,PKN,2024,6,4.15,unknown,uncertain: article 09:55 same day as Q4 results ('Wysokie zyski i rekordowa dywidenda'); likely with results,https://strefainwestorow.pl/dywidendy/orlen-dywidenda-2025
+2026-04-29,unknown,during,PKN,2025,8,6,no,9.3bn PLN; consensus 7.00; news article 15:13 says shares up >3% (reaction in session),https://strefainwestorow.pl/wiadomosci/20260429/zarzad-orlenu-rekomenduje-wyplate-8-zl-dywidendy-na-akcje-akcje-rosna-ponad-3
+2018-04-03,unknown,unknown,PKO,2017,0.55,0,unknown,,https://strefainwestorow.pl/wiadomosci/20180403/pko-bp-rekomenduje-055-zl-dywidendy-na-akcje-z-zysku-za-2017-rok
+2019-02-25,unknown,unknown,PKO,2018,1.33,0.55,unknown,uncertain: date from biznesradar article list (board plan 1.66bn PLN = 1.33/sh); exact ESPI date not verified,https://www.biznesradar.pl/dywidenda/PKO
+2022-02-24,unknown,unknown,PKO,2021,1.83,0,unknown,board proposed 49.77% of 2021 profit (2.29bn PLN); prev year no dividend (KNF/COVID),https://strefainwestorow.pl/wiadomosci/20220224/pko-bp-chce-przeznaczyc-4977-proc-zysku-netto-za-2021-r-na-dywidende
+2023-04-12,unknown,unknown,PKO,2022,0,1.83,no,no direct dividend; 1.63bn PLN of 2022 profit to reserve capital for possible later dividend (used for 1.28 advance Dec 2023),https://strefainwestorow.pl/wiadomosci/20230412/zarzad-pko-bp-rekomenduje-163-mld-zl-z-zysku-na-kapital-rezerwowy-przeznaczony
+2024-03-06,unknown,unknown,PKO,2023,3.87,0,unknown,"uncertain: board announced 2023 payout plan this day; amount shown is final total (1.28 advance + 2.59 final), board's exact March figure not verified",https://strefainwestorow.pl/artykuly/dywidendy/20240306/pko-bank-polski-dywidenda-2024
+2025-04-24,unknown,unknown,PKO,2024,5.48,3.87,no,KNF max 75% payout,https://strefainwestorow.pl/wiadomosci/20250424/pko-bp-planuje-wyplacic-548-zl-dywidendy-na-akcje
+2026-04-23,unknown,unknown,PKO,2025,6.14,5.48,no,74.95% of 2025 profit (7.67bn PLN); news article 16:34 (ESPI time not shown),https://strefainwestorow.pl/wiadomosci/20260423/zarzad-pko-bp-rekomenduje-wyplate-614-zl-dywidendy-na-akcje-z-zysku-za-2025-r
+2019-04-17,unknown,unknown,PZU,2018,2.8,2.5,unknown,uncertain: date of news article on board's proposal,https://strefainwestorow.pl/artykuly/dywidendy/20190417/dywidenda-pzu-2019
+2020-04-22,unknown,unknown,PZU,2019,0,2.8,no,COVID/KNF: profit to reserve capital and social fund,https://www.biznesradar.pl/dywidenda/PZU
+2021-05-12,unknown,unknown,PZU,2020,3.5,0,unknown,uncertain: date of analysis article; payout partly from reserve capital,https://strefainwestorow.pl/artykuly/dywidendy/20210512/pzu-dywidenda-2021
+2022-06-01,unknown,unknown,PZU,2021,1.94,3.5,no,,https://strefainwestorow.pl/wiadomosci/20220601/pzu-chce-wyplacic-194-zl-dywidendy-na-akcje
+2023-05-04,unknown,unknown,PZU,2022,2.4,1.94,unknown,uncertain: date of analysis article; dividend above net profit (part from reserve capital),https://strefainwestorow.pl/artykuly/dywidendy/20230504/pzu-dywidenda-2023
+2024-05-13,unknown,unknown,PZU,2023,4.34,2.4,no,,https://strefainwestorow.pl/wiadomosci/20240513/pzu-chce-wyplacic-434-zl-dywidendy-na-akcje
+2025-05-06,unknown,unknown,PZU,2024,4.47,4.34,no,3.86bn PLN; news article 17:20 (ESPI time not shown),https://strefainwestorow.pl/wiadomosci/20250506/pzu-chce-wyplacic-447-zl-dywidendy-na-akcje
+2026-05-13,unknown,unknown,PZU,2025,4.8,4.47,no,uncertain: date of article (10:36); board communique may be 2026-05-12,https://strefainwestorow.pl/dywidendy/pzu-dywidenda-2026
+2017-03-14,unknown,unknown,TPE,2016,0,0,unknown,net loss covered from reserve capital,https://strefainwestorow.pl/wiadomosci/20170314/tauron-rekomenduje-niewyplacanie-dywidendy-i-pokrycie-straty-z-kapitalu-zapas
+2020-03-30,unknown,unknown,TPE,2019,0,0,unknown,net loss covered from reserve capital; policy unchanged,https://strefainwestorow.pl/wiadomosci/20200330/zarzad-tauronu-chce-przeznaczyc-kapital-zapasowy-na-pokrycie-straty-netto-za-19
+2021-03-29,unknown,unknown,TPE,2020,0,0,unknown,board will not recommend dividend in 2021,https://www.biznesradar.pl/dywidenda/TPE
+2025-04-14,unknown,unknown,TPE,2024,0,0,no,in line with strategy,https://strefainwestorow.pl/wiadomosci/20250414/zarzad-tauronu-nie-bedzie-rekomendowac-wyplaty-dywidendy-za-24-zgodnie-ze
+2026-03-30,unknown,unknown,TPE,2025,0.2,0,yes,"first dividend in ~11 years (350m PLN, ~0.20/sh); FY2025 results same day; shares +16.2% that day (also ETS hopes); with_results inferred from same-day results article",https://strefainwestorow.pl/wiadomosci/20260330/tauron-w-2025-roku-zwiekszyl-ebitda-o-16-proc-zgodnie-z-szacunkami

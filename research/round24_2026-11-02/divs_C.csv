@@ -1,0 +1,172 @@
+date,time,session_timing,ticker,fiscal_year,dps_proposed,dps_prev,with_results,note,source_url
+unknown,unknown,unknown,ASB,2013,0.18,0.16,unknown,"date not found; USD-declared, PLN per biznesradar",https://www.biznesradar.pl/dywidenda/ASBIS
+unknown,unknown,unknown,ASB,2014,0,0.18,unknown,"uncertain: no dividend paid; explicit board proposal not verified; date not found; USD-declared, PLN per biznesradar",https://www.biznesradar.pl/dywidenda/ASBIS
+unknown,unknown,unknown,ASB,2015,0,0,unknown,"uncertain: no dividend paid; explicit board proposal not verified; date not found; USD-declared, PLN per biznesradar",https://www.biznesradar.pl/dywidenda/ASBIS
+unknown,unknown,unknown,ASB,2016,0.12,0,unknown,"date not found; USD-declared, PLN per biznesradar",https://www.biznesradar.pl/dywidenda/ASBIS
+unknown,unknown,unknown,ASB,2017,0.21,0.12,unknown,"date not found; USD-declared, PLN per biznesradar",https://www.biznesradar.pl/dywidenda/ASBIS
+unknown,unknown,unknown,ASB,2018,0.38,0.21,unknown,"total USD 0.10 incl interim (biznesradar.pl/a/78307); date not found; USD-declared, PLN per biznesradar",https://www.biznesradar.pl/dywidenda/ASBIS
+2020-03-27,10:49,during,ASB,2019,0.54,0.38,unknown,total FY USD 0.135 (final USD 0.075 + interim USD 0.06); PLN=biznesradar at payment (final 0.31),https://www.parkiet.com/komunikaty-espi/art27115921-asbisc-rekomendacja-rady-dyrektorow-w-sprawie-dywidendy-za-2019-r
+unknown,unknown,unknown,ASB,2020,1.14,0.54,unknown,date not found; USD-declared,https://www.biznesradar.pl/dywidenda/ASBIS
+2022-03-30,11:54,during,ASB,2021,1.22,1.14,unknown,total FY USD 0.30 (final USD 0.10 + interim USD 0.20 paid Dec 2021); PLN=biznesradar (final 0.43),https://www.parkiet.com/komunikaty-espi/art35972781-asbisc-rekomendacja-rady-dyrektorow-w-sprawie-dywidendy-za-2021-r
+unknown,unknown,unknown,ASB,2022,1.98,1.22,unknown,date not found; USD-declared,https://www.biznesradar.pl/dywidenda/ASBIS
+unknown,unknown,unknown,ASB,2023,2.02,1.98,unknown,date not found; USD-declared,https://www.biznesradar.pl/dywidenda/ASBIS
+2025-03-27,10:27,during,ASB,2024,1.99,2.02,unknown,RB 6/2025; total FY USD 0.50 (final USD 0.30 + interim USD 0.20 paid Dec 2024); PLN=biznesradar (final 1.16),https://www.parkiet.com/komunikaty-espi/art42026141-asbisc-enterprises-plc-rekomendacja-rady-dyrektorow-w-sprawie-dywidendy-za-2024-r
+unknown,unknown,unknown,ASB,2025,1.99,1.99,unknown,date not found; USD-declared (final 1.25 + interim 0.74 PLN),https://www.biznesradar.pl/dywidenda/ASBIS
+unknown,unknown,unknown,APR,2018,0.02,,unknown,first dividend in biznesradar table; date not found,https://www.biznesradar.pl/dywidenda/APR
+unknown,unknown,unknown,APR,2019,0,0.02,unknown,uncertain: no dividend paid; explicit board proposal not verified,https://www.biznesradar.pl/dywidenda/APR
+unknown,unknown,unknown,APR,2020,0.10,0,unknown,date not found,https://www.biznesradar.pl/dywidenda/APR
+2022-03-28,19:14,after,APR,2021,0.15,0.10,unknown,RB 6/2022,https://www.parkiet.com/komunikaty-espi/art35959421-auto-partner-s-a-rekomendacja-zarzadu-w-sprawie-wyplaty-dywidendy
+2023-03-31,10:23,during,APR,2022,0.15,0.15,unknown,RB 5/2023 (inside information),https://www.parkiet.com/komunikaty-espi/art38248871-auto-partner-s-a-informacja-poufna-rekomendacja-zarzadu-w-sprawie-wyplaty-dywidendy
+unknown,unknown,unknown,APR,2023,0.15,0.15,unknown,"uncertain: RB 7/2024 (inside information) published March 2024, exact date not verified",https://ir.autopartner.com/wp-content/uploads/2024/03/Raport-biezacy-nr-7-informacja-poufna-rekomendacja-Zarzadu-w-sprawie-wyplaty-dywidendy.pdf
+unknown,unknown,unknown,APR,2024,0.15,0.15,unknown,"uncertain: RB 6/2025 (inside information) published March 2025, exact date not verified",https://autopartner.com/wp-content/uploads/2025/03/Raport-biezacy-nr-6-informacja-poufna-rekomendacja-Zarzadu-w-sprawie-wyplaty-dywidendy.pdf
+2026-03-17,13:43,during,APR,2025,0.15,0.15,unknown,RB 5/2026 (inside information),https://www.bankier.pl/wiadomosc/AUTO-PARTNER-S-A-Informacja-poufna-rekomendacja-Zarzadu-w-sprawie-wyplaty-dywidendy-9099587.html
+unknown,unknown,unknown,CAR,2013,0.71,0,no,date not found; Inter Cars publishes separate board proposal (usually April),https://www.biznesradar.pl/dywidenda/CAR
+unknown,unknown,unknown,CAR,2014,0.71,0.71,no,date not found; Inter Cars publishes separate board proposal (usually April),https://www.biznesradar.pl/dywidenda/CAR
+unknown,unknown,unknown,CAR,2015,0.71,0.71,no,date not found; Inter Cars publishes separate board proposal (usually April),https://www.biznesradar.pl/dywidenda/CAR
+unknown,unknown,unknown,CAR,2016,0.71,0.71,no,date not found; Inter Cars publishes separate board proposal (usually April),https://www.biznesradar.pl/dywidenda/CAR
+2018-04-18,18:10,after,CAR,2017,0.71,0.71,no,"uncertain: time is ISBnews article time, ESPI may be slightly earlier","https://www.biznesradar.pl/a/43335,inter-cars-rekomenduje-0-71-zl-dywidendy-na-akcje-z-zysku-za-2017-r"
+2019-04-23,17:02,during,CAR,2018,0.71,0.71,no,"uncertain: time is press article time (17:02), ESPI may be earlier; treat as near close","https://www.biznesradar.pl/a/79287,niewiele-ale-stabilnie-zarzad-inter-cars-rekomenduje-dywidende-za-2018-r"
+unknown,unknown,unknown,CAR,2019,0,0.71,unknown,uncertain: no dividend paid for 2019 (COVID); explicit board proposal not verified,https://www.biznesradar.pl/dywidenda/CAR
+unknown,unknown,unknown,CAR,2020,1.42,0,unknown,date not found,https://comparic.pl/inter-cars-rekomenduje-142-zl-dywidendy-na-akcje-za-2020-rok/
+unknown,unknown,unknown,CAR,2021,1.42,1.42,unknown,date not found,https://www.biznesradar.pl/dywidenda/CAR
+unknown,unknown,unknown,CAR,2022,0.71,1.42,unknown,date not found,https://www.biznesradar.pl/dywidenda/CAR
+unknown,unknown,unknown,CAR,2023,0.71,0.71,unknown,date not found,https://www.biznesradar.pl/dywidenda/CAR
+2025-05-05,12:57,during,CAR,2024,1.42,0.71,unknown,uncertain: earliest press seen (ppcg); ESPI may be earlier,https://ppcg.com.pl/inter-cars-rekomenduje-dywidende-142-zl-na-akcje-za-2024-rok/
+unknown,unknown,unknown,CAR,2025,1.42,1.42,unknown,date not found (before GM 2026-05-28),https://www.biznesradar.pl/dywidenda/CAR
+unknown,unknown,unknown,TXT,2013,0.37,,unknown,date not found; total incl. interims; FY label per biznesradar (Apr-Mar FY from 2017/18),https://www.biznesradar.pl/dywidenda/TXT
+unknown,unknown,unknown,TXT,2014,0.71,0.37,unknown,date not found; total incl. interims; FY label per biznesradar (Apr-Mar FY from 2017/18),https://www.biznesradar.pl/dywidenda/TXT
+unknown,unknown,unknown,TXT,2015,1.08,0.71,unknown,date not found; total incl. interims; FY label per biznesradar (Apr-Mar FY from 2017/18),https://www.biznesradar.pl/dywidenda/TXT
+unknown,unknown,unknown,TXT,2016,1.41,1.08,unknown,date not found; total incl. interims; FY label per biznesradar (Apr-Mar FY from 2017/18),https://www.biznesradar.pl/dywidenda/TXT
+unknown,unknown,unknown,TXT,2017,1.77,1.41,unknown,date not found; total incl. interims; FY label per biznesradar (Apr-Mar FY from 2017/18),https://www.biznesradar.pl/dywidenda/TXT
+unknown,unknown,unknown,TXT,2018,1.95,1.77,unknown,date not found; total incl. interims; FY label per biznesradar (Apr-Mar FY from 2017/18),https://www.biznesradar.pl/dywidenda/TXT
+unknown,unknown,unknown,TXT,2019,2.48,1.95,unknown,date not found; total incl. interims; FY label per biznesradar (Apr-Mar FY from 2017/18),https://www.biznesradar.pl/dywidenda/TXT
+unknown,unknown,unknown,TXT,2020,3.69,2.48,unknown,date not found; total incl. interims; FY label per biznesradar (Apr-Mar FY from 2017/18),https://www.biznesradar.pl/dywidenda/TXT
+unknown,unknown,unknown,TXT,2021,4.40,3.69,unknown,date not found; total incl. interims; FY label per biznesradar (Apr-Mar FY from 2017/18),https://www.biznesradar.pl/dywidenda/TXT
+unknown,unknown,unknown,TXT,2022,5.95,4.40,unknown,date not found; total incl. interims; FY label per biznesradar (Apr-Mar FY from 2017/18),https://www.biznesradar.pl/dywidenda/TXT
+unknown,unknown,unknown,TXT,2023,5.98,5.95,unknown,date not found; total incl. interims; FY label per biznesradar (Apr-Mar FY from 2017/18),https://www.biznesradar.pl/dywidenda/TXT
+2025-06-27,17:24,after,TXT,2024,6.06,5.98,unknown,FY 2024/25 (Apr-Mar); RB 5/2025; total 6.06 = final 2.89 + interims 1.66 (Nov 2024) + 1.51 (decided same day),https://www.bankier.pl/wiadomosc/Text-S-A-Rekomendacja-Zarzadu-w-sprawie-podzialu-zysku-za-2024-25-rok-finansowy-8968816.html
+2026-06-26,17:50,after,TXT,2025,4.26,6.06,unknown,FY 2025/26 (Apr-Mar); RB 5/2026; total 4.26 = final 2.13 + interims 1.15 (Dec 2025) + 0.98 (Jul 2026); cut vs prior year,https://www.bankier.pl/wiadomosc/Text-S-A-Rekomendacja-Zarzadu-w-sprawie-podzialu-zysku-za-2025-26-rok-finansowy-9158985.html
+unknown,unknown,unknown,CDR,2016,1.05,0,unknown,first dividend; date not found,https://www.biznesradar.pl/dywidenda/CDR
+unknown,unknown,unknown,CDR,2017,0,1.05,unknown,uncertain: no dividend for 2017; explicit board proposal not verified,https://www.biznesradar.pl/dywidenda/CDR
+unknown,unknown,unknown,CDR,2018,1.05,0,unknown,"uncertain: board proposal ESPI RB 4/2019 published April 2019, exact date not verified",https://www.cdprojekt.com/pl/wp-content/uploads-pl/2019/04/rb_4-2019.pdf
+unknown,unknown,unknown,CDR,2019,0,1.05,unknown,board recommended no dividend (per biznesradar linked article); date not found,https://www.biznesradar.pl/dywidenda/CDR
+unknown,unknown,unknown,CDR,2020,5.00,0,unknown,date not found,https://www.biznesradar.pl/dywidenda/CDR
+2022-05-25,18:44,after,CDR,2021,1.00,5.00,no,RB 17/2022,https://www.parkiet.com/komunikaty-espi/art36365991-cd-projekt-sa-rekomendacja-zarzadu-dotyczaca-podzialu-zysku-netto-osiagnietego-w-2021-r
+2023-05-08,20:20,after,CDR,2022,1.00,1.00,no,RB 16/2023,https://parkiet.com/komunikaty-espi/art38856591-cd-projekt-spolka-akcyjna-rekomendacja-zarzadu-w-sprawie-podzialu-zysku-netto-osiagnietego-w-2022-r
+unknown,unknown,unknown,CDR,2023,1.00,1.00,unknown,"uncertain: board proposal RB 7/2024 published April 2024, exact date not verified",https://www.cdprojekt.com/pl/wp-content/uploads-pl/2024/04/rb-07-2024-wydruk-espi.pdf
+2025-05-07,17:02,during,CDR,2024,1.00,1.00,no,RB 6/2025; 17:02 is at the close,https://www.bankier.pl/wiadomosc/CD-PROJEKT-SA-Rekomendacja-Zarzadu-w-sprawie-podzialu-zysku-netto-osiagnietego-w-2024-r-8937452.html
+2026-05-20,18:20,after,CDR,2025,0,1.00,no,board proposes whole 2025 profit to reserve capital (no dividend); time = strefainwestorow article time,https://strefainwestorow.pl/wiadomosci/20260520/cd-projekt-chce-przeznaczyc-caly-zysk-za-25-na-kapital-zapasowy
+unknown,unknown,unknown,WPL,2016,1.10,,unknown,date not found,https://www.biznesradar.pl/dywidenda/WPL
+unknown,unknown,unknown,WPL,2017,0.96,1.10,unknown,date not found,https://www.biznesradar.pl/dywidenda/WPL
+unknown,unknown,unknown,WPL,2018,1.00,0.96,unknown,date not found,https://www.biznesradar.pl/dywidenda/WPL
+2020-05-26,10:46,during,WPL,2019,0,1.00,unknown,"board proposed no dividend (COVID); uncertain: time is ISBnews article time, ESPI may be earlier","https://www.biznesradar.pl/a/90708,zarzad-wirtualna-polska-holding-rekomenduje-rezygnacje-z-dywidendy-za-2019-r"
+unknown,unknown,unknown,WPL,2020,1.55,0,unknown,date not found,https://www.biznesradar.pl/dywidenda/WPL
+unknown,unknown,unknown,WPL,2021,1.20,1.55,unknown,date not found,https://www.biznesradar.pl/dywidenda/WPL
+unknown,unknown,unknown,WPL,2022,2.50,1.20,unknown,date not found,https://www.biznesradar.pl/dywidenda/WPL
+unknown,unknown,unknown,WPL,2023,2.00,2.50,unknown,date not found,https://www.biznesradar.pl/dywidenda/WPL
+unknown,unknown,unknown,WPL,2024,2.20,2.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/WPL
+2026-05-04,09:46,unknown,WPL,2025,1.30,2.20,unknown,uncertain: earliest press seen (ppcg 09:46); ESPI may be earlier (e.g. prior evening); also PLN 330m buyback,https://ppcg.com.pl/wirtualna-polska-wpl-dywidenda-skup-akcji-2026/
+unknown,unknown,unknown,DVL,2015,0.18,,unknown,date not found (LC Corp until 2019),https://www.biznesradar.pl/dywidenda/DVL
+unknown,unknown,unknown,DVL,2016,0.07,0.18,unknown,date not found (LC Corp until 2019),https://www.biznesradar.pl/dywidenda/DVL
+unknown,unknown,unknown,DVL,2017,0.24,0.07,unknown,date not found (LC Corp until 2019),https://www.biznesradar.pl/dywidenda/DVL
+unknown,unknown,unknown,DVL,2018,0.27,0.24,unknown,date not found (LC Corp until 2019),https://www.biznesradar.pl/dywidenda/DVL
+unknown,unknown,unknown,DVL,2019,0,0.27,unknown,uncertain: board suspended dividend policy for 2019 (biznesradar.pl/a/92259); GM 2020-08-31 paid 0.10 after shareholder (OFE PZU) request,"https://www.biznesradar.pl/a/92259,develia-zawiesila-polityke-dywidendowa-w-odniesieniu-do-dywidendy-za-2019-r"
+unknown,unknown,unknown,DVL,2020,0.17,0.10,unknown,date not found,https://www.biznesradar.pl/dywidenda/DVL
+2022-04-19,18:24,after,DVL,2021,0.45,0.17,unknown,PLN 201.4m incl. reserve capital from 2019 profit; uncertain: time is ISBnews article time,"https://www.biznesradar.pl/a/109048,zarzad-develii-rekomenduje-dywidende-w-wysokosci-201-4-mln-zl"
+unknown,unknown,unknown,DVL,2022,0.40,0.45,unknown,date not found; paid in 2 tranches,https://www.biznesradar.pl/dywidenda/DVL
+unknown,unknown,unknown,DVL,2023,0.50,0.40,unknown,date not found; paid in 2 tranches,https://www.biznesradar.pl/dywidenda/DVL
+2025-05-13,unknown,unknown,DVL,2024,0.58,0.50,unknown,uncertain: date from RB 33/2025 attachment filename (Wniosek Zarzadu dotyczacy przeznaczenia zysku za 2024),https://biznes.pap.pl/download/attachment/51553822/DOC.20250513.51553822.zal06_33_RB_Z6_Wniosek_Zarzadu_dotyczacy_przeznaczenia_zysku_za_2024.pdf
+2026-05-08,unknown,unknown,DVL,2025,0.73,0.58,unknown,date from strefainwestorow article URL; time not seen,https://strefainwestorow.pl/wiadomosci/20260508/develia-chce-wyplacic-073-zl-dywidendy-na-akcje
+unknown,unknown,unknown,ECH,2015,5.27,,unknown,uncertain: total incl. interims 1.43; large payout after asset sale; date not found,https://www.biznesradar.pl/dywidenda/ECH
+unknown,unknown,unknown,ECH,2016,1.35,5.27,unknown,uncertain: interims 0.85 + final 0.50; policy: final = interim (biznesradar.pl/a/18794),https://www.biznesradar.pl/dywidenda/ECH
+unknown,unknown,unknown,ECH,2017,0.50,1.35,unknown,board to recommend 0.50 for 2017 (biznesradar.pl/a/40180); date not found,"https://www.biznesradar.pl/a/40180,zarzad-echo-investment-zarekomenduje-0-5-zl-dywidendy-na-akcje-za-2017-r"
+unknown,unknown,unknown,ECH,2018,0.50,0.50,unknown,"uncertain: interim 0.50 only, board signalled no final above interim (biznesradar.pl/a/80552)","https://www.biznesradar.pl/a/80552,echo-investment-raczej-bez-dywidendy-ponad-wyplacona-zaliczke"
+unknown,unknown,unknown,ECH,2019,0.50,0.50,unknown,uncertain: interim 0.50 (conditional) only,https://www.biznesradar.pl/dywidenda/ECH
+unknown,unknown,unknown,ECH,2020,0.25,0.50,unknown,uncertain: date not found,https://www.biznesradar.pl/dywidenda/ECH
+unknown,unknown,unknown,ECH,2021,0.44,0.25,unknown,uncertain: interim 0.22 + final 0.22,https://www.biznesradar.pl/dywidenda/ECH
+unknown,unknown,unknown,ECH,2022,0.22,0.44,unknown,uncertain: biznesradar shows only interim 0.22 for 2022,https://www.biznesradar.pl/dywidenda/ECH
+unknown,unknown,unknown,ECH,2023,0.22,0.22,unknown,uncertain: biznesradar shows only interim 0.22 for 2023,https://www.biznesradar.pl/dywidenda/ECH
+unknown,unknown,unknown,ECH,2024,0,0.22,unknown,uncertain: no dividend listed for 2024,https://www.biznesradar.pl/dywidenda/ECH
+unknown,unknown,unknown,ECH,2025,1.20,0,unknown,uncertain: interim 0.80 (Dec 2025) + final 0.40,https://www.biznesradar.pl/dywidenda/ECH
+unknown,unknown,unknown,STP,2013,0.60,1.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/STP
+unknown,unknown,unknown,STP,2014,2.00,0.60,unknown,date not found,https://www.biznesradar.pl/dywidenda/STP
+unknown,unknown,unknown,STP,2015,3.00,2.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/STP
+unknown,unknown,unknown,STP,2016,3.00,3.00,unknown,board recommended 3 zl (biznesradar.pl/a/18644); date not found,https://www.biznesradar.pl/dywidenda/STP
+unknown,unknown,unknown,STP,2017,3.00,3.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/STP
+unknown,unknown,unknown,STP,2018,5.00,3.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/STP
+unknown,unknown,unknown,STP,2019,0,5.00,unknown,board declaration on 2019 dividend (no dividend paid); date not found,https://www.parkiet.com/komunikaty-espi/art27120281-stalprodukt-deklaracja-zarzadu-dotyczaca-wyplaty-dywidendy-z-zysku-za-2019-rok
+unknown,unknown,unknown,STP,2020,6.00,0,unknown,board declaration (ESPI); date not found,https://www.parkiet.com/komunikaty-espi/art26495561-stalprodukt-deklaracja-zarzadu-dotyczaca-wyplaty-dywidendy-z-zysku-za-2020-rok
+unknown,unknown,unknown,STP,2021,12.00,6.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/STP
+unknown,unknown,unknown,STP,2022,15.00,12.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/STP
+unknown,unknown,unknown,STP,2023,0,15.00,unknown,uncertain: no dividend paid; explicit board proposal not verified,https://www.biznesradar.pl/dywidenda/STP
+unknown,unknown,unknown,STP,2024,6.00,0,unknown,date not found,https://www.biznesradar.pl/dywidenda/STP
+unknown,unknown,unknown,STP,2025,,6.00,unknown,uncertain: ESPI 'Deklaracja dotyczaca podzialu zysku oraz wyplaty dywidendy' exists (2026) but page not fetchable; amount/date unknown,https://www.bankier.pl/wiadomosc/STALPRODUKT-Deklaracja-dotyczaca-podzialu-zysku-oraz-wyplaty-dywidendy-9124787.html
+unknown,unknown,unknown,AMC,2013,3.50,4.58,unknown,date not found,https://www.biznesradar.pl/dywidenda/AMC
+unknown,unknown,unknown,AMC,2014,3.00,3.50,unknown,date not found,https://www.biznesradar.pl/dywidenda/AMC
+unknown,unknown,unknown,AMC,2015,4.00,3.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/AMC
+unknown,unknown,unknown,AMC,2016,5.50,4.00,unknown,board recommended 5.5 zl (biznesradar.pl/a/19005); date not found,https://www.biznesradar.pl/dywidenda/AMC
+unknown,unknown,unknown,AMC,2017,3.00,5.50,unknown,date not found,https://www.biznesradar.pl/dywidenda/AMC
+unknown,unknown,unknown,AMC,2018,4.00,3.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/AMC
+2020-07-23,unknown,unknown,AMC,2019,3.00,4.00,unknown,uncertain: date from strefainwestorow URL; delayed by COVID (GM 2020-08-27); earlier board stance not checked,https://strefainwestorow.pl/wiadomosci/20200723/amica-zamierza-wyplacic-3-zl-dywidendy-na-akcje
+2021-04-29,10:28,during,AMC,2020,6.00,3.00,unknown,uncertain: time is press article time,"https://www.biznesradar.pl/a/99568,amica-zamierza-wyplacic-6-zl-dywidendy-na-akcje"
+unknown,unknown,unknown,AMC,2021,3.50,6.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/AMC
+unknown,unknown,unknown,AMC,2022,0,3.50,unknown,uncertain: no dividend paid; explicit board proposal not verified,https://www.biznesradar.pl/dywidenda/AMC
+unknown,unknown,unknown,AMC,2023,2.50,0,unknown,date not found,https://www.biznesradar.pl/dywidenda/AMC
+2025-05-16,unknown,unknown,AMC,2024,2.00,2.50,unknown,date from strefainwestorow URL; time not seen,https://strefainwestorow.pl/wiadomosci/20250516/amica-chce-wyplacic-2-zl-dywidendy-na-akcje
+2026-05-20,unknown,unknown,AMC,2025,2.50,2.00,unknown,date from strefainwestorow URL; time not seen,https://strefainwestorow.pl/wiadomosci/20260520/amica-proponuje-250-zl-dywidendy
+unknown,unknown,unknown,RBW,2013,0.35,0.04,unknown,date not found,https://www.biznesradar.pl/dywidenda/RBW
+unknown,unknown,unknown,RBW,2014,0.80,0.35,unknown,date not found,https://www.biznesradar.pl/dywidenda/RBW
+unknown,unknown,unknown,RBW,2015,1.00,0.80,unknown,date not found,https://www.biznesradar.pl/dywidenda/RBW
+unknown,unknown,unknown,RBW,2016,1.00,1.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/RBW
+unknown,unknown,unknown,RBW,2017,1.20,1.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/RBW
+unknown,unknown,unknown,RBW,2018,0,1.20,unknown,uncertain: no dividend paid; explicit board proposal not verified,https://www.biznesradar.pl/dywidenda/RBW
+unknown,unknown,unknown,RBW,2019,0,0,unknown,uncertain: no dividend paid; explicit board proposal not verified,https://www.biznesradar.pl/dywidenda/RBW
+unknown,unknown,unknown,RBW,2020,0,0,unknown,uncertain: no dividend paid; explicit board proposal not verified,https://www.biznesradar.pl/dywidenda/RBW
+unknown,unknown,unknown,RBW,2021,1.50,0,unknown,"paid from retained earnings, GM 2022-10-12 (forsal/biznesradar.pl/a/112390); date not found","https://www.biznesradar.pl/a/112390,rainbow-tours-planuje-wyplate-dywidendy-z-zyskow-zatrzymanych"
+unknown,unknown,unknown,RBW,2022,0.50,1.50,unknown,date not found,https://www.biznesradar.pl/dywidenda/RBW
+unknown,unknown,unknown,RBW,2023,6.29,0.50,unknown,total incl. interims 0.79 + 2.00; final 3.50; date not found,https://www.biznesradar.pl/dywidenda/RBW
+unknown,unknown,unknown,RBW,2024,11.00,6.29,unknown,total incl. interim 3.33 (Oct 2024); final 7.67; date not found,https://www.biznesradar.pl/dywidenda/RBW
+2026-04-23,15:02,during,RBW,2025,8.60,11.00,unknown,uncertain: time is strefainwestorow article time; ESPI may be earlier,https://strefainwestorow.pl/wiadomosci/20260423/rainbow-tours-chce-wyplacic-za-2025-rok-860-zl-dywidendy-na-akcje
+unknown,unknown,unknown,MRB,2019,0.02,0,unknown,first dividend after 7-year break; date not found,https://www.biznesradar.pl/dywidenda/MRB
+unknown,unknown,unknown,MRB,2020,0.08,0.02,unknown,date not found,https://www.biznesradar.pl/dywidenda/MRB
+unknown,unknown,unknown,MRB,2021,0.20,0.08,unknown,date not found,https://www.biznesradar.pl/dywidenda/MRB
+unknown,unknown,unknown,MRB,2022,0.26,0.20,unknown,date not found,https://www.biznesradar.pl/dywidenda/MRB
+unknown,unknown,unknown,MRB,2023,0.21,0.26,unknown,date not found,https://www.biznesradar.pl/dywidenda/MRB
+unknown,unknown,unknown,MRB,2024,0.10,0.21,unknown,date not found,https://www.biznesradar.pl/dywidenda/MRB
+unknown,unknown,unknown,MRB,2025,0.20,0.10,unknown,date not found,https://www.biznesradar.pl/dywidenda/MRB
+unknown,unknown,unknown,SNT,2019,0.36,0,unknown,"uncertain: FY labelling conflicts with press (0.45 'za r.obr. 2019'); FY Oct-Sep, label=FY end year per biznesradar; date not found",https://www.biznesradar.pl/dywidenda/SNT
+unknown,unknown,unknown,SNT,2020,0.45,0.36,unknown,"uncertain: FY labelling conflicts with press (0.45 'za r.obr. 2019'); FY Oct-Sep, label=FY end year per biznesradar; date not found",https://www.biznesradar.pl/dywidenda/SNT
+unknown,unknown,unknown,SNT,2021,0.45,0.45,unknown,"FY Oct-Sep, label=FY end year per biznesradar; date not found",https://www.biznesradar.pl/dywidenda/SNT
+unknown,unknown,unknown,SNT,2022,0.60,0.45,unknown,"FY Oct-Sep, label=FY end year per biznesradar; date not found",https://www.biznesradar.pl/dywidenda/SNT
+unknown,unknown,unknown,SNT,2023,3.03,0.60,unknown,"FY Oct-Sep, label=FY end year per biznesradar; date not found",https://www.biznesradar.pl/dywidenda/SNT
+unknown,unknown,unknown,SNT,2024,8.25,3.03,unknown,"FY Oct-Sep, label=FY end year per biznesradar; date not found",https://www.biznesradar.pl/dywidenda/SNT
+2025-12-22,12:07,during,SNT,2025,10.75,8.25,unknown,FY 2024/25 (Oct-Sep); 99.7% of standalone profit; uncertain: time is press article time,"https://www.biznesradar.pl/a/142395,synektik-chce-wyplacic-akcjonariuszom-niemal-caly-zysk-netto-za-2024-2025"
+2024-12-10,07:14,before,PCO,2024,0.25,0,yes,first dividend; EUR 0.062/share; PLN per biznesradar (paid Apr 2025); FY ended 2024-09-30,https://www.bankier.pl/wiadomosc/Pepco-Group-rekomeduje-6-2-eurocenta-dywidendy-na-akcje-8858902.html
+2025-12-17,07:06,before,PCO,2025,0.40,0.25,yes,"EUR 0.096/share announced with FY25 preliminary results, conditional on audited data; PLN per biznesradar",https://strefainwestorow.pl/wiadomosci/20251217/pepco-group-zarekomeduje-96-eurocenta-dywidendy-na-akcje
+2019-04-18,09:14,during,TEN,2018,3.78,0,unknown,"first dividend; uncertain: time is press article time, ESPI may be pre-open","https://www.biznesradar.pl/a/79140,zarzad-ten-square-games-rekomenduje-wyplate-pierwszej-dywidendy"
+unknown,unknown,unknown,TEN,2019,3.78,3.78,unknown,date not found,"https://www.biznesradar.pl/a/89443,3-78-zl-na-akcje-po-raz-drugi-zarzad-ten-square-games-rekomenduje-dywidende"
+2021-05-19,22:50,after,TEN,2020,10.00,3.78,unknown,uncertain: time is press article time,"https://www.biznesradar.pl/a/100231,zarzad-ten-square-games-rekomenduje-10-zl-dywidendy-na-akcje"
+unknown,unknown,unknown,TEN,2021,10.00,10.00,unknown,date not found,https://comparic.pl/ten-square-games-rekomenduje-wyplate-10-zl-dywidendy-na-akcje-za-2021-r/
+unknown,unknown,unknown,TEN,2022,7.20,10.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/TEN
+unknown,unknown,unknown,TEN,2023,0,7.20,unknown,uncertain: no dividend paid; explicit board proposal not verified,https://www.biznesradar.pl/dywidenda/TEN
+unknown,unknown,unknown,TEN,2024,15.73,0,unknown,date not found,https://www.biznesradar.pl/dywidenda/TEN
+unknown,unknown,unknown,TEN,2025,10.00,15.73,unknown,date not found (GM 2026-04-21),https://www.biznesradar.pl/dywidenda/TEN
+unknown,unknown,unknown,1AT,2015,0.61,,unknown,date not found,https://www.biznesradar.pl/dywidenda/1AT
+unknown,unknown,unknown,1AT,2016,1.68,0.61,unknown,first under new dividend policy (biznesradar.pl/a/17186); date not found,"https://www.biznesradar.pl/a/17186,atal-rekomenduje-1-68-zl-dywidendy-na-akcje-zgodnie-z-nowa-polityka-dywidendowa"
+2018-03-20,08:56,before,1AT,2017,3.54,1.68,no,based on already-published annual report; uncertain: time is ISBnews article time,"https://www.biznesradar.pl/a/39262,atal-rekomenduje-wyplate-3-54-zl-dywidendy-na-akcje-za-2017-r"
+unknown,unknown,unknown,1AT,2018,4.70,3.54,unknown,date not found; paid in 2 instalments,"https://forsal.pl/artykuly/1403898,atal-rekomenduje-47-zl-dywidendy-na-akcje-z-zysku-za-2018-r.html"
+unknown,unknown,unknown,1AT,2019,0,4.70,unknown,board one-off waived 2019 dividend (biznesradar.pl/a/88270); date not found,"https://www.biznesradar.pl/a/88270,atal-jednorazowo-rezygnuje-z-wyplaty-dywidendy"
+2021-03-18,20:56,after,1AT,2020,3.03,0,unknown,RB 5/2021,https://www.parkiet.com/komunikaty-espi/art26723191-atal-s-a-rekomendacja-zarzadu-dotyczaca-poziomu-wyplaty-dywidendy-za-2020-rok
+unknown,unknown,unknown,1AT,2021,6.00,3.03,unknown,date not found,https://www.biznesradar.pl/dywidenda/1AT
+unknown,unknown,unknown,1AT,2022,5.00,6.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/1AT
+unknown,unknown,unknown,1AT,2023,6.00,5.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/1AT
+unknown,unknown,unknown,1AT,2024,5.50,6.00,unknown,date not found,https://www.biznesradar.pl/dywidenda/1AT
+unknown,unknown,unknown,1AT,2025,4.50,5.50,unknown,date not found,https://www.biznesradar.pl/dywidenda/1AT
+unknown,unknown,unknown,ATC,2017,0.20,0,unknown,date not found,"https://www.biznesradar.pl/a/41881,arctic-paper-rekomenduje-0-2-zl-dywidendy-na-akcje-za-2017-r"
+unknown,unknown,unknown,ATC,2018,0,0.20,unknown,board recommended no dividend (biznesradar.pl/a/78049); date not found,"https://www.biznesradar.pl/a/78049,zarzad-arctic-paper-rekomenduje-niewyplacenie-dywidendy-z-zysku-za-2018-rok"
+unknown,unknown,unknown,ATC,2019,0,0,unknown,uncertain: no dividend for 2019 ('jednak nie wyplaci' - board reversed an earlier plan); date/amount of earlier plan not verified,https://comparic.pl/arctic-paper-spolka-jednak-nie-wyplaci-dywidendy-za-2019-rok/
+unknown,unknown,unknown,ATC,2020,0.30,0,unknown,date not found,https://www.biznesradar.pl/dywidenda/ATC
+unknown,unknown,unknown,ATC,2021,0.40,0.30,unknown,date not found,https://www.biznesradar.pl/dywidenda/ATC
+unknown,unknown,unknown,ATC,2022,2.70,0.40,unknown,date not found,https://www.biznesradar.pl/dywidenda/ATC
+unknown,unknown,unknown,ATC,2023,1.00,2.70,unknown,date not found,https://www.biznesradar.pl/dywidenda/ATC
+unknown,unknown,unknown,ATC,2024,0.70,1.00,unknown,board first proposed 0.70 in Feb 2025 (exact date not found); board withdrew it 2025-05-15 19:41 and recommended 0 (no dividend paid),https://strefainwestorow.pl/wiadomosci/20250515/zarzad-arctic-paper-rekomenduje-niewyplacanie-dywidendy-za-24-wczesniej-chcial
