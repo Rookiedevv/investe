@@ -1,4 +1,4 @@
-fetched 2026-11-05 20:31 UTC
+fetched 2026-11-05 22:09 UTC
 PKO (PKO.WA): 2539 days, 2016-11-07 .. 2026-11-05, last close 116.6
 PEO (PEO.WA): 2539 days, 2016-11-07 .. 2026-11-05, last close 264.9
 EBP (EBP.WA): 2539 days, 2016-11-07 .. 2026-11-05, last close 786.4
@@ -19,11 +19,11 @@ WIG20 (WIG20.WA): 1 days, 2026-11-05 .. 2026-11-05, last close 4209.1499
 FW20: NO DATA (tried [])
 ETFW20L: NO DATA (tried ['ETFW20L.WA'])
 ETFBW20TR (ETFBW20TR.WA): 1960 days, 2019-01-07 .. 2026-11-05, last close 86.91
-SPX (^GSPC): 14334 days, 1970-01-02 .. 2026-11-05, last close 7362.8999
-NDQ (^IXIC): 14056 days, 1971-02-05 .. 2026-11-05, last close 24354.1738
+SPX (^GSPC): 14334 days, 1970-01-02 .. 2026-11-05, last close 7353.73
+NDQ (^IXIC): 14056 days, 1971-02-05 .. 2026-11-05, last close 24314.998
 DAX (^GDAXI): 9826 days, 1987-12-30 .. 2026-11-05, last close 26325.0098
-VIX (^VIX): 9282 days, 1990-01-02 .. 2026-11-05, last close 26.04
-BRENT (BZ=F): 4797 days, 2007-07-29 .. 2026-11-05, last close 98.44
-HO (HO=F): 6573 days, 2000-08-31 .. 2026-11-05, last close 4.353
-EURPLN (EURPLN=X): 6360 days, 2002-03-31 .. 2026-11-05, last close 4.4006
-USDPLN (USDPLN=X): 5949 days, 2003-12-01 .. 2026-11-05, last close 3.9203
+VIX (^VIX): 9282 days, 1990-01-02 .. 2026-11-05, last close 28.18
+BRENT (BZ=F): 4797 days, 2007-07-29 .. 2026-11-05, last close 99.25
+HO (HO=F): 6573 days, 2000-08-31 .. 2026-11-05, last close 4.3668
+EURPLN (EURPLN=X): 6360 days, 2002-03-31 .. 2026-11-05, last close 4.3933
+USDPLN (USDPLN=X): 5949 days, 2003-12-01 .. 2026-11-05, last close 3.9165
