@@ -1,0 +1,56 @@
+== base
+G+M base                   m=190 n~ 29 | top-univ +1.48 t  3.8 (+1.2/+1.8) bot-univ -1.54 | top-WIG +1.25 t 2.7 win 56% | top5-WIG +1.31 win 56% (+0.9/+1.7) top5-univ +1.54 t 3.4 | IC +0.076 t 4.0
+       m  top  univ  wig  top_wig   win  top5_wig  win5  bot_univ
+y                                                                
+2011  12 -1.8  -1.0 -1.5     -0.3  41.7      -0.1  41.7      -1.6
+2012  12 -0.3  -0.8  0.1     -0.4  50.0      -0.2  50.0      -1.8
+2013  12  1.4  -0.7 -0.7      2.0  83.3       1.9  75.0      -2.5
+2014  12 -1.5  -1.0 -0.4     -1.1  33.3      -1.0  41.7      -1.3
+2015  12 -0.1  -2.9 -2.8      2.7  75.0       2.7  75.0      -1.7
+2016  12  6.4   1.3  0.9      5.5  83.3       5.5  83.3      -0.7
+2017  12  0.8   0.3  1.2     -0.5  41.7      -0.7  41.7      -1.7
+2018  12 -2.7  -2.0 -1.4     -1.3  41.7      -1.2  41.7       0.6
+2019  12 -0.7  -2.3 -1.2      0.6  58.3       0.5  58.3      -2.8
+2020  12  8.5   2.3 -0.3      8.8  66.7      10.2  75.0      -2.7
+2021  12  0.8   0.0  0.8     -0.0  41.7       0.5  58.3      -1.4
+2022  12 -0.0  -1.0 -1.3      1.2  58.3       0.1  50.0      -2.3
+2023  12  1.6   0.1  1.4      0.2  41.7       0.3  41.7      -1.6
+2024  12  2.8   0.0  0.3      2.5  83.3       2.3  75.0      -2.0
+2025  12  1.7   1.7  2.2     -0.5  41.7      -1.2  25.0      -0.7
+2026  10  1.7   0.8  1.5      0.2  50.0       1.4  70.0      -0.4
+abs monthly net: top quintile 1.15%, top5 1.22%, universe -0.33%, WIG(net ETF cost) -0.10% ; months top5 > 0.45% (deposit): 51% ; top5 beats both WIG and deposit: 39%
+worst months top5-WIG: [[Timestamp('2020-10-30 00:00:00'), -16.1], [Timestamp('2022-08-31 00:00:00'), -12.8], [Timestamp('2024-12-30 00:00:00'), -10.8], [Timestamp('2021-03-31 00:00:00'), -10.0], [Timestamp('2026-02-27 00:00:00'), -7.3]]  best: [[Timestamp('2020-06-30 00:00:00'), 71.7], [Timestamp('2020-02-28 00:00:00'), 21.6], [Timestamp('2016-06-30 00:00:00'), 19.8], [Timestamp('2016-07-29 00:00:00'), 16.7], [Timestamp('2022-03-31 00:00:00'), 14.4]]
+median top5-WIG 0.63, median top-WIG 0.51 ; share of individual top5 stock-months beating WIG 51%
+thirds top5-WIG: [np.float64(0.56), np.float64(2.71), np.float64(0.68)] top-univ: [np.float64(0.72), np.float64(2.44), np.float64(1.28)]
+avg new names per month in top5: 1.5 of 5
+== entry one session later
+lag 1 session              m=190 n~ 29 | top-univ +1.46 t  3.8 (+1.2/+1.7) bot-univ -1.47 | top-WIG +1.17 t 2.6 win 55% | top5-WIG +1.24 win 55% (+0.9/+1.5) top5-univ +1.53 t 3.4 | IC +0.077 t 4.1
+== hold 2 / 3 months (overlapping)
+hold 2m                    m=189 n~ 29 | top-univ +2.63 t  4.4 (+2.4/+2.8) bot-univ -2.51 | top-WIG +2.59 t 3.9 win 57% | top5-WIG +2.28 win 54% (+1.9/+2.6) top5-univ +2.32 t 3.6 | IC +0.091 t 4.6
+hold 3m                    m=188 n~ 28 | top-univ +3.50 t  4.4 (+3.5/+3.5) bot-univ -3.36 | top-WIG +3.63 t 4.0 win 59% | top5-WIG +3.32 win 55% (+3.1/+3.5) top5-univ +3.20 t 3.6 | IC +0.096 t 4.7
+== cohorts
+LARGE >=30m                m= 70 n~ 10 | top-univ -0.36 t -0.6 (-1.1/+0.4) bot-univ +0.08 | top-WIG -0.77 t-1.3 win 46% | top5-WIG -0.56 win 49% (-1.7/+0.5) top5-univ -0.16 t-0.3 | IC -0.013 t-0.3
+MID 10-30m                 m= 91 n~ 10 | top-univ +1.21 t  2.1 (+0.5/+1.9) bot-univ -1.22 | top-WIG +1.28 t 1.8 win 57% | top5-WIG +1.27 win 53% (+0.2/+2.3) top5-univ +1.21 t 2.0 | IC +0.086 t 1.9
+SMALL-LIQ 2-10m            m=190 n~ 14 | top-univ +1.81 t  3.5 (+1.4/+2.2) bot-univ -1.61 | top-WIG +1.43 t 2.0 win 52% | top5-WIG +1.36 win 53% (+0.5/+2.2) top5-univ +1.73 t 2.7 | IC +0.126 t 5.5
+>=10m                      m=185 n~ 15 | top-univ +0.21 t  0.7 (-0.4/+0.8) bot-univ -0.04 | top-WIG +0.18 t 0.6 win 51% | top5-WIG +0.47 win 55% (+0.2/+0.7) top5-univ +0.50 t 1.4 | IC +0.035 t 1.5
+>=5m                       m=190 n~ 21 | top-univ +1.06 t  2.5 (+0.8/+1.3) bot-univ -0.97 | top-WIG +1.04 t 2.1 win 53% | top5-WIG +0.93 win 54% (+0.5/+1.4) top5-univ +0.96 t 2.3 | IC +0.060 t 3.0
+>=1m                       m=190 n~ 35 | top-univ +1.51 t  4.3 (+0.9/+2.1) bot-univ -1.21 | top-WIG +1.17 t 2.8 win 54% | top5-WIG +1.39 win 52% (+0.7/+2.1) top5-univ +1.73 t 3.8 | IC +0.081 t 4.6
+ex banks/finance           m=157 n~ 21 | top-univ +1.78 t  3.3 (+1.9/+1.6) bot-univ -1.59 | top-WIG +1.32 t 1.9 win 54% | top5-WIG +1.05 win 50% (+1.0/+1.1) top5-univ +1.51 t 3.1 | IC +0.097 t 4.3
+top 3                      m=190 n~ 29 | top-univ +1.48 t  3.8 (+1.2/+1.8) bot-univ -1.54 | top-WIG +1.25 t 2.7 win 56% | top5-WIG +1.76 win 55% (+0.8/+2.7) top5-univ +1.99 t 2.9 | IC +0.076 t 4.0
+top 8                      m=190 n~ 29 | top-univ +1.48 t  3.8 (+1.2/+1.8) bot-univ -1.54 | top-WIG +1.25 t 2.7 win 56% | top5-WIG +0.96 win 53% (+0.3/+1.7) top5-univ +1.19 t 2.7 | IC +0.076 t 4.0
+top 10                     m=190 n~ 29 | top-univ +1.48 t  3.8 (+1.2/+1.8) bot-univ -1.54 | top-WIG +1.25 t 2.7 win 56% | top5-WIG +0.72 win 50% (+0.1/+1.3) top5-univ +0.95 t 2.6 | IC +0.076 t 4.0
+== leave one component out / pairs
+without d_ni               m=190 n~ 29 | top-univ +1.21 t  3.1 (+0.8/+1.6) bot-univ -1.16 | top-WIG +0.93 t 2.0 win 52% | top5-WIG +1.14 win 52% (+0.6/+1.6) top5-univ +1.42 t 3.1 | IC +0.080 t 4.1
+without sue                m=190 n~ 30 | top-univ +1.30 t  3.2 (+1.0/+1.6) bot-univ -1.01 | top-WIG +1.02 t 2.2 win 54% | top5-WIG +0.98 win 53% (+0.5/+1.4) top5-univ +1.26 t 2.7 | IC +0.075 t 4.0
+without mom12_1/vol        m=190 n~ 29 | top-univ +1.19 t  3.2 (+1.0/+1.4) bot-univ -1.51 | top-WIG +0.96 t 2.2 win 56% | top5-WIG +1.08 win 56% (+0.7/+1.5) top5-univ +1.31 t 3.0 | IC +0.077 t 4.2
+without near 52w high      m=190 n~ 29 | top-univ +1.40 t  3.6 (+1.1/+1.7) bot-univ -1.51 | top-WIG +1.17 t 2.4 win 56% | top5-WIG +1.14 win 52% (+0.8/+1.5) top5-univ +1.37 t 2.8 | IC +0.069 t 3.8
+d_ni+sue                   m=190 n~ 28 | top-univ +1.18 t  3.1 (+0.9/+1.4) bot-univ -1.24 | top-WIG +0.98 t 2.1 win 53% | top5-WIG +1.06 win 49% (+0.6/+1.5) top5-univ +1.26 t 2.7 | IC +0.062 t 3.4
+mom12_1/vol+near 52w high  m=190 n~ 29 | top-univ +0.96 t  2.3 (+0.7/+1.2) bot-univ -1.05 | top-WIG +0.68 t 1.4 win 47% | top5-WIG +0.60 win 46% (+0.3/+0.9) top5-univ +0.89 t 2.0 | IC +0.074 t 3.8
+d_ni+mom12_1               m=190 n~ 29 | top-univ +1.46 t  2.7 (+0.8/+2.1) bot-univ -1.39 | top-WIG +1.23 t 1.9 win 52% | top5-WIG +0.97 win 52% (+0.5/+1.4) top5-univ +1.19 t 2.4 | IC +0.067 t 3.7
+growth_combo+trend (mom12/ m=190 n~ 29 | top-univ +1.43 t  3.5 (+0.9/+2.0) bot-univ -1.25 | top-WIG +1.21 t 2.5 win 53% | top5-WIG +1.51 win 57% (+0.6/+2.4) top5-univ +1.74 t 3.7 | IC +0.069 t 3.7
+d_ebit+mom6                m=190 n~ 29 | top-univ +1.44 t  2.6 (+0.7/+2.1) bot-univ -0.99 | top-WIG +1.20 t 1.8 win 54% | top5-WIG +1.60 win 52% (+0.4/+2.8) top5-univ +1.84 t 2.6 | IC +0.056 t 3.1
+d_ni+sue+d_rev+mom12_1/vol m=190 n~ 29 | top-univ +1.38 t  3.4 (+0.8/+2.0) bot-univ -1.33 | top-WIG +1.16 t 2.4 win 53% | top5-WIG +1.15 win 53% (+0.5/+1.8) top5-univ +1.37 t 2.8 | IC +0.072 t 3.8
+== quintile ladder (net - universe, pp/month)
+Q1(worst)..Q5(best): [-1.44  0.07 -0.23  0.05  1.55]  t: [np.float64(-4.0), np.float64(0.2), np.float64(-0.8), np.float64(0.2), np.float64(4.0)]
+== placebo: shuffle the composite across stocks within each month (200 draws) -> distribution of top-univ t and top5-WIG mean
+placebo top-univ t: mean -0.12 sd 0.97 max 1.98 ; placebo top5-WIG mean -0.25 sd 0.33 max 0.73 ; real: t 3.8, top5-WIG 1.31

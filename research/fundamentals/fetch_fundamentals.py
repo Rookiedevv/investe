@@ -7,7 +7,10 @@ biznesradar redirects /<page>/<TICKER>,Q to /<page>/<NAME> and drops the ",Q" (a
 page name is resolved first from the redirect and the quarterly page is requested as <NAME>,Q.
 The report table of each page is stored, with the r/r, k/k and sector-comparison blocks removed, gzipped in
 research/fundamentals/raw/<TICKER>_<page>.html.gz. parse_fundamentals.py turns them into tidy CSVs.
-Usage: fetch_fundamentals.py [--part K/N] [--force] [TICKER ...]   (existing files are skipped unless --force)
+Usage: fetch_fundamentals.py [--top N] [--pages rzis,bilans] [--force] [TICKER ...]
+  existing files are skipped unless --force; --top N = only the first N tickers of universe_order.txt (most liquid first).
+The site stops answering after a few hundred pages in a short time, so requests go one at a time with a pause,
+and the script stops as soon as two tickers in a row fail.
 """
 import datetime as dt
 import gzip
@@ -29,7 +32,7 @@ PAGES = {
     "wr": "wskazniki-wartosci-rynkowej/{n}",
 }
 NON_STOCK = {"WIG", "WIG20", "FW20"}
-DELAY = 2.5      # seconds between pages
+DELAY = float(os.environ.get("FETCH_DELAY", 2.5))  # seconds between pages
 BUDGET = int(os.environ.get("FETCH_BUDGET", 40 * 60))  # stop after this many seconds; the next pass continues with the missing files
 HDR = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36",
        "Accept-Language": "pl-PL,pl;q=0.9,en;q=0.5", "Accept": "text/html,application/xhtml+xml"}
@@ -109,19 +112,21 @@ def main() -> None:
     RAW.mkdir(parents=True, exist_ok=True)
     args = sys.argv[1:]
     force = "--force" in args
-    part = None
-    if "--part" in args:
-        part = args[args.index("--part") + 1]
-        args.remove("--part"); args.remove(part)
-    tickers = [a.upper() for a in args if not a.startswith("--")] or universe()
-    if part:
-        k, n = (int(x) for x in part.split("/"))
-        tickers = tickers[k::n]
-    log = [f"fetched {dt.datetime.now(dt.timezone.utc):%Y-%m-%d %H:%M} UTC, {len(tickers)} tickers, part {part}"]
+    top, pages = None, list(PAGES)
+    for opt in ("--top", "--pages"):
+        if opt in args:
+            val = args[args.index(opt) + 1]
+            args.remove(opt); args.remove(val)
+            if opt == "--top":
+                top = int(val)
+            else:
+                pages = [p for p in val.split(",") if p in PAGES]
+    tickers = [a.upper() for a in args if not a.startswith("--")] or universe()[:top]
+    log = [f"fetched {dt.datetime.now(dt.timezone.utc):%Y-%m-%d %H:%M} UTC, {len(tickers)} tickers, pages {','.join(pages)}, force {force}"]
     t0 = time.time()
     fails = 0
     for t in tickers:
-        todo = [k for k in PAGES if force or not (RAW / f"{t}_{k}.html.gz").exists()]
+        todo = [k for k in pages if force or not (RAW / f"{t}_{k}.html.gz").exists()]
         if not todo:
             continue
         try:

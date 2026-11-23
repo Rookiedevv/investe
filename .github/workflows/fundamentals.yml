@@ -1,35 +1,39 @@
 name: fundamentals
+# Quarterly statements from biznesradar for the factor ranking (research round 36).
+# Twice a month: income statement + balance sheet of the 70 most liquid stocks, one page every 4 seconds
+# (the site stops answering after a few hundred quick requests). Parsed CSVs are committed back.
 on:
   workflow_dispatch:
-  push:
-    branches: [round36-factors]
-    paths: ["research/fundamentals/fetch_fundamentals.py", ".github/workflows/fundamentals.yml"]
+  schedule:
+    - cron: "10 3 12,26 * *"
 concurrency:
   group: fundamentals
-  cancel-in-progress: true
+  cancel-in-progress: false
 permissions:
   contents: write
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Fetch quarterly statements (missing files only, most liquid first, one page every 2.5 s), saving every 10 minutes
+      - name: Fetch income statement and balance sheet (70 most liquid, forced refresh)
         env:
-          FETCH_BUDGET: "600"
+          FETCH_DELAY: "4"
+          FETCH_BUDGET: "1800"
+        run: python research/fundamentals/fetch_fundamentals.py --top 70 --pages rzis,bilans --force | tail -5 || true
+      - name: Parse to CSV
+        run: python research/fundamentals/parse_fundamentals.py
+      - name: Commit
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for pass in 1 2 3 4 5; do
-            python research/fundamentals/fetch_fundamentals.py | tail -3 || true
-            git add research/fundamentals
-            if git diff --cached --quiet; then echo "nothing new"; break; fi
-            git commit -q -m "Round 36 data: quarterly statements, pass $pass [skip ci]"
-            git pull -q --rebase origin ${{ github.ref_name }}
-            git push -q
-            if tail -3 research/fundamentals/raw/_fetch_log.txt | grep -q "not answering"; then break; fi
-          done
+          git add research/fundamentals
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -q -m "Update quarterly statements [skip ci]"
+          git pull -q --rebase origin ${{ github.ref_name }}
+          git push -q

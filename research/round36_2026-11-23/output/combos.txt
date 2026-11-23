@@ -1,0 +1,14 @@
+d_ni                       m=190 n~ 29 | top-univ +1.30 t  3.0 (+1.1/+1.5) bot-univ -1.29 | top-WIG +1.08 t 2.0 win 50% | top5-WIG +1.12 win 50% (+0.7/+1.6) top5-univ +1.34 t 2.6 | IC +0.059 t 3.3
+sue                        m=190 n~ 28 | top-univ +1.09 t  2.8 (+0.6/+1.6) bot-univ -1.36 | top-WIG +0.88 t 1.9 win 49% | top5-WIG +0.95 win 45% (+0.1/+1.8) top5-univ +1.16 t 2.6 | IC +0.064 t 3.5
+growth_combo               m=190 n~ 29 | top-univ +1.31 t  3.3 (+1.2/+1.4) bot-univ -1.25 | top-WIG +1.08 t 2.2 win 49% | top5-WIG +0.89 win 49% (+0.8/+1.0) top5-univ +1.12 t 2.3 | IC +0.058 t 3.4
+mom12_1/vol                m=190 n~ 29 | top-univ +1.28 t  3.0 (+1.1/+1.5) bot-univ -1.09 | top-WIG +1.00 t 2.0 win 50% | top5-WIG +0.97 win 50% (+0.7/+1.3) top5-univ +1.26 t 2.4 | IC +0.062 t 3.3
+near 52w high              m=190 n~ 30 | top-univ +0.95 t  2.5 (+0.5/+1.4) bot-univ -1.29 | top-WIG +0.66 t 1.5 win 53% | top5-WIG +0.75 win 52% (+0.2/+1.3) top5-univ +1.03 t 2.3 | IC +0.078 t 4.0
+win1m                      m=190 n~ 30 | top-univ +0.88 t  1.6 (+0.6/+1.1) bot-univ -0.49 | top-WIG +0.60 t 0.9 win 47% | top5-WIG +0.73 win 44% (+0.3/+1.2) top5-univ +1.02 t 1.5 | IC +0.025 t 1.4
+trend (mom12/vol, 52wh, ma m=190 n~ 29 | top-univ +0.95 t  2.1 (+0.4/+1.5) bot-univ -0.91 | top-WIG +0.66 t 1.3 win 50% | top5-WIG +0.73 win 47% (+0.3/+1.2) top5-univ +1.02 t 2.0 | IC +0.065 t 3.2
+G+M (d_ni, sue, mom12/vol, m=190 n~ 29 | top-univ +1.48 t  3.8 (+1.2/+1.8) bot-univ -1.54 | top-WIG +1.25 t 2.7 win 56% | top5-WIG +1.31 win 56% (+0.9/+1.7) top5-univ +1.54 t 3.4 | IC +0.076 t 4.0
+G+M2 (growth_combo, mom6)  m=190 n~ 29 | top-univ +1.56 t  2.9 (+0.8/+2.4) bot-univ -1.04 | top-WIG +1.33 t 2.1 win 51% | top5-WIG +1.26 win 51% (+0.5/+2.0) top5-univ +1.49 t 3.1 | IC +0.058 t 3.1
+G+M3 (d_ni, mom12_1/vol)   m=190 n~ 29 | top-univ +1.41 t  2.7 (+0.8/+2.0) bot-univ -1.31 | top-WIG +1.18 t 1.9 win 53% | top5-WIG +0.94 win 52% (+0.5/+1.4) top5-univ +1.16 t 2.4 | IC +0.067 t 3.6
+G+M4 (sue, near 52w high)  m=190 n~ 28 | top-univ +0.96 t  2.4 (+0.6/+1.3) bot-univ -1.75 | top-WIG +0.75 t 1.7 win 52% | top5-WIG +0.98 win 54% (+0.4/+1.6) top5-univ +1.19 t 2.7 | IC +0.082 t 4.3
+G+M+1m (d_ni, mom12/vol, w m=190 n~ 29 | top-univ +1.16 t  2.2 (+0.4/+1.9) bot-univ -1.48 | top-WIG +0.94 t 1.5 win 52% | top5-WIG +1.20 win 53% (+0.1/+2.3) top5-univ +1.42 t 2.1 | IC +0.062 t 3.3
+G+Q (growth_combo, roe)    m=190 n~ 29 | top-univ +0.44 t  1.3 (+0.5/+0.4) bot-univ -0.64 | top-WIG +0.22 t 0.6 win 48% | top5-WIG +0.30 win 47% (+0.1/+0.5) top5-univ +0.51 t 1.4 | IC +0.052 t 2.9
+G+M+Q (d_ni, mom12/vol, ro m=190 n~ 29 | top-univ +1.22 t  3.1 (+0.8/+1.6) bot-univ -1.29 | top-WIG +0.99 t 2.1 win 53% | top5-WIG +0.73 win 53% (+0.5/+1.0) top5-univ +0.95 t 2.6 | IC +0.067 t 3.6

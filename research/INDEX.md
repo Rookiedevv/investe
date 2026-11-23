@@ -4,7 +4,7 @@ All research write-ups, raw data and scripts live here; there is no size limit. 
 
 | Path | What |
 |---|---|
-| `prices/` | Yahoo daily history for ~75 GPW stocks (research only). Add tickers in `prices_tickers.txt`. |
+| `prices/` | Yahoo daily history for ~150 GPW stocks back to 2009 (research only). Add tickers in `prices_tickers.txt`. Also refreshed on the evenings of the 25th–31st. |
 | `project_data/prices_ohlcv.csv` | Bank OHLCV 2018–2026 (Stooq), moved from the claude.ai project on 30 Oct 2026. |
 | `xtb_shorts/` | XTB short tests of avoid signals (29 Oct 2026). |
 | `wig20_model/` | WIG20 dip predictor and calendar tests (Oct 2026). |
@@ -32,6 +32,8 @@ All research write-ups, raw data and scripts live here; there is no size limit. 
 | `round25_2026-11-02/` | Round 25: TTF gas / US HRC steel / foreign peers → Azoty, Police, Cognor, Stalprodukt. Gas rises hurt Azoty/Police but they lag anyway (short ≈ deposit); Cognor steel signal is look-ahead + two outliers. Weak illiquid lead: Stalprodukt after HRC ≥ +10% month → +4.6 pp vs ETF, 64%, n=22, both periods. New foreign prices: HRC=F, MT.AS, VOE.VI, SZG.DE, YAR.OL, CF; PCE added. |
 | `round26_2026-11-02/` | Round 26: aluminium→Kęty, silver→KGHM, bitcoin→XTB, cracks→Orlen/Unimot. New lead: Orlen after diesel crack (HO×42−Brent) +5 USD/bbl month → +3.6 pp vs ETF, 76%, n=17 (≤ −5 → −2.1 pp, 29%: avoid). `signal_now.py` for the monthly check. Rest rejected. New prices: ALI=F, SI=F, BTC-USD, HO=F, RB=F, BZ=F. |
 | `round27_2026-11-02/` | Round 27: report-date changes (74 notices, 20 companies, bank/JSW-heavy): postponed −2.8 pp vs ETF, 31% but driven by JSW (ex-JSW −1.5, ex-JSW/banks +0.4); report-day reaction after postponement +1.1 (not bad news); XTB short ≈ deposit. Rejected. |
+| `round36_2026-11-23/` | Round 36: liquid cohorts, quarterly statements for 85 companies stored in `fundamentals/`, prices back to 2009, ~60 monthly factors tested. Value, quality, yield, size, low-vol: nothing. Growth + trend composite: best 5 +1.0–1.3 pp/month vs WIG, 56% of months (paper-trade lead); worst fifth −1.4 pp vs the average stock, 15 of 16 years (avoid list). `signal_now.py` gives the current ranking. |
+| `fundamentals/` | Quarterly income statement, balance sheet, cash flow and share count from biznesradar (`*_q.csv`, with publication dates), fetcher and parser. Refreshed twice a month by `.github/workflows/fundamentals.yml`. |
 | `prices_foreign/` | Yahoo history for 29 foreign peers (list in `foreign_tickers.txt`). |
 
 New research rounds go in their own dated folder with a `README.md` of results plus the scripts that produced them.
