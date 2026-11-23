@@ -2,9 +2,9 @@ name: research-prices
 on:
   workflow_dispatch:
   schedule:
-    # Evenings of the 25th-31st (weekdays), after the Warsaw close: fresh closes for the month-end
+    # Evenings of the 25th-31st, after the Warsaw close: fresh closes for the month-end
     # factor ranking (research round 36). 16:20 UTC = 17:20 Warsaw in winter, 18:20 in summer.
-    - cron: "20 16 25-31 * 1-5"
+    - cron: "20 16 25-31 * *"
   push:
     branches: [main]
     paths: ["research/prices_tickers.txt", "research/foreign_tickers.txt", "research/fetch_research_prices.py"]
