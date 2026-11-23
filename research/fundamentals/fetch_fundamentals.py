@@ -16,7 +16,6 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -29,6 +28,8 @@ PAGES = {
     "wr": "wskazniki-wartosci-rynkowej/{n}",
 }
 NON_STOCK = {"WIG", "WIG20", "FW20"}
+DELAY = 2.5      # seconds between pages
+BUDGET = 40 * 60  # stop after this many seconds; the next run continues with the missing files
 HDR = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36",
        "Accept-Language": "pl-PL,pl;q=0.9,en;q=0.5", "Accept": "text/html,application/xhtml+xml"}
 
@@ -40,6 +41,9 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 def universe() -> list[str]:
     out = []
+    order = ROOT / "research" / "fundamentals" / "universe_order.txt"   # most liquid first
+    if order.exists():
+        out = [t for t in order.read_text().split() if t]
     for line in (ROOT / "research" / "prices_tickers.txt").read_text().splitlines():
         for t in line.split("#")[0].upper().split():
             if t not in out:
@@ -70,7 +74,7 @@ def get(url: str) -> tuple[str, str]:
     last = None
     for attempt in range(3):
         try:
-            with urllib.request.urlopen(urllib.request.Request(url, headers=HDR), timeout=90) as r:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=HDR), timeout=45) as r:
                 return r.read().decode("utf-8", "replace"), r.geturl()
         except Exception as e:  # noqa: BLE001
             last = e
@@ -114,6 +118,7 @@ def main() -> None:
         tickers = tickers[k::n]
     log = [f"fetched {dt.datetime.now(dt.timezone.utc):%Y-%m-%d %H:%M} UTC, {len(tickers)} tickers, part {part}"]
     t0 = time.time()
+    fails = 0
     for t in tickers:
         todo = [k for k in PAGES if force or not (RAW / f"{t}_{k}.html.gz").exists()]
         if not todo:
@@ -122,10 +127,22 @@ def main() -> None:
             name = resolve(t)
         except Exception as e:  # noqa: BLE001
             log.append(f"{t}: NOT FOUND ({e})")
+            if "404" not in str(e):
+                fails += 1
+                if fails >= 2:
+                    log.append("stopping: site not answering; rerun later for the rest")
+                    break
+            time.sleep(DELAY)
             continue
-        with ThreadPoolExecutor(4) as ex:
-            log += list(ex.map(lambda k: one(t, name, k), todo))
-        time.sleep(0.3)
+        res = []
+        for k in todo:                      # one page at a time, slowly: be gentle with the site
+            res.append(one(t, name, k))
+            time.sleep(DELAY)
+        log += res
+        fails = fails + 1 if all("ERROR" in x for x in res) else 0
+        if fails >= 2 or time.time() - t0 > BUDGET:
+            log.append("stopping: site not answering or time budget used; rerun later for the rest")
+            break
     log.append(f"done in {time.time() - t0:.0f}s")
     with open(RAW / "_fetch_log.txt", "a") as f:
         f.write("\n".join(log) + "\n")
