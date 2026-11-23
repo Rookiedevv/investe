@@ -183,3 +183,26 @@ APR bilans: 676891 -> 155024 bytes, https://www.biznesradar.pl/raporty-finansowe
 APR cf: 276786 -> 63351 bytes, https://www.biznesradar.pl/raporty-finansowe-przeplywy-pieniezne/APR,Q
 APR wr: 344336 -> 99285 bytes, https://www.biznesradar.pl/wskazniki-wartosci-rynkowej/APR
 done in 60s
+fetched 2026-11-23 09:47 UTC, 21 tickers, part 2/8
+DNP: NOT FOUND (The read operation timed out)
+ALE: NOT FOUND (<urlopen error timed out>)
+VST: NOT FOUND (<urlopen error timed out>)
+CIG: NOT FOUND (<urlopen error timed out>)
+VRG: NOT FOUND (<urlopen error timed out>)
+MBR: NOT FOUND (<urlopen error timed out>)
+ZEP: NOT FOUND (<urlopen error timed out>)
+SNT: NOT FOUND (<urlopen error timed out>)
+NWG: NOT FOUND (<urlopen error timed out>)
+KGH: NOT FOUND (<urlopen error timed out>)
+GPW: NOT FOUND (<urlopen error timed out>)
+ARH: NOT FOUND (<urlopen error timed out>)
+GIF: NOT FOUND (<urlopen error timed out>)
+LKM: NOT FOUND (<urlopen error timed out>)
+BKM: NOT FOUND (<urlopen error timed out>)
+PCE: NOT FOUND (<urlopen error timed out>)
+BLO: NOT FOUND (<urlopen error timed out>)
+MCI: NOT FOUND (<urlopen error timed out>)
+MLS: NOT FOUND (<urlopen error timed out>)
+SPL: NOT FOUND (<urlopen error timed out>)
+ALR: NOT FOUND (<urlopen error timed out>)
+done in 634s
