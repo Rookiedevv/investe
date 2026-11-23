@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / "pipeline"))
 import fetch_prices  # noqa: E402
 
 OUT = ROOT / "research" / "prices"
+YEARS = 17  # history length requested from Yahoo (round 36: back to 2010 for factor tests)
 COLS = ["date", "open", "high", "low", "close", "adj_close", "volume"]
 
 
@@ -27,7 +28,7 @@ def main() -> None:
                 tickers.append(t)
     log = [f"fetched {dt.datetime.now(dt.timezone.utc):%Y-%m-%d %H:%M} UTC"]
     for t in tickers:
-        rows, used = fetch_prices.fetch_any([f"{t}.WA"], 12)
+        rows, used = fetch_prices.fetch_any([f"{t}.WA"], YEARS)
         if not rows:
             log.append(f"{t}: NO DATA")
             continue
@@ -44,7 +45,7 @@ def main() -> None:
         sym = line.split("#")[0].strip()
         if not sym:
             continue
-        rows, used = fetch_prices.fetch_any([sym], 12)
+        rows, used = fetch_prices.fetch_any([sym], YEARS)
         if not rows:
             log.append(f"{sym}: NO DATA")
             continue

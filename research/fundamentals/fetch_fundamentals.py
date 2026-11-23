@@ -1,33 +1,41 @@
 """Download quarterly financial statements for the research universe from biznesradar.pl.
 
-For every ticker in research/prices_tickers.txt plus the pipeline's GPW stocks, fetches
-  rzis  quarterly income statement        bilans quarterly balance sheet
-  cf    quarterly cash flow               wr     market-value indicators (share count, price)
-  dyw   dividend history
-and stores the page's <table> blocks gzipped in research/fundamentals/raw/<TICKER>_<page>.html.gz.
-parse_fundamentals.py turns them into tidy CSVs. Run by .github/workflows/fundamentals.yml.
-Usage: fetch_fundamentals.py [TICKER ...]   (no args = whole universe)
+For every ticker in research/prices_tickers.txt plus the pipeline's GPW stocks, fetches the QUARTERLY
+  rzis  income statement    bilans  balance sheet    cf  cash flow
+and   wr  market-value indicators (share count, price per quarter).
+biznesradar redirects /<page>/<TICKER>,Q to /<page>/<NAME> and drops the ",Q" (annual table), so the
+page name is resolved first from the redirect and the quarterly page is requested as <NAME>,Q.
+The report table of each page is stored, with the r/r, k/k and sector-comparison blocks removed, gzipped in
+research/fundamentals/raw/<TICKER>_<page>.html.gz. parse_fundamentals.py turns them into tidy CSVs.
+Usage: fetch_fundamentals.py [--part K/N] [--force] [TICKER ...]   (existing files are skipped unless --force)
 """
 import datetime as dt
 import gzip
 import re
 import sys
 import time
+import urllib.error
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW = ROOT / "research" / "fundamentals" / "raw"
+BASE = "https://www.biznesradar.pl/"
 PAGES = {
-    "rzis": "raporty-finansowe-rachunek-zyskow-i-strat/{t},Q",
-    "bilans": "raporty-finansowe-bilans/{t},Q",
-    "cf": "raporty-finansowe-przeplywy-pieniezne/{t},Q",
-    "wr": "wskazniki-wartosci-rynkowej/{t}",
-    "dyw": "dywidenda/{t}",
+    "rzis": "raporty-finansowe-rachunek-zyskow-i-strat/{n},Q",
+    "bilans": "raporty-finansowe-bilans/{n},Q",
+    "cf": "raporty-finansowe-przeplywy-pieniezne/{n},Q",
+    "wr": "wskazniki-wartosci-rynkowej/{n}",
 }
 NON_STOCK = {"WIG", "WIG20", "FW20"}
 HDR = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36",
        "Accept-Language": "pl-PL,pl;q=0.9,en;q=0.5", "Accept": "text/html,application/xhtml+xml"}
+
+
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, *a, **k):
+        return None
 
 
 def universe() -> list[str]:
@@ -44,40 +52,84 @@ def universe() -> list[str]:
     return out
 
 
+def resolve(t: str) -> str:
+    """biznesradar page name for a ticker (from the redirect of the report page; no redirect = ticker is the name)."""
+    req = urllib.request.Request(BASE + PAGES["rzis"].format(n=t), headers=HDR)
+    try:
+        with urllib.request.build_opener(NoRedirect).open(req, timeout=30) as r:
+            r.read(1)
+            return t
+    except urllib.error.HTTPError as e:
+        loc = e.headers.get("Location") or ""
+        if e.code in (301, 302, 303, 307, 308) and loc:
+            return loc.rstrip("/").split("/")[-1].split(",")[0]
+        raise
+
+
 def get(url: str) -> tuple[str, str]:
     last = None
     for attempt in range(3):
         try:
-            with urllib.request.urlopen(urllib.request.Request(url, headers=HDR), timeout=60) as r:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=HDR), timeout=90) as r:
                 return r.read().decode("utf-8", "replace"), r.geturl()
         except Exception as e:  # noqa: BLE001
             last = e
-            time.sleep(4 * (attempt + 1))
+            time.sleep(3 * (attempt + 1))
     raise RuntimeError(str(last))
+
+
+def compact(html: str) -> str:
+    m = re.search(r'<table[^>]*class="[^"]*report-table[^"]*".*?</table>', html, re.S)
+    if not m:
+        return ""
+    t = re.sub(r"<div\b[^>]*>.*?</div>", "", m.group(0), flags=re.S)
+    t = re.sub(r"</div>", "", t)
+    return re.sub(r"\s+", " ", t)
+
+
+def one(t: str, name: str, key: str) -> str:
+    url = BASE + PAGES[key].format(n=name)
+    try:
+        html, final = get(url)
+    except Exception as e:  # noqa: BLE001
+        return f"{t} {key}: ERROR {e}"
+    body = compact(html)
+    if not body:
+        return f"{t} {key}: NO TABLE ({len(html)} bytes, {final})"
+    (RAW / f"{t}_{key}.html.gz").write_bytes(gzip.compress(f"<!-- url {final} -->\n{body}".encode("utf-8"), 9))
+    return f"{t} {key}: {len(html)} -> {len(body)} bytes, {final}"
 
 
 def main() -> None:
     RAW.mkdir(parents=True, exist_ok=True)
-    tickers = [a.upper() for a in sys.argv[1:]] or universe()
-    log = [f"fetched {dt.datetime.now(dt.timezone.utc):%Y-%m-%d %H:%M} UTC, {len(tickers)} tickers"]
-    for n, t in enumerate(tickers):
-        for key, path in PAGES.items():
-            url = "https://www.biznesradar.pl/" + path.format(t=t)
-            try:
-                html, final = get(url)
-            except Exception as e:  # noqa: BLE001
-                log.append(f"{t} {key}: ERROR {e}")
-                continue
-            tables = re.findall(r"<table\b.*?</table>", html, re.S)
-            title = (re.search(r"<title>(.*?)</title>", html, re.S) or [None, ""])[1].strip()
-            body = f"<!-- url {final} | title {title} -->\n" + "\n".join(tables)
-            (RAW / f"{t}_{key}.html.gz").write_bytes(gzip.compress(body.encode("utf-8"), 9))
-            if n == 0 and key in ("rzis", "wr"):  # one full page kept for parser debugging
-                (RAW / f"_sample_{key}.html.gz").write_bytes(gzip.compress(html.encode("utf-8"), 9))
-            log.append(f"{t} {key}: {len(html)} bytes, {len(tables)} tables, {final}")
-            time.sleep(1.0)
-    (RAW / "_fetch_log.txt").write_text("\n".join(log) + "\n")
-    print("\n".join(log[-40:]))
+    args = sys.argv[1:]
+    force = "--force" in args
+    part = None
+    if "--part" in args:
+        part = args[args.index("--part") + 1]
+        args.remove("--part"); args.remove(part)
+    tickers = [a.upper() for a in args if not a.startswith("--")] or universe()
+    if part:
+        k, n = (int(x) for x in part.split("/"))
+        tickers = tickers[k::n]
+    log = [f"fetched {dt.datetime.now(dt.timezone.utc):%Y-%m-%d %H:%M} UTC, {len(tickers)} tickers, part {part}"]
+    t0 = time.time()
+    for t in tickers:
+        todo = [k for k in PAGES if force or not (RAW / f"{t}_{k}.html.gz").exists()]
+        if not todo:
+            continue
+        try:
+            name = resolve(t)
+        except Exception as e:  # noqa: BLE001
+            log.append(f"{t}: NOT FOUND ({e})")
+            continue
+        with ThreadPoolExecutor(4) as ex:
+            log += list(ex.map(lambda k: one(t, name, k), todo))
+        time.sleep(0.3)
+    log.append(f"done in {time.time() - t0:.0f}s")
+    with open(RAW / "_fetch_log.txt", "a") as f:
+        f.write("\n".join(log) + "\n")
+    print("\n".join(log))
 
 
 if __name__ == "__main__":

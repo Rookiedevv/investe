@@ -86,3 +86,5 @@ IDA BKM MPH I2D STL UNT GPR GBK NTU
 PCE
 # round 36 (23 Nov 2026): wider liquid universe for factor tests
 EAT KER AST PKP PCR OPN ABS BLO CRJ WLT ELT SGN APT BOS MLG MCI SKA TOA AGO MSZ ZUE PEN KGN MLS SEL STX MNC BIO MDV DCR AMB SPL CCC BFT TPE
+# round 36: the pipeline's banks/utilities/car-parts stocks too, so they get the same long history as the rest
+PKO PEO EBP MBK ING MIL ALR BHW BNP PGE ENA PEP CAR APR

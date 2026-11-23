@@ -3,34 +3,38 @@ on:
   workflow_dispatch:
   push:
     branches: [round36-factors]
-    paths: ["research/fundamentals/fetch_fundamentals.py", "research/prices_tickers.txt", ".github/workflows/fundamentals.yml"]
+    paths: ["research/fundamentals/fetch_fundamentals.py", "research/prices_tickers.txt", "research/fetch_research_prices.py", ".github/workflows/fundamentals.yml"]
 concurrency:
   group: fundamentals
-  cancel-in-progress: false
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Refresh research prices (Yahoo)
-        continue-on-error: true
-        run: python research/fetch_research_prices.py
-      - name: Fetch quarterly statements (biznesradar)
-        continue-on-error: true
-        run: python research/fundamentals/fetch_fundamentals.py
-      - name: Commit
+      - name: Fetch in parts, committing after each
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add research/prices research/prices_foreign research/fundamentals
-          if git diff --cached --quiet; then echo "no changes"; else
-            git commit -m "Round 36: prices and quarterly statements [skip ci]"
-            git pull --rebase origin ${{ github.ref_name }}
-            git push
-          fi
+          save () {
+            git add research/prices research/prices_foreign research/fundamentals
+            if git diff --cached --quiet; then echo "no changes"; else
+              git commit -q -m "Round 36 data: $1 [skip ci]"
+              git pull -q --rebase origin ${{ github.ref_name }}
+              git push -q
+            fi
+          }
+          python research/fundamentals/fetch_fundamentals.py PKN PKO PZU XTB 11B || true
+          save "statement samples"
+          python research/fetch_research_prices.py > /dev/null || true
+          save "research prices"
+          for k in 0 1 2 3 4 5 6 7; do
+            python research/fundamentals/fetch_fundamentals.py --part $k/8 | tail -3 || true
+            save "quarterly statements part $k"
+          done
