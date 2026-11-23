@@ -1,0 +1,22 @@
+fetched 2026-11-23 09:38 UTC, 5 tickers, part None
+PKN rzis: 842695 -> 170978 bytes, https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/ORLEN,Q
+PKN bilans: 1396606 -> 302331 bytes, https://www.biznesradar.pl/raporty-finansowe-bilans/ORLEN,Q
+PKN cf: 473926 -> 112954 bytes, https://www.biznesradar.pl/raporty-finansowe-przeplywy-pieniezne/ORLEN,Q
+PKN wr: 588106 -> 174951 bytes, https://www.biznesradar.pl/wskazniki-wartosci-rynkowej/ORLEN
+PKO rzis: 845265 -> 168208 bytes, https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/PKO,Q
+PKO bilans: 1348505 -> 254321 bytes, https://www.biznesradar.pl/raporty-finansowe-bilans/PKO,Q
+PKO cf: 392077 -> 93627 bytes, https://www.biznesradar.pl/raporty-finansowe-przeplywy-pieniezne/PKO,Q
+PKO wr: 340785 -> 100614 bytes, https://www.biznesradar.pl/wskazniki-wartosci-rynkowej/PKO
+PZU rzis: 603020 -> 137248 bytes, https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/PZU,Q
+PZU bilans: 907184 -> 240283 bytes, https://www.biznesradar.pl/raporty-finansowe-bilans/PZU,Q
+PZU cf: 389382 -> 92108 bytes, https://www.biznesradar.pl/raporty-finansowe-przeplywy-pieniezne/PZU,Q
+PZU wr: 511603 -> 148361 bytes, https://www.biznesradar.pl/wskazniki-wartosci-rynkowej/PZU
+XTB rzis: 412428 -> 92606 bytes, https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/XTB,Q
+XTB bilans: 574777 -> 162639 bytes, https://www.biznesradar.pl/raporty-finansowe-bilans/XTB,Q
+XTB cf: 284509 -> 65189 bytes, https://www.biznesradar.pl/raporty-finansowe-przeplywy-pieniezne/XTB,Q
+XTB wr: 346398 -> 100139 bytes, https://www.biznesradar.pl/wskazniki-wartosci-rynkowej/XTB
+11B rzis: 527325 -> 118095 bytes, https://www.biznesradar.pl/raporty-finansowe-rachunek-zyskow-i-strat/11-BIT-STUDIOS,Q
+11B bilans: 844815 -> 209404 bytes, https://www.biznesradar.pl/raporty-finansowe-bilans/11-BIT-STUDIOS,Q
+11B cf: 317681 -> 81892 bytes, https://www.biznesradar.pl/raporty-finansowe-przeplywy-pieniezne/11-BIT-STUDIOS,Q
+11B wr: 462373 -> 134735 bytes, https://www.biznesradar.pl/wskazniki-wartosci-rynkowej/11-BIT-STUDIOS
+done in 15s
