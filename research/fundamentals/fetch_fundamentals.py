@@ -11,6 +11,7 @@ Usage: fetch_fundamentals.py [--part K/N] [--force] [TICKER ...]   (existing fil
 """
 import datetime as dt
 import gzip
+import os
 import re
 import sys
 import time
@@ -29,7 +30,7 @@ PAGES = {
 }
 NON_STOCK = {"WIG", "WIG20", "FW20"}
 DELAY = 2.5      # seconds between pages
-BUDGET = 40 * 60  # stop after this many seconds; the next run continues with the missing files
+BUDGET = int(os.environ.get("FETCH_BUDGET", 40 * 60))  # stop after this many seconds; the next pass continues with the missing files
 HDR = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36",
        "Accept-Language": "pl-PL,pl;q=0.9,en;q=0.5", "Accept": "text/html,application/xhtml+xml"}
 

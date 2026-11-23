@@ -18,15 +18,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Fetch quarterly statements (missing files only, most liquid first, one page every 2.5 s)
-        run: python research/fundamentals/fetch_fundamentals.py | tail -5 || true
-      - name: Commit
-        if: always()
+      - name: Fetch quarterly statements (missing files only, most liquid first, one page every 2.5 s), saving every 10 minutes
+        env:
+          FETCH_BUDGET: "600"
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add research/fundamentals
-          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
-          git commit -q -m "Round 36 data: quarterly statements [skip ci]"
-          git pull -q --rebase origin ${{ github.ref_name }}
-          git push -q
+          for pass in 1 2 3 4 5; do
+            python research/fundamentals/fetch_fundamentals.py | tail -3 || true
+            git add research/fundamentals
+            if git diff --cached --quiet; then echo "nothing new"; break; fi
+            git commit -q -m "Round 36 data: quarterly statements, pass $pass [skip ci]"
+            git pull -q --rebase origin ${{ github.ref_name }}
+            git push -q
+            if tail -3 research/fundamentals/raw/_fetch_log.txt | grep -q "not answering"; then break; fi
+          done
